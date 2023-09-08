@@ -16,8 +16,21 @@ public class MainMenu extends BasePage {
     @FindBy(id = "menu-menu")
     WebElement navMenu;
 
+    @FindBy(xpath = ".//a[@class='cart-contents']")
+    WebElement siteHeaderCart;
+
     public void click(String index) {
 
         getDriver().findElement(By.linkText(index)).click();
+    }
+
+    public String getCartContents() {
+
+        return siteHeaderCart.getText();
+    }
+
+    public void clickSiteHeaderCart() {
+
+        siteHeaderCart.click();
     }
 }
