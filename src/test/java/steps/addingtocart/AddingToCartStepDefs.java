@@ -2,13 +2,16 @@ package steps.addingtocart;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.MainMenu;
 import qa.pages.ProductsContainer;
-//import qa.pages.NewProducts;
+
+
 import static qa.driver.Driver.*;
 
 public class AddingToCartStepDefs {
@@ -31,16 +34,22 @@ public class AddingToCartStepDefs {
     }
 
     @When("The user clicks the 'Dodaj do koszyka' button of {int} product from category: {string}")
-    public void theUserClicksTheAddToCartButton(int productNumber, String category) {
+    public void theUserClicksTheAddToCartButton(int productNumber, String category) throws InterruptedException {
 
-        productsContainer.setCategory(category);
-        productsContainer.clickAddToCartButton(productNumber);
+        productsContainer.setProductThumbnail(category, productNumber);
+        productsContainer.getProductThumbnail().clickAddToCartButton();
+    }
+
+    @And("Waits until the 'Zobacz koszyk' button is visible")
+    public void waitsUntilTheSeeCartButtonIsVisible() {
+
+        productsContainer.getProductThumbnail().waitForSeeCartButton();
     }
 
     @Then("The product has been added to the shopping cart")
     public void theProductHasBeenAddedToTheShoppingCart() {
 
-        System.out.println(mainMenu.getCartContents());
+        Assert.assertNotEquals(mainMenu.getPrice(), "0,00 zł");
     }
 
     @After
