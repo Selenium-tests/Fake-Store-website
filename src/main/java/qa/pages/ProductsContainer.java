@@ -1,20 +1,13 @@
 package qa.pages;
 
-import io.cucumber.java.et.Ja;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import qa.base.BasePage;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ProductsContainer extends BasePage {
 
-    private List<WebElement> products;
+    private final ProductThumbnail productThumbnail;
 
     Map<String, String> xpaths = new HashMap<>() {{
 
@@ -27,20 +20,17 @@ public class ProductsContainer extends BasePage {
     public ProductsContainer(WebDriver driver) {
 
         super(driver);
+
+        productThumbnail = new ProductThumbnail(driver);
     }
 
-    public void setCategory(String category) {
+    public void setProductThumbnail(String category, int number) {
 
-        WebElement locator = getDriver().findElement(By.xpath(xpaths.get(category)));
-        products = locator.findElements(By.xpath(".//li[@class]"));
+        productThumbnail.setThumbnail(xpaths.get(category), number);
     }
 
-    public void clickAddToCartButton(int index) {
+    public ProductThumbnail getProductThumbnail() {
 
-        WebElement button = products.get(index).findElement(By.xpath(".//a[@rel='nofollow']"));
-
-        Actions actions = new Actions(getDriver());
-        actions.moveToElement(button).click().perform();
-
+        return productThumbnail;
     }
 }
