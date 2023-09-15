@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import qa.base.BasePage;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -50,6 +49,11 @@ public class ProductThumbnail extends BasePage {
     public String getPrice() {
 
         return price.getText();
+    }
+
+    public void clickTheProductLink() {
+
+        clickElement(title);
     }
 
     public void clickAddToCartButton() {
