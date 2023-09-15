@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.MainMenu;
+import qa.pages.ProductPage;
 import qa.pages.ProductsContainer;
 
 
@@ -40,10 +41,25 @@ public class AddingToCartStepDefs {
         productsContainer.getProductThumbnail().clickAddToCartButton();
     }
 
+    @When("The user clicks on the {int} product link from the {string} category")
+    public void theUserClicksOnTheProductFromCategory(int productNumber, String category) {
+
+        productsContainer.setProductThumbnail(category, productNumber);
+        productsContainer.getProductThumbnail().clickTheProductLink();
+    }
+
     @And("Waits until the 'Zobacz koszyk' button is visible")
     public void waitsUntilTheSeeCartButtonIsVisible() {
 
         productsContainer.getProductThumbnail().waitForSeeCartButton();
+    }
+
+    @And("Clicks the 'Dodaj do koszyka' button")
+    public void clicksTheAddToCartButton() throws InterruptedException {
+
+        ProductPage productPage = new ProductPage(getDriver());
+        productPage.clickAddToCartButton();
+        Thread.sleep(3000);
     }
 
     @Then("The product has been added to the shopping cart")
