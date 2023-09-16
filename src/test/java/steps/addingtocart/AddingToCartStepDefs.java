@@ -20,7 +20,8 @@ public class AddingToCartStepDefs {
 
     private MainMenu mainMenu;
     private ProductsContainer productsContainer;
-    private String productTitle;
+    private ShoppingCart shoppingCart;
+    private String productName;
     private String price;
 
     @Before
@@ -28,6 +29,8 @@ public class AddingToCartStepDefs {
 
         createDriver(Browser.CHROME);
         startDriver();
+
+        shoppingCart = new ShoppingCart(getDriver());
     }
 
     @Given("The user is on the home page")
@@ -63,7 +66,7 @@ public class AddingToCartStepDefs {
         ProductPage productPage = new ProductPage(getDriver());
         productPage.clickAddToCartButton();
 
-        productTitle = productPage.getProductTitle();
+        productName = productPage.getProductTitle();
         price = productPage.getPrice();
 
         Thread.sleep(3000);
@@ -75,18 +78,21 @@ public class AddingToCartStepDefs {
         Assert.assertNotEquals(mainMenu.getPrice(), "0,00 zł");
     }
 
+    @And("The message about adding the product to the cart was displayed")
+    public void theMessageWasDisplayed() {
+
+        Assert.assertTrue(shoppingCart.isMessageVisible());
+    }
+
     @And("The product is in the shopping cart")
     public void theProductIsInTheShoppingCart() {
 
         mainMenu.clickSiteHeaderCart();
-        ShoppingCart shoppingCart = new ShoppingCart(getDriver());
+        //ShoppingCart shoppingCart = new ShoppingCart(getDriver());
         shoppingCart.findProduct(0);
 
-        System.out.println(productTitle);
-        System.out.println(price);
-        System.out.println("-------");
-        System.out.println(shoppingCart.getRow().getName());
-        System.out.println(shoppingCart.getRow().getPrice());
+        Assert.assertEquals(shoppingCart.getRow().getName(), productName);
+        Assert.assertEquals(shoppingCart.getRow().getPrice(), price);
     }
 
     @After
