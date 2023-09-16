@@ -11,6 +11,7 @@ import qa.enums.Browser;
 import qa.pages.MainMenu;
 import qa.pages.ProductPage;
 import qa.pages.ProductsContainer;
+import qa.pages.ShoppingCart;
 
 
 import static qa.driver.Driver.*;
@@ -19,6 +20,8 @@ public class AddingToCartStepDefs {
 
     private MainMenu mainMenu;
     private ProductsContainer productsContainer;
+    private String productTitle;
+    private String price;
 
     @Before
     public void init() {
@@ -59,6 +62,10 @@ public class AddingToCartStepDefs {
 
         ProductPage productPage = new ProductPage(getDriver());
         productPage.clickAddToCartButton();
+
+        productTitle = productPage.getProductTitle();
+        price = productPage.getPrice();
+
         Thread.sleep(3000);
     }
 
@@ -66,6 +73,20 @@ public class AddingToCartStepDefs {
     public void theProductHasBeenAddedToTheShoppingCart() {
 
         Assert.assertNotEquals(mainMenu.getPrice(), "0,00 zł");
+    }
+
+    @And("The product is in the shopping cart")
+    public void theProductIsInTheShoppingCart() {
+
+        mainMenu.clickSiteHeaderCart();
+        ShoppingCart shoppingCart = new ShoppingCart(getDriver());
+        shoppingCart.findProduct(0);
+
+        System.out.println(productTitle);
+        System.out.println(price);
+        System.out.println("-------");
+        System.out.println(shoppingCart.getRow().getName());
+        System.out.println(shoppingCart.getRow().getPrice());
     }
 
     @After
