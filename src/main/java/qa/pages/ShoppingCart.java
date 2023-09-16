@@ -10,20 +10,26 @@ import java.util.List;
 
 public class ShoppingCart extends BasePage {
 
-    private List<WebElement> products;
-    private WebElement removeButton;
+    private final Row row;
 
     public ShoppingCart(WebDriver driver) {
 
         super(driver);
+
+        row = new Row(driver);
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
     WebElement contents;
 
-    public void findProducts() {
+    public void findProduct(int index) {
 
-        products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
+        List<WebElement> products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
+        row.setRow(products.get(index));
+    }
 
+    public Row getRow() {
+
+        return row;
     }
 }
