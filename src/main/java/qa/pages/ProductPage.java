@@ -18,7 +18,7 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = ".//span[@class='woocommerce-Price-amount amount']")
     WebElement price;
 
-    @FindBy(linkText = "Dodaj do koszyka")
+    @FindBy(xpath = ".//button[@name='add-to-cart']")
     WebElement addToCartButton;
 
     public String getProductTitle() {
