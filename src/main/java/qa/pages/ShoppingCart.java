@@ -22,6 +22,9 @@ public class ShoppingCart extends BasePage {
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
     WebElement contents;
 
+    @FindBy(className = "woocommerce-message")
+    List<WebElement> message;
+
     public void findProduct(int index) {
 
         List<WebElement> products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
@@ -31,5 +34,10 @@ public class ShoppingCart extends BasePage {
     public Row getRow() {
 
         return row;
+    }
+
+    public boolean isMessageVisible() {
+
+        return !(message.isEmpty());
     }
 }
