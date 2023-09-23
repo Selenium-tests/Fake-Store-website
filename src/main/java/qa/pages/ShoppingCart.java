@@ -25,6 +25,16 @@ public class ShoppingCart extends BasePage {
     @FindBy(className = "woocommerce-message")
     List<WebElement> message;
 
+    @FindBy(id = "coupon_code")
+    WebElement couponCodeField;
+    @FindBy(xpath = ".//button[@name='apply_coupon']")
+    WebElement applyCouponButton;
+
+    @FindBy(xpath = ".//button[@name='update_cart']")
+    WebElement updateCartButton;
+
+
+
     public void findProduct(int index) {
 
         List<WebElement> products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
@@ -39,5 +49,20 @@ public class ShoppingCart extends BasePage {
     public boolean isMessageVisible() {
 
         return !(message.isEmpty());
+    }
+
+    public void setCouponCode(String code) {
+
+        couponCodeField.sendKeys(code);
+    }
+
+    public void clickApplyCouponButton() {
+
+        applyCouponButton.click();
+    }
+
+    public void clickUpdateCartButton() {
+
+        updateCartButton.click();
     }
 }
