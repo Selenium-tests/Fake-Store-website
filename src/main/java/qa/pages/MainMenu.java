@@ -16,24 +16,8 @@ public class MainMenu extends BasePage {
     @FindBy(id = "menu-menu")
     WebElement navMenu;
 
-    @FindBy(xpath = ".//span[@class='woocommerce-Price-amount amount']")
-    WebElement priceAmount;
-
-    @FindBy(id = "site-header-cart")
-    WebElement siteHeaderCart;
-
     public void click(String index) {
 
         getDriver().findElement(By.linkText(index)).click();
-    }
-
-    public String getPrice() {
-
-        return priceAmount.getText();
-    }
-
-    public void clickSiteHeaderCart() {
-
-        siteHeaderCart.click();
     }
 }
