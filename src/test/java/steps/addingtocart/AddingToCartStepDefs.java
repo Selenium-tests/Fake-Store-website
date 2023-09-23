@@ -8,17 +8,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
-import qa.pages.MainMenu;
-import qa.pages.ProductPage;
-import qa.pages.ProductsContainer;
-import qa.pages.ShoppingCart;
+import qa.pages.*;
 
 
 import static qa.driver.Driver.*;
 
 public class AddingToCartStepDefs {
 
-    private MainMenu mainMenu;
+    private SiteHeaderCart siteHeaderCart;
     private ProductsContainer productsContainer;
     private ShoppingCart shoppingCart;
     private String productName;
@@ -30,13 +27,13 @@ public class AddingToCartStepDefs {
         createDriver(Browser.CHROME);
         startDriver();
 
+        siteHeaderCart = new SiteHeaderCart(getDriver());
         shoppingCart = new ShoppingCart(getDriver());
     }
 
     @Given("The user is on the home page")
     public void theUserIsOnTheHomePage() {
 
-        mainMenu = new MainMenu(getDriver());
         productsContainer = new ProductsContainer(getDriver());
     }
 
@@ -75,7 +72,7 @@ public class AddingToCartStepDefs {
     @Then("The product has been added to the shopping cart")
     public void theProductHasBeenAddedToTheShoppingCart() {
 
-        Assert.assertNotEquals(mainMenu.getPrice(), "0,00 zł");
+        Assert.assertNotEquals(siteHeaderCart.getPrice(), "0,00 zł");
     }
 
     @And("The message about adding the product to the cart was displayed")
@@ -87,8 +84,7 @@ public class AddingToCartStepDefs {
     @And("The product is in the shopping cart")
     public void theProductIsInTheShoppingCart() {
 
-        mainMenu.clickSiteHeaderCart();
-        //ShoppingCart shoppingCart = new ShoppingCart(getDriver());
+        siteHeaderCart.clickCartMenu();
         shoppingCart.findProduct(0);
 
         Assert.assertEquals(shoppingCart.getRow().getName(), productName);
