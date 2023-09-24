@@ -38,7 +38,7 @@ public class AddingToCartStepDefs {
     }
 
     @When("The user clicks the 'Dodaj do koszyka' button of {int} product from category: {string}")
-    public void theUserClicksTheAddToCartButton(int productNumber, String category) throws InterruptedException {
+    public void theUserClicksTheAddToCartButton(int productNumber, String category) {
 
         productsContainer.setProductThumbnail(category, productNumber);
         productsContainer.getProductThumbnail().clickAddToCartButton();
@@ -85,6 +85,16 @@ public class AddingToCartStepDefs {
     public void theProductIsInTheShoppingCart() {
 
         siteHeaderCart.clickCartMenu();
+        shoppingCart.findProduct(0);
+
+        Assert.assertTrue(shoppingCart.isContentsLocatorPresent());
+        Assert.assertEquals(shoppingCart.getRow().getName(), productName);
+        Assert.assertEquals(shoppingCart.getRow().getPrice(), price);
+    }
+
+    @And("Product name and price match")
+    public void productNameAndPriceMatch() {
+
         shoppingCart.findProduct(0);
 
         Assert.assertEquals(shoppingCart.getRow().getName(), productName);
