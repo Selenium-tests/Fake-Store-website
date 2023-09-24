@@ -11,6 +11,7 @@ import java.util.List;
 public class ShoppingCart extends BasePage {
 
     private final Row row;
+    private List<WebElement> products;
 
     public ShoppingCart(WebDriver driver) {
 
@@ -20,10 +21,13 @@ public class ShoppingCart extends BasePage {
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
-    WebElement contents;
+    List<WebElement> contents;
 
     @FindBy(className = "woocommerce-message")
     List<WebElement> message;
+
+    @FindBy(xpath = ".//p[@class='cart-empty woocommerce-info']")
+    List<WebElement> emptyCartMessage;
 
     @FindBy(id = "coupon_code")
     WebElement couponCodeField;
@@ -33,12 +37,21 @@ public class ShoppingCart extends BasePage {
     @FindBy(xpath = ".//button[@name='update_cart']")
     WebElement updateCartButton;
 
+    public void findProducts() {
 
+        products = contents.get(0).findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
+    }
 
     public void findProduct(int index) {
 
-        List<WebElement> products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
+        findProducts();
+
         row.setRow(products.get(index));
+    }
+
+    public boolean isContentsLocatorPresent() {
+
+        return !(contents.isEmpty());
     }
 
     public Row getRow() {
@@ -49,6 +62,16 @@ public class ShoppingCart extends BasePage {
     public boolean isMessageVisible() {
 
         return !(message.isEmpty());
+    }
+
+    public boolean isEmptyCartMessageVisible() {
+
+        return !(emptyCartMessage.isEmpty());
+    }
+
+    public String getEmptyCartMessageText() {
+
+        return emptyCartMessage.get(0).getText();
     }
 
     public void setCouponCode(String code) {
