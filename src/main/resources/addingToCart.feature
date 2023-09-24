@@ -21,6 +21,7 @@ Feature: Adding to the shopping cart
       Then The product has been added to the shopping cart
       And The message about adding the product to the cart was displayed
       And The product is in the shopping cart
+      And Product name and price match
 
       Examples:
       |number|category |
