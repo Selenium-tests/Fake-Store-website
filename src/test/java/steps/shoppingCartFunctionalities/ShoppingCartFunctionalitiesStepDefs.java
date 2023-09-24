@@ -1,5 +1,6 @@
 package steps.shoppingCartFunctionalities;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -39,7 +40,7 @@ public class ShoppingCartFunctionalitiesStepDefs {
     }
 
     @And("The shopping cart page is open")
-    public void theShoppingCartPagesOpen() {
+    public void theShoppingCartPagesIsOpen() {
 
         SiteHeaderCart siteHeaderCart = new SiteHeaderCart(getDriver());
         siteHeaderCart.clickCartMenu();
@@ -55,10 +56,12 @@ public class ShoppingCartFunctionalitiesStepDefs {
     }
 
     @When("The user clicks the 'Remove' button")
-    public void theUserClicksTheRemoveButton() {
+    public void theUserClicksTheRemoveButton() throws InterruptedException {
 
         shoppingCart.findProduct(0);
         shoppingCart.getRow().clickRemoveButton();
+
+        Thread.sleep(2000);
     }
 
     @And("Clicks the 'Zaktualizuj koszyk' button")
@@ -81,6 +84,19 @@ public class ShoppingCartFunctionalitiesStepDefs {
     @Then("The shopping cart is empty")
     public void theShoppingCartIsEmpty() {
 
+        Assert.assertFalse(shoppingCart.isContentsLocatorPresent());
+    }
 
+    @And("The message {string} has been displayed")
+    public void theMessageHasBeenDisplayed(String message) {
+
+        Assert.assertTrue(shoppingCart.isEmptyCartMessageVisible());
+        Assert.assertEquals(shoppingCart.getEmptyCartMessageText(), message);
+    }
+
+    @After
+    public void tearDown() {
+
+        quitDriver();
     }
 }
