@@ -1,5 +1,6 @@
 package steps.couponRedemption;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -15,6 +16,7 @@ import static qa.driver.Driver.*;
 public class CouponRedemptionStepDefs {
 
     private ShoppingCart shoppingCart;
+    private String usedCouponCode;
 
     @Before
     public void init() {
@@ -25,11 +27,11 @@ public class CouponRedemptionStepDefs {
         shoppingCart = new ShoppingCart(getDriver());
     }
 
-    @Given("The product has been added to the shopping cart")
-    public void theProductHasBeenAddedToTheShoppingCart() {
+    @Given("The product number {int} from the {string} category has been added to the shopping cart")
+    public void theProductHasBeenAddedToTheShoppingCart(int productNumber, String category) {
 
         ProductsContainer productsContainer = new ProductsContainer(getDriver());
-        productsContainer.setProductThumbnail("Popularne", 1);
+        productsContainer.setProductThumbnail(category, productNumber);
         productsContainer.getProductThumbnail().clickAddToCartButton();
         productsContainer.getProductThumbnail().waitForSeeCartButton();
     }
@@ -59,6 +61,7 @@ public class CouponRedemptionStepDefs {
     public void entersTheStringAsACouponCode(String couponCode) {
 
         shoppingCart.getCouponForm().setCouponCode(couponCode);
+        usedCouponCode = couponCode;
     }
 
     @And("Clicks the 'Zastosuj kupon' button")
@@ -75,10 +78,22 @@ public class CouponRedemptionStepDefs {
         Assert.assertEquals(shoppingCart.getMessageText(), message);
     }
 
+    @And("The {string} coupon is displayed on the shopping cart summary")
+    public void theCouponIsDisplayedOnTheShoppingCartSummary(String couponCode) {
+
+        Assert.assertEquals(couponCode, shoppingCart.getShoppingCartSummary().getCouponDescription(usedCouponCode));
+    }
+
     @Then("The {string} error message has been displayed")
     public void theErrorMessageHasBeenDisplayed(String message) {
 
         Assert.assertTrue(shoppingCart.isErrorMessageVisible());
         Assert.assertEquals(message, shoppingCart.getErrorMessageText());
+    }
+
+    @After
+    public void tearDown() {
+
+        quitDriver();
     }
 }
