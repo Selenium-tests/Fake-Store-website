@@ -12,12 +12,14 @@ public class ShoppingCart extends BasePage {
 
     private final Row row;
     private List<WebElement> products;
+    private final CouponForm couponForm;
 
     public ShoppingCart(WebDriver driver) {
 
         super(driver);
 
         row = new Row(driver);
+        couponForm = new CouponForm(driver);
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
@@ -26,14 +28,11 @@ public class ShoppingCart extends BasePage {
     @FindBy(className = "woocommerce-message")
     List<WebElement> message;
 
+    @FindBy(className = "woocommerce-error")
+    List<WebElement> errorMessage;
+
     @FindBy(xpath = ".//p[@class='cart-empty woocommerce-info']")
     List<WebElement> emptyCartMessage;
-
-    @FindBy(id = "coupon_code")
-    WebElement couponCodeField;
-    @FindBy(xpath = ".//button[@name='apply_coupon']")
-    WebElement applyCouponButton;
-
     @FindBy(xpath = ".//button[@name='update_cart']")
     WebElement updateCartButton;
 
@@ -64,6 +63,21 @@ public class ShoppingCart extends BasePage {
         return !(message.isEmpty());
     }
 
+    public String getMessageText() {
+
+        return message.get(0).getText();
+    }
+
+    public boolean isErrorMessageVisible() {
+
+        return !(errorMessage.isEmpty());
+    }
+
+    public String getErrorMessageText() {
+
+        return errorMessage.get(0).getText();
+    }
+
     public boolean isEmptyCartMessageVisible() {
 
         return !(emptyCartMessage.isEmpty());
@@ -74,14 +88,9 @@ public class ShoppingCart extends BasePage {
         return emptyCartMessage.get(0).getText();
     }
 
-    public void setCouponCode(String code) {
+    public CouponForm getCouponForm() {
 
-        couponCodeField.sendKeys(code);
-    }
-
-    public void clickApplyCouponButton() {
-
-        applyCouponButton.click();
+        return couponForm;
     }
 
     public void clickUpdateCartButton() {
