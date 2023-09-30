@@ -13,6 +13,7 @@ public class ShoppingCart extends BasePage {
     private final Row row;
     private List<WebElement> products;
     private final CouponForm couponForm;
+    private final ShoppingCartSummary shoppingCartSummary;
 
     public ShoppingCart(WebDriver driver) {
 
@@ -20,6 +21,7 @@ public class ShoppingCart extends BasePage {
 
         row = new Row(driver);
         couponForm = new CouponForm(driver);
+        shoppingCartSummary = new ShoppingCartSummary(driver);
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
@@ -91,6 +93,11 @@ public class ShoppingCart extends BasePage {
     public CouponForm getCouponForm() {
 
         return couponForm;
+    }
+
+    public ShoppingCartSummary getShoppingCartSummary() {
+
+        return shoppingCartSummary;
     }
 
     public void clickUpdateCartButton() {
