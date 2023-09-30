@@ -62,6 +62,7 @@ public class CouponRedemptionStepDefs {
     }
 
     @And("Clicks the 'Zastosuj kupon' button")
+    @And("Clicks the 'Zastosuj kupon' button leaving the coupon code field blank")
     public void clicksTheButton() {
 
         shoppingCart.getCouponForm().clickApplyCouponButton();
