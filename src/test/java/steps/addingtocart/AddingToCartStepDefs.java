@@ -9,8 +9,6 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.*;
-
-
 import static qa.driver.Driver.*;
 
 public class AddingToCartStepDefs {
