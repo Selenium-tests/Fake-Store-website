@@ -10,9 +10,13 @@ import java.util.List;
 
 public class Account extends BasePage {
 
+    private final Addresses addresses;
+
     public Account(WebDriver driver) {
 
         super(driver);
+
+        addresses = new Addresses(driver);
     }
 
     @FindBy(xpath = ".//ul[@class='phoen_nav_tab']")
@@ -26,5 +30,10 @@ public class Account extends BasePage {
     public void clickLink(String linkText) {
 
         clickElement(getDriver().findElement(By.linkText(linkText)));
+    }
+
+    public Addresses getAddresses() {
+
+        return addresses;
     }
 }
