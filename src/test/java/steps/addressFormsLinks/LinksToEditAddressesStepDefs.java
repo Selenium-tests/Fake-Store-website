@@ -1,4 +1,4 @@
-package steps.billingAddressForm;
+package steps.addressFormsLinks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
