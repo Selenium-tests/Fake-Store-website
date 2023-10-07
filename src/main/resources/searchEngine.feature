@@ -5,7 +5,7 @@ Feature: Search engine
     When The user clicks on the search engine field
     Then The placeholder disappears
 
-  Scenario Outline: Searching products with a correct phrase
+  Scenario Outline: I test searching products with a correct phrase
     Given The user is on the home page
     When The user clicks on the search engine field
     And Enters the '<phrase>' phrase
@@ -21,7 +21,7 @@ Feature: Search engine
     |"Yoga i pilates" |5     |
     |"Żeglarstwo"     |1     |
 
-    Scenario Outline: Searching products with an incorrect phrase
+    Scenario Outline: I test searching products with an incorrect phrase
       Given The user is on the home page
       When The user clicks on the search engine field
       And Enters the '<phrase>' phrase

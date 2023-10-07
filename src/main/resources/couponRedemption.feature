@@ -1,6 +1,6 @@
 Feature: Coupon redemption
 
-  Scenario Outline: Correct plain coupon code
+  Scenario Outline: I test using correct plain coupon code
     Given The product number 0 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -18,7 +18,7 @@ Feature: Coupon redemption
     |"10procent1"           |"Kupon: 10procent1"           |
 
 
-  Scenario Outline: Using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
+  Scenario Outline: I test using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -35,7 +35,7 @@ Feature: Coupon redemption
     |2            |"Bestsellery"|
 
 
-  Scenario Outline: Using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
+  Scenario Outline: I test using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -51,7 +51,7 @@ Feature: Coupon redemption
     |1            |"Bestsellery"|
 
 
-  Scenario Outline: Using "windsurfing350" coupon code for a product from the windsurfing category
+  Scenario Outline: I test using "windsurfing350" coupon code for a product from the windsurfing category
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -66,7 +66,7 @@ Feature: Coupon redemption
     |3            |"Nowości"|
 
 
-  Scenario Outline: Using "windsurfing350" coupon code for a product from the non-windsurfing category
+  Scenario Outline: I test using "windsurfing350" coupon code for a product from the non-windsurfing category
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -81,7 +81,7 @@ Feature: Coupon redemption
     |1            |"Bestsellery"|
 
 
-  Scenario Outline: Reusing a redeemed coupon
+  Scenario Outline: I test reusing a redeemed coupon
     Given The product number 3 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -103,7 +103,7 @@ Feature: Coupon redemption
     |"windsurfing350"       |
 
 
-  Scenario Outline: An attempt to link coupon "kwotowy250pojedynczy" to other coupons
+  Scenario Outline: I test Aan attemption to link coupon "kwotowy250pojedynczy" to other coupons
   Given The product number 0 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -125,7 +125,7 @@ Feature: Coupon redemption
     |"windsurfing350"       |
 
 
-  Scenario Outline: Incorrect coupon code
+  Scenario Outline: I test using an incorrect coupon code
     Given The product number 2 from the "W promocji" category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
