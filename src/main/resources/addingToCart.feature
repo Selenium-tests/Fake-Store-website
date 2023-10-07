@@ -14,7 +14,7 @@ Feature: Adding to the shopping cart
     #|3     |"Bestsellery"|
 
 
-    Scenario Outline: Adding product to the cart from a product page
+    Scenario Outline: I test adding product to the cart from a product page
       Given The user is on the home page
       When The user clicks on the <number> product link from the <category> category
       And Clicks the 'Dodaj do koszyka' button
