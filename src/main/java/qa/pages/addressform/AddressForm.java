@@ -20,8 +20,8 @@ public class AddressForm extends BasePage {
         countryDropdownList = new CountryDropdownList(driver);
     }
 
-    @FindBy(xpath = ".//button[@type='submit']")
-    private WebElement submitButton;
+    @FindBy(css = "[name='save_address']")
+    WebElement submitButton;
 
     private String getPrefix() {
 
@@ -30,6 +30,7 @@ public class AddressForm extends BasePage {
 
     private void setText(WebElement element, String text) {
 
+        element.click();
         element.clear();
         element.sendKeys(text);
     }
@@ -81,7 +82,7 @@ public class AddressForm extends BasePage {
 
     public void clickSubmitButton() {
 
-        submitButton.click();
+        clickElement(submitButton);
     }
 
     public CountryDropdownList getCountryDropdownList() {
