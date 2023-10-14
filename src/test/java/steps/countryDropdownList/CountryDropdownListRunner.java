@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         features = "./src/main/resources/countryDropdownList.feature",
-        plugin = {"pretty", "html:target/cucumber-reports/adding-to-cart.html"}
+        plugin = {"pretty", "html:target/cucumber-reports/country-drop-down-list.html"}
 )
 public class CountryDropdownListRunner {
 }
