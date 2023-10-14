@@ -1,5 +1,6 @@
 package steps.countryDropdownList;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -9,22 +10,20 @@ import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.*;
 import qa.pages.addressform.AddressForm;
-import qa.pages.addressform.CountryDropdownList;
 
 import static qa.driver.Driver.*;
 
 public class CountryDropdownListStepDefs {
 
-    AddressForm addressForm;
-    CountryDropdownList countryDropdownList;
+    private AddressForm addressForm;
+
     @Before
     public void init() {
 
         createDriver(Browser.CHROME);
         startDriver();
 
-        addressForm = new AddressForm(getDriver(), "shipping");
-        countryDropdownList = new CountryDropdownList(getDriver());
+        addressForm = new AddressForm(getDriver(), "billing");
     }
 
     @Given("An user is logged in with email: {string} and password: {string}")
@@ -41,20 +40,18 @@ public class CountryDropdownListStepDefs {
         loginForm.clickSubmitButton();
     }
 
-    @And("The {string} page is open")
-    public void thePageIsOpen(String column) {
-
-        int index = column.equals("Adres rozliczeniowy") ? 0 : 1;
+    @When("Goes to the \"Adres rozliczeniowy\" form")
+    public void goesToTheAddressForm() {
 
         Account account = new Account(getDriver());
         account.clickLink("Adres");
-        account.getAddresses().clickAddButton(index);
+        account.getAddresses().clickAddButton(0);
     }
 
-    @When("An user clicks the drop-down list arrow")
-    public void anUserClicksTheDropdownListButton() throws InterruptedException {
+    @When("An user clicks the country drop-down list arrow")
+    public void anUserClicksTheDropdownListArrow() {
 
-        countryDropdownList.clickArrow();
+        addressForm.getCountryDropdownList().clickArrow();
     }
 
     @And("Types {string} in the drop-down search field")
@@ -63,9 +60,27 @@ public class CountryDropdownListStepDefs {
         addressForm.getCountryDropdownList().setCountry(country);
     }
 
+    @And("Other {string}")
+    public void other(String name) {
+
+        addressForm.setFirstName(name);
+    }
+
     @Then("The message about incorrect country name is not displayed")
     public void messageIsNotDisplayed() {
 
+        Assert.assertFalse(addressForm.getCountryDropdownList().isMessageDisplayed());
+    }
+
+    @Then("The message about incorrect country name is displayed")
+    public void messageIsDisplayed() {
+
         Assert.assertTrue(addressForm.getCountryDropdownList().isMessageDisplayed());
+    }
+
+    @After
+    public void tearDown() {
+
+        quitDriver();
     }
 }
