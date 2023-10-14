@@ -34,11 +34,16 @@ public class CountryDropdownList extends BasePage {
 
     public void setCountry(String country) {
 
-        searchField.sendKeys(country + Keys.ENTER);
+        searchField.sendKeys(country);
+    }
+
+    public void submit() {
+
+        searchField.sendKeys(Keys.ENTER);
     }
 
     public boolean isMessageDisplayed() {
 
-        return message.isEmpty();
+        return !(message.isEmpty());
     }
 }
