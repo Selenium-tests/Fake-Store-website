@@ -1,8 +1,11 @@
 package steps.addressForms;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.Account;
 import qa.pages.addressform.AddressForm;
@@ -10,7 +13,7 @@ import qa.pages.LoginForm;
 import qa.pages.MainMenu;
 
 import static qa.driver.Driver.*;
-public class AddressFormsStepDefs {
+public class AddressFormFillingStepDefs {
 
     private AddressForm addressForm;
 
@@ -19,6 +22,8 @@ public class AddressFormsStepDefs {
 
         createDriver(Browser.CHROME);
         startDriver();
+
+        addressForm = new AddressForm(getDriver(), "billing");
     }
 
     @Given("An user is logged in with email: {string} and password: {string}")
@@ -27,23 +32,37 @@ public class AddressFormsStepDefs {
         MainMenu mainMenu = new MainMenu(getDriver());
         LoginForm loginForm = new LoginForm(getDriver());
 
+        mainMenu.hideNotice();
         mainMenu.click("Moje konto");
         loginForm.setUsername(email);
         loginForm.setPassword(password);
         loginForm.clickSubmitButton();
     }
 
-    @When("An user goes to the {string} form")
-    public void thePageIsOpen(String column) {
-
-        int index = column.equals("Adres rozliczeniowy") ? 0 : 1;
-        String prefix = column.equals("Adres rozliczeniowy") ? "billing" : "shipping";
+    @And("Goes to the \"Adres rozliczeniowy\" form")
+    public void goesToTheAddressForm() {
 
         Account account = new Account(getDriver());
         account.clickLink("Adres");
-        account.getAddresses().clickAddButton(index);
+        account.getAddresses().clickAddButton(0);
+    }
 
-        addressForm = new AddressForm(getDriver(), prefix);
+    @When("An user clicks the country drop-down list arrow")
+    public void clicksTheCountryDropDownListArrow() {
+
+        addressForm.getCountryDropdownList().clickArrow();
+    }
+
+    @And("Types {string} in the drop-down search field")
+    public void typesCountryInTheDropdownListSearchField(String country) {
+
+        addressForm.getCountryDropdownList().setCountry(country);
+    }
+
+    @And("Presses the ENTER key")
+    public void pressesEnter() {
+
+        addressForm.getCountryDropdownList().submit();
     }
 
     @And("Types {string} as first name")
@@ -92,5 +111,29 @@ public class AddressFormsStepDefs {
     public void anUserTypesEmail(String email) {
 
         addressForm.setEmail(email);
+    }
+
+    @And("Clicks the \"Zapisz adres\" key")
+    public void clicksTheKey() {
+
+        addressForm.clickSubmitButton();
+    }
+
+    @Then("The data has been saved")
+    public void theDataHasBeenSaved() {
+
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
+    }
+
+    @Then("The data has not been saved")
+    public void theDataHasNotBeenSaved() {
+
+        Assert.assertNotEquals(getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
+    }
+
+    @After
+    public void tearDown() {
+
+        quitDriver();
     }
 }
