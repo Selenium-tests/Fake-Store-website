@@ -1,4 +1,4 @@
-package steps.login;
+package com.stepdefs.login;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
-import qa.pages.Account;
+import qa.pages.account.Account;
 import qa.pages.LoginForm;
 import qa.pages.MainMenu;
 
