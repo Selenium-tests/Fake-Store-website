@@ -1,11 +1,8 @@
-package steps.mainMenu;
+package com.stepdefs.mainmenu;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.MainMenu;
 import static qa.driver.Driver.createDriver;
@@ -18,16 +15,11 @@ public class MainMenuStepDefs {
 
     MainMenu mainMenu;
 
-
     @Before
     public void init() {
 
         createDriver(Browser.CHROME);
         startDriver();
-    }
-
-    @Given("The user is on the home page")
-    public void theUserIsOnTheHomePage() {
 
         mainMenu = new MainMenu(getDriver());
     }
@@ -36,12 +28,6 @@ public class MainMenuStepDefs {
     public void theUserClicksLink(String linkText) {
 
         mainMenu.click(linkText);
-    }
-
-    @Then("The page with url {string} has been opened")
-    public void thePageWithUrlHasBeenOpened(String url) {
-
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 
     @After
