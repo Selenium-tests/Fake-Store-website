@@ -1,5 +1,6 @@
 Feature: Coupon redemption
 
+  @CCCorrectPlain
   Scenario Outline: I test using correct plain coupon code
     Given The product number 0 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
@@ -18,6 +19,7 @@ Feature: Coupon redemption
     |"10procent1"           |"Kupon: 10procent1"           |
 
 
+  @CC300Success
   Scenario Outline: I test using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
@@ -35,6 +37,7 @@ Feature: Coupon redemption
     |2            |"Bestsellery"|
 
 
+  @CC300Fail
   Scenario Outline: I test using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
@@ -51,6 +54,7 @@ Feature: Coupon redemption
     |1            |"Bestsellery"|
 
 
+  @CC300Windsurfing
   Scenario Outline: I test using "windsurfing350" coupon code for a product from the windsurfing category
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
@@ -66,6 +70,7 @@ Feature: Coupon redemption
     |3            |"Nowości"|
 
 
+  @CC350NonWindsurfing
   Scenario Outline: I test using "windsurfing350" coupon code for a product from the non-windsurfing category
     Given The product number <productNumber> from the <category> category has been added to the shopping cart
     And The shopping cart page is open
@@ -81,6 +86,7 @@ Feature: Coupon redemption
     |1            |"Bestsellery"|
 
 
+  @CCReusingRedeemed
   Scenario Outline: I test reusing a redeemed coupon
     Given The product number 3 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
@@ -103,7 +109,8 @@ Feature: Coupon redemption
     |"windsurfing350"       |
 
 
-  Scenario Outline: I test Aan attemption to link coupon "kwotowy250pojedynczy" to other coupons
+  @CC250Reusing
+  Scenario Outline: I test an attemption to link coupon "kwotowy250pojedynczy" to other coupons
   Given The product number 0 from the "Popularne" category has been added to the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
@@ -125,6 +132,7 @@ Feature: Coupon redemption
     |"windsurfing350"       |
 
 
+  @CCIncorrectCode
   Scenario Outline: I test using an incorrect coupon code
     Given The product number 2 from the "W promocji" category has been added to the shopping cart
     And The shopping cart page is open
@@ -141,6 +149,7 @@ Feature: Coupon redemption
     |"bad_coupon^5%"|"Kupon \"bad_coupon^5%\" nie istnieje!"|
 
 
+  @CCBlankCCodeField
   Scenario: Blank coupon code field
     Given The product number 3 from the "Bestsellery" category has been added to the shopping cart
     And The shopping cart page is open
