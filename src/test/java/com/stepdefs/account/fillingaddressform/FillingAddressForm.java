@@ -1,19 +1,15 @@
-package steps.addressForms;
-import io.cucumber.java.After;
+package com.stepdefs.account.fillingaddressform;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.After;
 import org.testng.Assert;
 import qa.enums.Browser;
-import qa.pages.Account;
 import qa.pages.addressform.AddressForm;
-import qa.pages.LoginForm;
-import qa.pages.MainMenu;
 
 import static qa.driver.Driver.*;
-public class AddressFormFillingStepDefs {
+
+public class FillingAddressForm {
 
     private AddressForm addressForm;
 
@@ -24,45 +20,6 @@ public class AddressFormFillingStepDefs {
         startDriver();
 
         addressForm = new AddressForm(getDriver(), "billing");
-    }
-
-    @Given("An user is logged in with email: {string} and password: {string}")
-    public void anUserIsLoggedIn(String email, String password) {
-
-        MainMenu mainMenu = new MainMenu(getDriver());
-        LoginForm loginForm = new LoginForm(getDriver());
-
-        mainMenu.hideNotice();
-        mainMenu.click("Moje konto");
-        loginForm.setUsername(email);
-        loginForm.setPassword(password);
-        loginForm.clickSubmitButton();
-    }
-
-    @And("Goes to the \"Adres rozliczeniowy\" form")
-    public void goesToTheAddressForm() {
-
-        Account account = new Account(getDriver());
-        account.clickLink("Adres");
-        account.getAddresses().clickAddButton(0);
-    }
-
-    @When("An user clicks the country drop-down list arrow")
-    public void clicksTheCountryDropDownListArrow() {
-
-        addressForm.getCountryDropdownList().clickArrow();
-    }
-
-    @And("Types {string} in the drop-down search field")
-    public void typesCountryInTheDropdownListSearchField(String country) {
-
-        addressForm.getCountryDropdownList().setCountry(country);
-    }
-
-    @And("Presses the ENTER key")
-    public void pressesEnter() {
-
-        addressForm.getCountryDropdownList().submit();
     }
 
     @And("Types {string} as first name")
