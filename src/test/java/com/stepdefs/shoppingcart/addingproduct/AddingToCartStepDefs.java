@@ -1,9 +1,8 @@
-package steps.addingtocart;
+package com.stepdefs.shoppingcart.addingproduct;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -25,14 +24,9 @@ public class AddingToCartStepDefs {
         createDriver(Browser.CHROME);
         startDriver();
 
+        productsContainer = new ProductsContainer(getDriver());
         siteHeaderCart = new SiteHeaderCart(getDriver());
         shoppingCart = new ShoppingCart(getDriver());
-    }
-
-    @Given("The user is on the home page")
-    public void theUserIsOnTheHomePage() {
-
-        productsContainer = new ProductsContainer(getDriver());
     }
 
     @When("The user clicks the 'Dodaj do koszyka' button of {int} product from category: {string}")
