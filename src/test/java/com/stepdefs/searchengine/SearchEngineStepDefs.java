@@ -1,20 +1,16 @@
-package steps.searchengine;
-
+package com.stepdefs.searchengine;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
 import qa.pages.Products;
 import qa.pages.SearchEngine;
-import static qa.driver.Driver.createDriver;
-import static qa.driver.Driver.startDriver;
-import static qa.driver.Driver.getDriver;
-import static qa.driver.Driver.quitDriver;
+
+import static qa.driver.Driver.*;
 
 public class SearchEngineStepDefs {
 
@@ -26,10 +22,6 @@ public class SearchEngineStepDefs {
 
         createDriver(Browser.CHROME);
         startDriver();
-    }
-
-    @Given("The user is on the home page")
-    public void theUserIsOnTheHomePage() {
 
         searchEngine = new SearchEngine(getDriver());
         products = new Products(getDriver());
@@ -39,6 +31,8 @@ public class SearchEngineStepDefs {
     public void theUserClicksOnTheSearchEngineField() throws InterruptedException {
 
         searchEngine.clickOnTheSearchField();
+
+        Thread.sleep(2000);
     }
 
     @And("Enters the '{string}' phrase")
@@ -47,10 +41,12 @@ public class SearchEngineStepDefs {
         searchEngine.enterPhrase(phrase);
     }
 
-    @And("Presses the ENTER key")
-    public void pressesTheEnterKey() {
+    @And("Submits")
+    public void submits() throws InterruptedException {
 
         searchEngine.submit();
+
+        Thread.sleep(2000);
     }
 
     @Then("The placeholder disappears")
@@ -69,14 +65,6 @@ public class SearchEngineStepDefs {
     public void theProductsCountTextIsNotPresent() {
 
         Assert.assertTrue(products.isResultCountEmpty());
-    }
-
-    @And("Products count text is 'Wyświetlanie wszystkich wyników: {int}'")
-    public void productsCountTextIs(int numberOfProducts) {
-
-        String expected = "Wyświetlanie wszystkich wyników: " + String.valueOf(numberOfProducts);
-
-        Assert.assertEquals(products.getResultCountText(), expected);
     }
 
     @And("The number of products is {int}")
