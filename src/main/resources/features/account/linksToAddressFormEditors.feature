@@ -1,6 +1,6 @@
 Feature: Billing address form
 
-  Background: An user is logged in
+  Background:
     Given An user is logged in with email: "my_email@gmail.com" and password: "secret_password"
     And The address editing section is open
 
