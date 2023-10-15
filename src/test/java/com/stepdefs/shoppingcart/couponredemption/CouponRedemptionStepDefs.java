@@ -1,18 +1,16 @@
-package steps.couponRedemption;
+package com.stepdefs.shoppingcart.couponredemption;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.Browser;
-import qa.pages.ProductsContainer;
 import qa.pages.ShoppingCart;
-import qa.pages.SiteHeaderCart;
 
 import static qa.driver.Driver.*;
+
 public class CouponRedemptionStepDefs {
 
     private ShoppingCart shoppingCart;
@@ -25,22 +23,6 @@ public class CouponRedemptionStepDefs {
         startDriver();
 
         shoppingCart = new ShoppingCart(getDriver());
-    }
-
-    @Given("The product number {int} from the {string} category has been added to the shopping cart")
-    public void theProductHasBeenAddedToTheShoppingCart(int productNumber, String category) {
-
-        ProductsContainer productsContainer = new ProductsContainer(getDriver());
-        productsContainer.setProductThumbnail(category, productNumber);
-        productsContainer.getProductThumbnail().clickAddToCartButton();
-        productsContainer.getProductThumbnail().waitForSeeCartButton();
-    }
-
-    @And("The shopping cart page is open")
-    public void theShoppingCartPagesIsOpen() {
-
-        SiteHeaderCart siteHeaderCart = new SiteHeaderCart(getDriver());
-        siteHeaderCart.clickCartMenu();
     }
 
     @And("Waits for 2 seconds")
