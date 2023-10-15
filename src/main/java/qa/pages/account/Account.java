@@ -1,10 +1,11 @@
-package qa.pages;
+package qa.pages.account;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.pages.Addresses;
 
 import java.util.List;
 
