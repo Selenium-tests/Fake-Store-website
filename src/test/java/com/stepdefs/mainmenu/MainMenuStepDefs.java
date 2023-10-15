@@ -1,38 +1,23 @@
 package com.stepdefs.mainmenu;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.When;
-import qa.enums.Browser;
 import qa.pages.MainMenu;
-import static qa.driver.Driver.createDriver;
-import static qa.driver.Driver.startDriver;
-import static qa.driver.Driver.getDriver;
-import static qa.driver.Driver.quitDriver;
 
 
 public class MainMenuStepDefs {
 
-    MainMenu mainMenu;
+    private final TestUtil testUtil;
 
-    @Before
-    public void init() {
+    public MainMenuStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
-
-        mainMenu = new MainMenu(getDriver());
+        this.testUtil = testUtil;
     }
 
     @When("The user clicks {string} link")
     public void theUserClicksLink(String linkText) {
 
+        MainMenu mainMenu = new MainMenu(testUtil.getDriver());
         mainMenu.click(linkText);
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

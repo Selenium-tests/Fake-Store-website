@@ -1,25 +1,22 @@
 package com.stepdefs.account.fillingaddressform;
-import io.cucumber.java.Before;
+
+import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.After;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.addressform.AddressForm;
 
-import static qa.driver.Driver.*;
 
 public class FillingAddressForm {
 
-    private AddressForm addressForm;
+    private final TestUtil testUtil;
+    private final AddressForm addressForm;
 
-    @Before
-    public void init() {
+    public FillingAddressForm(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+        this.testUtil = testUtil;
 
-        addressForm = new AddressForm(getDriver(), "billing");
+        addressForm = new AddressForm(testUtil.getDriver(), "billing");
     }
 
     @And("Types {string} as first name")
@@ -79,18 +76,12 @@ public class FillingAddressForm {
     @Then("The data has been saved")
     public void theDataHasBeenSaved() {
 
-        Assert.assertEquals(getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
+        Assert.assertEquals(testUtil.getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
     }
 
     @Then("The data has not been saved")
     public void theDataHasNotBeenSaved() {
 
-        Assert.assertNotEquals(getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
+        Assert.assertNotEquals(testUtil.getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
     }
 }

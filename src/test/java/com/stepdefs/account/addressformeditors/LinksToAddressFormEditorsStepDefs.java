@@ -1,24 +1,17 @@
 package com.stepdefs.account.addressformeditors;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.When;
-import qa.enums.Browser;
 import qa.pages.account.Account;
 
-import static qa.driver.Driver.*;
 
 public class LinksToAddressFormEditorsStepDefs {
 
-    private Account account;
+    private final TestUtil testUtil;
 
-    @Before
-    public void create() {
+    public LinksToAddressFormEditorsStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
-
-        account = new Account(getDriver());
+        this.testUtil = testUtil;
     }
 
     @When("An user clicks the symbol in the {string} column")
@@ -26,12 +19,7 @@ public class LinksToAddressFormEditorsStepDefs {
 
         int index = column.equals("Adres rozliczeniowy") ? 0 : 1;
 
+        Account account = new Account(testUtil.getDriver());
         account.getAddresses().clickAddButton(index);
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

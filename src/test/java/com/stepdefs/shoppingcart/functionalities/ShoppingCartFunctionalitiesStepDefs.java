@@ -1,29 +1,25 @@
 package com.stepdefs.shoppingcart.functionalities;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.ShoppingCart;
 import qa.utils.PriceParser;
 
-import static qa.driver.Driver.*;
 
 public class ShoppingCartFunctionalitiesStepDefs {
 
-    private ShoppingCart shoppingCart;
+    private final TestUtil testUtil;
+    private final ShoppingCart shoppingCart;
     private double expectedTotalPrice;
 
-    @Before
-    public void init() {
+    public ShoppingCartFunctionalitiesStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+        this.testUtil = testUtil;
 
-        shoppingCart = new ShoppingCart(getDriver());
+        shoppingCart = new ShoppingCart(testUtil.getDriver());
     }
 
     @When("The user types the {string} as amount of the product")
@@ -72,11 +68,5 @@ public class ShoppingCartFunctionalitiesStepDefs {
 
         Assert.assertTrue(shoppingCart.isEmptyCartMessageVisible());
         Assert.assertEquals(shoppingCart.getEmptyCartMessageText(), message);
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

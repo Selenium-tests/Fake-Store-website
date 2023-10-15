@@ -1,32 +1,29 @@
 package com.stepdefs.shoppingcart.addingproduct;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.*;
-import static qa.driver.Driver.*;
+
 
 public class AddingToCartStepDefs {
 
-    private SiteHeaderCart siteHeaderCart;
-    private ProductsContainer productsContainer;
-    private ShoppingCart shoppingCart;
+    private final TestUtil testUtil;
+    private final SiteHeaderCart siteHeaderCart;
+    private final ProductsContainer productsContainer;
+    private final ShoppingCart shoppingCart;
     private String productName;
     private String price;
 
-    @Before
-    public void init() {
+    public AddingToCartStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+        this.testUtil = testUtil;
 
-        productsContainer = new ProductsContainer(getDriver());
-        siteHeaderCart = new SiteHeaderCart(getDriver());
-        shoppingCart = new ShoppingCart(getDriver());
+        siteHeaderCart = new SiteHeaderCart(testUtil.getDriver());
+        productsContainer = new ProductsContainer(testUtil.getDriver());
+        shoppingCart = new ShoppingCart(testUtil.getDriver());
     }
 
     @When("The user clicks the 'Dodaj do koszyka' button of {int} product from category: {string}")
@@ -52,7 +49,7 @@ public class AddingToCartStepDefs {
     @And("Clicks the 'Dodaj do koszyka' button")
     public void clicksTheAddToCartButton() throws InterruptedException {
 
-        ProductPage productPage = new ProductPage(getDriver());
+        ProductPage productPage = new ProductPage(testUtil.getDriver());
         productPage.clickAddToCartButton();
 
         productName = productPage.getProductTitle();
@@ -91,11 +88,5 @@ public class AddingToCartStepDefs {
 
         Assert.assertEquals(shoppingCart.getRow().getName(), productName);
         Assert.assertEquals(shoppingCart.getRow().getPrice(), price);
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

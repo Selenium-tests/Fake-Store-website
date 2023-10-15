@@ -1,25 +1,22 @@
 package com.stepdefs.account.countrydropdownlist;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.addressform.CountryDropdownList;
 
-import static qa.driver.Driver.*;
 
 public class CountryDropdownListStepDefs {
 
-    private CountryDropdownList countryDropdownList;
+    private final TestUtil testUtil;
+    private final CountryDropdownList countryDropdownList;
 
-    @Before
-    public void init() {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+    public CountryDropdownListStepDefs(TestUtil testUtil) {
 
-        countryDropdownList = new CountryDropdownList(getDriver());
+        this.testUtil = testUtil;
+
+        countryDropdownList = new CountryDropdownList(testUtil.getDriver());
     }
 
     @Then("The message about incorrect country name is displayed")
@@ -32,11 +29,5 @@ public class CountryDropdownListStepDefs {
     public void messageIsNotDisplayed() {
 
         Assert.assertFalse(countryDropdownList.isMessageDisplayed());
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

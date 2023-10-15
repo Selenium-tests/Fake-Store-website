@@ -1,31 +1,27 @@
 package com.stepdefs.searchengine;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.Products;
 import qa.pages.SearchEngine;
 
-import static qa.driver.Driver.*;
-
 public class SearchEngineStepDefs {
 
-    private SearchEngine searchEngine;
-    private Products products;
+    private final TestUtil testUtil;
+    private final SearchEngine searchEngine;
+    private final Products products;
 
-    @Before
-    public void init() {
+    public SearchEngineStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+        this.testUtil = testUtil;
 
-        searchEngine = new SearchEngine(getDriver());
-        products = new Products(getDriver());
+        searchEngine = new SearchEngine(testUtil.getDriver());
+        products = new Products(testUtil.getDriver());
     }
+
 
     @When("The user clicks on the search engine field")
     public void theUserClicksOnTheSearchEngineField() throws InterruptedException {
@@ -71,11 +67,5 @@ public class SearchEngineStepDefs {
     public void theNumberOfProductsIs(int numberOfProducts) {
 
         Assert.assertEquals(products.getProductsColumnsSize(), numberOfProducts);
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

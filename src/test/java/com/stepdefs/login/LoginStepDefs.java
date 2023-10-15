@@ -1,37 +1,33 @@
 package com.stepdefs.login;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.account.Account;
 import qa.pages.LoginForm;
 import qa.pages.MainMenu;
 
-import static qa.driver.Driver.*;
 
 public class LoginStepDefs {
 
-    private LoginForm loginForm;
+    private final TestUtil testUtil;
+    private final LoginForm loginForm;
 
-    @Before
-    public void init() {
+    public LoginStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
+        this.testUtil = testUtil;
+
+        loginForm = new LoginForm(testUtil.getDriver());
     }
 
     @Given("The user goes to the login page")
     public void theUserGoesToTheLoginPage() {
 
-        MainMenu mainMenu = new MainMenu(getDriver());
+        MainMenu mainMenu = new MainMenu(testUtil.getDriver());
         mainMenu.click("Moje konto");
-
-        loginForm = new LoginForm(getDriver());
     }
 
     @When("The user types a correct email address {string}")
@@ -87,14 +83,8 @@ public class LoginStepDefs {
     @Then("The user is logged in")
     public void theUserIsLoggedIn() {
 
-        Account account = new Account(getDriver());
+        Account account = new Account(testUtil.getDriver());
 
         Assert.assertTrue(account.areNavigationButtonsVisible());
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }

@@ -1,32 +1,26 @@
 package com.stepdefs.account.accountpagenavigation;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import com.testutil.TestUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.enums.Browser;
 import qa.pages.account.Account;
 
-import static qa.driver.Driver.*;
 
 public class AccountPageNavigationStepDefs {
 
+    private final TestUtil testUtil;
     Account account;
 
-    @Before
-    public void init() {
+    public AccountPageNavigationStepDefs(TestUtil testUtil) {
 
-        createDriver(Browser.CHROME);
-        startDriver();
-
-        account = new Account(getDriver());
+        this.testUtil = testUtil;
     }
 
     @When("An user clicks the {string} link")
     public void anUserClicksTheLink(String link) {
 
-        account = new Account(getDriver());
+        account = new Account(testUtil.getDriver());
         account.clickLink(link);
     }
 
@@ -34,11 +28,5 @@ public class AccountPageNavigationStepDefs {
     public void anUserIsLoggedOut() {
 
         Assert.assertFalse(account.areNavigationButtonsVisible());
-    }
-
-    @After
-    public void tearDown() {
-
-        quitDriver();
     }
 }
