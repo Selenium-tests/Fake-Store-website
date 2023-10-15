@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "./src/main/resources/features/searchEngine/searchEngine.feature",
         plugin = { "pretty", "html:target/cucumber-reports/searchEngine.html" },
-        glue = {"com.stepdefs.searchengine", "com.commonstepdefs"}
+        glue = {"com.stepdefs.searchengine", "com.commonstepdefs", "com.testutil"}
 )
 public class Runner {
 }

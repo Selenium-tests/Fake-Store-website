@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/shoppingCart/addingProduct.feature",
         plugin = {"pretty", "html:target/cucumber-reports/addingProductToTheCart.html"},
-        glue = {"com.stepdefs.shoppingcart.addingproduct", "com.commonstepdefs"}
+        glue = {"com.stepdefs.shoppingcart.addingproduct", "com.commonstepdefs", "com.testutil"}
 )
 public class Runner {
 }

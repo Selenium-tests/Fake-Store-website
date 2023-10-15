@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/account/linksToAddressFormEditors.feature",
         plugin = {"pretty", "html:target/cucumber-reports/addressFormEditorsLinks.html" },
-        glue = {"com.stepdefs.account.addressformeditors", "com.commonstepdefs"}
+        glue = {"com.stepdefs.account.addressformeditors", "com.commonstepdefs", "com.testutil"}
 )
 public class Runner {
 }

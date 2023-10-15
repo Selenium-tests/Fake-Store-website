@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/account/countryDropdownList.feature",
         plugin = {"pretty", "html:target/cucumber-reports/countryDropdownList.html"},
-        glue = {"com.stepdefs.account.countrydropdownlist", "com.commonstepdefs"},
+        glue = {"com.stepdefs.account.countrydropdownlist", "com.commonstepdefs", "com.testutil"},
         tags = "@CDLCorrectCityName"
 )
 public class Runner {
