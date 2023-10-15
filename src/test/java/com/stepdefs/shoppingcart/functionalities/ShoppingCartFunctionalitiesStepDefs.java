@@ -1,17 +1,13 @@
-package steps.shoppingCartFunctionalities;
+package com.stepdefs.shoppingcart.functionalities;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.driver.Driver;
 import qa.enums.Browser;
-import qa.pages.ProductsContainer;
 import qa.pages.ShoppingCart;
-import qa.pages.SiteHeaderCart;
 import qa.utils.PriceParser;
 
 import static qa.driver.Driver.*;
@@ -24,26 +20,10 @@ public class ShoppingCartFunctionalitiesStepDefs {
     @Before
     public void init() {
 
-        Driver.createDriver(Browser.CHROME);
+        createDriver(Browser.CHROME);
         startDriver();
 
         shoppingCart = new ShoppingCart(getDriver());
-    }
-
-    @Given("The product has been added to the shopping cart")
-    public void theProductHasBeenAddedToTheShoppingCart() {
-
-        ProductsContainer productsContainer = new ProductsContainer(getDriver());
-        productsContainer.setProductThumbnail("Popularne", 1);
-        productsContainer.getProductThumbnail().clickAddToCartButton();
-        productsContainer.getProductThumbnail().waitForSeeCartButton();
-    }
-
-    @And("The shopping cart page is open")
-    public void theShoppingCartPagesIsOpen() {
-
-        SiteHeaderCart siteHeaderCart = new SiteHeaderCart(getDriver());
-        siteHeaderCart.clickCartMenu();
     }
 
     @When("The user types the {string} as amount of the product")
