@@ -9,7 +9,7 @@ public class Row extends BasePage {
 
     private WebElement removeButton;
     private WebElement productName;
-    private WebElement amountField;
+    private WebElement quantityField;
     private WebElement price;
     private WebElement totalPrice;
 
@@ -22,9 +22,9 @@ public class Row extends BasePage {
 
         removeButton = product.findElement(By.xpath(".//a[@class='remove']"));
         productName = product.findElement(By.className("product-name"));
-        amountField = product.findElement(By.xpath(".//input[@type='number']"));
-        price = product.findElement(By.xpath(".//span[@class='woocommerce-Price-amount amount']"));
-        totalPrice = product.findElement(By.xpath(".//td[@class='product-subtotal']"));
+        quantityField = product.findElement(By.cssSelector("input[class='input-text qty text']"));
+        price = product.findElement(By.cssSelector("span[class='woocommerce-Price-amount amount']"));
+        totalPrice = product.findElement(By.className("product-subtotal"));
     }
 
     public void clickRemoveButton() {
@@ -42,14 +42,24 @@ public class Row extends BasePage {
         return price.getText();
     }
 
-    public void setAmount(String amount) {
+    public void setQuantity(String quantity) {
 
-        amountField.clear();
-        amountField.sendKeys(amount);
+        quantityField.clear();
+        quantityField.sendKeys(quantity);
     }
 
     public String getTotalPrice() {
 
         return totalPrice.getText();
+    }
+
+    public boolean isValidationMessageVisible() {
+
+        return !quantityField.getAttribute("validationMessage").isEmpty();
+    }
+
+    public String getValidationMessageText() {
+
+        return quantityField.getAttribute("validationMessage");
     }
 }
