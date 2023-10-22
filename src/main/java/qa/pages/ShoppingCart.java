@@ -33,7 +33,7 @@ public class ShoppingCart extends BasePage {
     @FindBy(className = "woocommerce-error")
     List<WebElement> errorMessage;
 
-    @FindBy(xpath = ".//p[@class='cart-empty woocommerce-info']")
+    @FindBy(css = "div[class='cart-empty woocommerce-info']")
     List<WebElement> emptyCartMessage;
     @FindBy(xpath = ".//button[@name='update_cart']")
     WebElement updateCartButton;
