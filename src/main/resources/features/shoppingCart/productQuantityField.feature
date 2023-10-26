@@ -37,7 +37,7 @@ Feature: Product quantity field
     And The message about empty shopping cart is displayed
     And The empty shopping cart message is: "Twój koszyk jest pusty."
 
-  @SCNotANumber
+  @SCCNotANumber
   Scenario Outline: I test changing the quantity of the product with not a number
     When The user types the <quantity> as not a number
     And Clicks the 'Zaktualizuj koszyk' button
@@ -49,7 +49,7 @@ Feature: Product quantity field
     |","     |
     |"."     |
 
-  @SCRemovingProduct
+  @SCCRemovingProduct
   Scenario: Removing a product from the shopping cart
     When The user clicks the 'Remove' button
     Then The shopping cart is empty
