@@ -37,6 +37,8 @@ public class ShoppingCart extends BasePage {
     List<WebElement> emptyCartMessage;
     @FindBy(xpath = ".//button[@name='update_cart']")
     WebElement updateCartButton;
+    @FindBy(css = "a[class='checkout-button button alt wc-forward']")
+    WebElement checkoutButton;
 
     public void findProducts() {
 
@@ -103,5 +105,10 @@ public class ShoppingCart extends BasePage {
     public void clickUpdateCartButton() {
 
         updateCartButton.click();
+    }
+
+    public void clickCheckoutButton() {
+
+        clickElement(checkoutButton);
     }
 }
