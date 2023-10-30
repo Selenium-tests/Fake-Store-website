@@ -1,4 +1,4 @@
-package com.stepdefs.checkout.creditcard;
+package com.stepdefs.checkout.creditcardnumber;
 
 import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
@@ -10,13 +10,13 @@ import qa.pages.checkout.CheckoutPage;
 import qa.pages.ShoppingCart;
 
 
-public class CreditCard {
+public class CreditCardNumber {
 
     private final CheckoutPage checkoutPage;
 
     private final TestUtil testUtil;
 
-    public CreditCard(TestUtil testUtil) {
+    public CreditCardNumber(TestUtil testUtil) {
 
         this.testUtil = testUtil;
 
@@ -31,19 +31,19 @@ public class CreditCard {
         shoppingCart.clickCheckoutButton();
     }
 
-    @And("Types {string} as card number")
+    @And("Types {string} as a card number")
     public void typesCardNumber(String cardNumber) {
 
         checkoutPage.getCreditCardForm().setCardNumber(cardNumber);
     }
 
-    @And("Types {string} as expiration date")
+    @And("Types {string} as an expiration date")
     public void typesExpirationDate(String expirationDate) {
 
         checkoutPage.getCreditCardForm().setExpirationDate(expirationDate);
     }
 
-    @And("Types {string} as CVC")
+    @And("Types {string} as a CVC")
     public void typesCVC(String CVC) {
 
         checkoutPage.getCreditCardForm().setCVC(CVC);
@@ -73,5 +73,20 @@ public class CreditCard {
     public void theOrderConfirmationPageHasBeenOpened() {
 
         Assert.assertTrue(testUtil.getDriver().getCurrentUrl().contains("https://fakestore.testelka.pl/zamowienie/zamowienie-otrzymane/"));
+    }
+
+    @Then("The message about an incorrect card number has been displayed")
+    @Then("The message about incomplete card number has been displayed")
+    @Then("The message about incorrect month has been displayed")
+    public void theMessageAboutAnIncorrectCardNumberHasBeenDisplayed() {
+
+        Assert.assertTrue(checkoutPage.getCreditCardForm().isIncorrectCardNumberMessageVisible());
+    }
+
+    @And("The text of the invalid card number message is {string}")
+    @And("The message text for the invalid month is {string}")
+    public void theIncorrectCardNumberMessageTextIs(String message) {
+
+        Assert.assertEquals(checkoutPage.getCreditCardForm().getIncorrectCardNumberMessageText(), message);
     }
 }
