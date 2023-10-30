@@ -6,6 +6,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
 
+import java.util.List;
+
 public class CreditCardForm extends BasePage {
 
     private final Actions actions;
@@ -24,6 +26,9 @@ public class CreditCardForm extends BasePage {
 
     @FindBy(id = "stripe-cvc-element")
     WebElement cvcField;
+
+    @FindBy(css = "div[class='stripe-source-errors']")
+    List<WebElement> incorrectCardNumberMessage;
 
     private void set(WebElement element, String data) {
 
@@ -44,5 +49,15 @@ public class CreditCardForm extends BasePage {
     public void setCVC(String CVC) {
 
         set(cvcField, CVC);
+    }
+
+    public boolean isIncorrectCardNumberMessageVisible() {
+
+        return !(incorrectCardNumberMessage.isEmpty());
+    }
+
+    public String getIncorrectCardNumberMessageText() {
+
+        return incorrectCardNumberMessage.get(0).getText();
     }
 }
