@@ -58,7 +58,6 @@ public class Driver {
                 edgeOptions.merge(capabilities);
 
                 driver = new EdgeDriver(edgeOptions);
-
             }
         }
 
@@ -69,6 +68,7 @@ public class Driver {
 
         driver.navigate().to("https://fakestore.testelka.pl/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 
