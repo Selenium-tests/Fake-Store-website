@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
 
+import java.util.List;
+
 public class AddressForm extends BasePage {
 
     private final CountryDropdownList countryDropdownList;
@@ -22,6 +24,9 @@ public class AddressForm extends BasePage {
 
     @FindBy(css = "[name='save_address']")
     WebElement submitButton;
+
+    @FindBy(className = "woocommerce-error")
+    List<WebElement> errorMessage;
 
     private String getPrefix() {
 
@@ -88,5 +93,15 @@ public class AddressForm extends BasePage {
     public CountryDropdownList getCountryDropdownList() {
 
         return countryDropdownList;
+    }
+
+    public boolean isErrorMessageDisplayed() {
+
+        return !(errorMessage.isEmpty());
+    }
+
+    public String getErrorMessageText() {
+
+        return errorMessage.get(0).getText();
     }
 }
