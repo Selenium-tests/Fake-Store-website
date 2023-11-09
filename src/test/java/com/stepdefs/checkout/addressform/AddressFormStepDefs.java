@@ -5,11 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import qa.factories.AddressFormFactory;
-import qa.factories.CreditCardFormFactory;
 import qa.pages.addressform.AddressForm;
-import qa.pages.checkout.CheckoutPage;
 
-import static qa.driver.Driver.getDriver;
 
 public class AddressFormStepDefs {
 
@@ -18,12 +15,6 @@ public class AddressFormStepDefs {
     public AddressFormStepDefs(TestUtil testUtil) {
 
         this.testUtil = testUtil;
-    }
-
-    @And("Fills the credit card form")
-    public void fillsTheCreditCardForm() {
-
-        CreditCardFormFactory.get(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Imię' field blank")
@@ -66,14 +57,6 @@ public class AddressFormStepDefs {
     public void fillsTheAddressFormLeavesTheEmailFieldBlank() {
 
         AddressFormFactory.withoutEmail(testUtil.getDriver());
-    }
-
-    @And("Accepts terms")
-    public void acceptsTerms() {
-
-        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
-
-        checkoutPage.clickTermsCheckbox();
     }
 
     @Then("A message about not accepting the terms was displayed")
