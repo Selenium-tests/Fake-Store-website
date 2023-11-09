@@ -9,7 +9,10 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/checkout/checkbox.feature",
         plugin = { "pretty", "html:target/cucumber-reports/checkbox.html" },
-        glue = { "com.stepdefs.checkout.addressform", "com.stepdefs.checkout.checkbox", "com.stepdefs.checkout.creditcardnumber", "com.commonstepdefs", "com.testutil" }
+        glue = { "com.stepdefs.checkout.checkbox",
+                 "com.stepdefs.checkout.creditcardnumber",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }

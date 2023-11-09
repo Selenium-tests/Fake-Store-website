@@ -8,8 +8,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         features = "./src/main/resources/features/account/linksToAddressFormEditors.feature",
-        plugin = {"pretty", "html:target/cucumber-reports/addressFormEditorsLinks.html" },
-        glue = {"com.stepdefs.account.addressformeditors", "com.commonstepdefs", "com.testutil"}
+        plugin = {"pretty", "html:target/cucumber-reports/linksToAddressFormEditors.html" },
+        glue = { "com.stepdefs.account.addressformeditors",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }

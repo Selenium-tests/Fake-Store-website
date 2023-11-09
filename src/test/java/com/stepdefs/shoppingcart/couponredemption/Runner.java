@@ -9,8 +9,9 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/shoppingCart/couponRedemption.feature",
         plugin = { "pretty", "html:target/cucumber-reports/couponRedemption.html" },
-        glue = {"com.stepdefs.shoppingcart.couponredemption", "com.commonstepdefs", "com.testutil"},
-        tags = "@CC250Reusing"
+        glue = { "com.stepdefs.shoppingcart.couponredemption",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }

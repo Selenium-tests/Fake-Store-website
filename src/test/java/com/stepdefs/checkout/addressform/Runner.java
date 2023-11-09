@@ -8,9 +8,11 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         features = "./src/main/resources/features/checkout/addressForm.feature",
-        plugin = { "pretty", "html:target/cucumber-reports/clickingButton.html" },
-        glue = { "com.stepdefs.checkout.addressform", "com.stepdefs.checkout.creditcardnumber", "com.commonstepdefs", "com.testutil" },
-        tags = "@BTN_withoutEmail"
+        plugin = { "pretty", "html:target/cucumber-reports/addressForm.html" },
+        glue = { "com.stepdefs.checkout.addressform",
+                 "com.stepdefs.checkout.creditcardnumber",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }

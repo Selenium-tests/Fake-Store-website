@@ -8,12 +8,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 
         features = "./src/main/resources/features/checkout/expirationDate.feature",
-        plugin = { "pretty", "html:target/cucumber-reports/creditCardExpirationDate.html" },
+        plugin = { "pretty", "html:target/cucumber-reports/expirationDate.html" },
         glue = { "com.stepdefs.checkout.creditcardnumber",
                  "com.commonstepdefs",
-                 "com.testutil" },
-
-        tags = "@ED_DateInThePast"
+                 "com.testutil" }
 )
 public class Runner {
 }

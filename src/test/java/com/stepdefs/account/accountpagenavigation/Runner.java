@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 
         features = {"./src/main/resources/features/account/accountPageNavigation.feature"},
         plugin = {"pretty", "html:target/cucumber-reports/accountPageNavigation.html"},
-        glue = { "com.stepdefs.account.accountpagenavigation", "com.commonstepdefs", "com.testutil" }
+        glue = { "com.stepdefs.account.accountpagenavigation",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }

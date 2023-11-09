@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/login/login.feature",
         plugin = { "pretty", "html:target/cucumber-reports/login.html" },
-        glue = {"com.stepdefs.login", "com.commonstepdefs", "com.testutil"}
+        glue = { "com.stepdefs.login",
+                 "com.commonstepdefs",
+                 "com.testutil" }
 )
 public class Runner {
 }
