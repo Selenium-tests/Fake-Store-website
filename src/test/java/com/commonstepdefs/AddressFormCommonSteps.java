@@ -7,7 +7,6 @@ import org.testng.Assert;
 import qa.pages.account.Account;
 import qa.pages.addressform.AddressForm;
 import qa.pages.addressform.CountryDropdownList;
-import qa.pages.checkout.CheckoutPage;
 
 import static qa.driver.Driver.getDriver;
 
