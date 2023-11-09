@@ -17,8 +17,8 @@ Feature: Credit card expiration date
 
     Examples:
     |expirationDate|
-    |"12/23"          |
-    |"10/73"          |
+    |"12/23"       |
+    |"10/73"       |
 
   @ED_DateInThePast
   Scenario Outline: I am testing the credit card form using date in the past
