@@ -27,9 +27,7 @@ public class CheckoutCommonSteps {
     @And("Fills the payment details form")
     public void fillsThePaymentDetailsForm() {
 
-        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
-
-        checkoutPage.setAddressForm(AddressFormFactory.get(getDriver()));
+        AddressFormFactory.get(getDriver());
     }
 
     @And("Accepts terms")
