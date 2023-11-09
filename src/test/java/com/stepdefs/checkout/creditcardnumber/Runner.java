@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 
         features = "./src/main/resources/features/checkout/creditCardNumber.feature",
         plugin = { "pretty", "html:target/cucumber-reports/creditCardNumber.html" },
-        glue = { "com.stepdefs.checkout.creditcardnumber", "com.commonstepdefs", "com.testutil" }
+        glue = { "com.stepdefs.checkout.creditcardnumber", "com.commonstepdefs.addressform", "com.testutil" }
 )
 public class Runner {
 }
