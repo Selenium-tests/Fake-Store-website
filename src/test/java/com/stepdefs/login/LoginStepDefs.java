@@ -74,12 +74,6 @@ public class LoginStepDefs {
         Assert.assertTrue(loginForm.isErrorMessageDisplayed());
     }
 
-    @And("The error message text is {string}")
-    public void theErrorMessageTextIs(String errorMessage) {
-
-        Assert.assertEquals(loginForm.getErrorMessageText(), errorMessage);
-    }
-
     @Then("The user is logged in")
     public void theUserIsLoggedIn() {
 

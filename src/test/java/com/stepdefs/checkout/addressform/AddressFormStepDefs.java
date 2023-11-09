@@ -58,12 +58,4 @@ public class AddressFormStepDefs {
 
         AddressFormFactory.withoutEmail(testUtil.getDriver());
     }
-
-    @Then("A message about not accepting the terms was displayed")
-    public void messageAboutNotAcceptingTermsHasBeenDisplayed() {
-
-        AddressForm addressForm = new AddressForm(testUtil.getDriver(), "billing");
-
-        Assert.assertTrue(addressForm.isErrorMessageDisplayed());
-    }
 }
