@@ -7,7 +7,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutFirstName
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Imię" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Imię' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -17,7 +19,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutLastName
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Nazwisko" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Nazwisko' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -27,7 +31,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutAddress
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Ulica" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Ulica' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -37,7 +43,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutPostcode
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Kod pocztowy" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Kod pocztowy' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -47,7 +55,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutCity
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Miasto" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Miasto' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -57,7 +67,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutPhone
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Telefon" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Telefon' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
@@ -67,7 +79,9 @@ Feature: Clicking the "Kupuję i płacę" button
   @BTN_withoutEmail
   Scenario: I am testing clicking the "Kupuję i płacę" button without filling in the "Telefon" field.
     When The user clicks the 'Przejdź do płatności' button
-    And Fills the credit card form
+    And Types "4242424242424242" as a card number
+    And Types "09/25" as an expiration date
+    And Types "343" as a CVC
     And Fills the address form leaving the 'Adres email' field blank
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
