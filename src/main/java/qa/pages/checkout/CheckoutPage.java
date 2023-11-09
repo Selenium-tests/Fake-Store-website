@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
 import qa.pages.addressform.AddressForm;
 
+import java.util.List;
+
 public class CheckoutPage extends BasePage {
 
     private AddressForm addressForm;
@@ -24,6 +26,12 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = "button[name='woocommerce_checkout_place_order']")
     WebElement submitButton;
 
+    @FindBy(className = "woocommerce-terms-and-conditions-link")
+    WebElement termsLink;
+
+    @FindBy(className = "woocommerce-terms-and-conditions")
+    List<WebElement> termsAndConditions;
+
     public void clickTermsCheckbox() {
 
         termsCheckbox.click();
@@ -39,8 +47,18 @@ public class CheckoutPage extends BasePage {
         this.addressForm = addressForm;
     }
 
+    public void clickTermsLink() {
+
+        clickElement(termsLink);
+    }
+
     public CreditCardForm getCreditCardForm() {
 
         return creditCardForm;
+    }
+
+    public boolean isTermsAndConditionsTextBoxVisible() {
+
+        return !(termsAndConditions.isEmpty());
     }
 }
