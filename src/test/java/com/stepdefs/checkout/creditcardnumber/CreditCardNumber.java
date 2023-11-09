@@ -13,7 +13,6 @@ import qa.pages.ShoppingCart;
 public class CreditCardNumber {
 
     private final CheckoutPage checkoutPage;
-
     private final TestUtil testUtil;
 
     public CreditCardNumber(TestUtil testUtil) {
@@ -47,12 +46,6 @@ public class CreditCardNumber {
     public void typesCVC(String CVC) {
 
         checkoutPage.getCreditCardForm().setCVC(CVC);
-    }
-
-    @And("Accepts terms")
-    public void acceptsTerms() {
-
-        checkoutPage.clickTermsCheckbox();
     }
 
     @And("Fills the payment details form")
