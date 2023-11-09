@@ -3,31 +3,21 @@ package com.stepdefs.checkout.creditcardnumber;
 import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.factories.AddressFormFactory;
 import qa.pages.checkout.CheckoutPage;
-import qa.pages.ShoppingCart;
 
 
-public class CreditCardNumber {
+public class CreditCardNumberStepDefs {
 
     private final CheckoutPage checkoutPage;
     private final TestUtil testUtil;
 
-    public CreditCardNumber(TestUtil testUtil) {
+    public CreditCardNumberStepDefs(TestUtil testUtil) {
 
         this.testUtil = testUtil;
 
         checkoutPage = new CheckoutPage(testUtil.getDriver());
         checkoutPage.hideNotice();
-    }
-
-    @When("The user clicks the 'Przejdź do płatności' button")
-    public void theUserClicksTheButton() {
-
-        ShoppingCart shoppingCart = new ShoppingCart(testUtil.getDriver());
-        shoppingCart.clickCheckoutButton();
     }
 
     @And("Types {string} as a card number")
@@ -46,12 +36,6 @@ public class CreditCardNumber {
     public void typesCVC(String CVC) {
 
         checkoutPage.getCreditCardForm().setCVC(CVC);
-    }
-
-    @And("Fills the payment details form")
-    public void fillsThePaymentDetailsForm() {
-
-        checkoutPage.setAddressForm(AddressFormFactory.get(testUtil.getDriver()));
     }
 
     @And("Clicks the \"Kupuję i płacę\" button")
