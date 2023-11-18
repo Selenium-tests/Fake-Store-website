@@ -18,6 +18,13 @@ public class CheckoutCommonSteps {
         shoppingCart.clickCheckoutButton();
     }
 
+    @And("The checkout page is open")
+    public void theCheckoutPageIsOpen() {
+
+        ShoppingCart shoppingCart = new ShoppingCart(getDriver());
+        shoppingCart.clickCheckoutButton();
+    }
+
     @And("Fills the credit card form")
     public void fillsTheCreditCardForm() {
 
