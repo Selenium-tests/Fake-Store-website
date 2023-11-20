@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
 
 public class Row extends BasePage {
 
@@ -16,6 +17,8 @@ public class Row extends BasePage {
     public Row(WebDriver driver) {
 
         super(driver);
+
+        setClickable(new ClickWithJSExecutor(driver));
     }
 
     public void setRow(WebElement product) {
@@ -27,9 +30,10 @@ public class Row extends BasePage {
         totalPrice = product.findElement(By.className("product-subtotal"));
     }
 
-    public void clickRemoveButton() {
+    public void clickRemoveButton() throws IllegalAccessException {
 
-        clickElement(removeButton);
+        clickable.click(removeButton);
+        //clickElement(removeButton);
     }
 
     public String getName() {
