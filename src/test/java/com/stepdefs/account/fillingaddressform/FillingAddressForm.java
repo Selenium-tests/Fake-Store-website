@@ -20,55 +20,55 @@ public class FillingAddressForm {
     }
 
     @And("Types {string} as first name")
-    public void anUserTypesFirstName(String firstName) {
+    public void anUserTypesFirstName(String firstName) throws IllegalAccessException {
 
         addressForm.setFirstName(firstName);
     }
 
     @And("Types {string} as last name")
-    public void anUserTypesLastName(String lastName) {
+    public void anUserTypesLastName(String lastName) throws IllegalAccessException {
 
         addressForm.setLastName(lastName);
     }
 
     @And("Types {string} as a company")
-    public void anUserTypesCompany(String company) {
+    public void anUserTypesCompany(String company) throws IllegalAccessException {
 
         addressForm.setCompany(company);
     }
 
     @And("Types {string} as an address")
-    public void anUserTypesStreet(String address) {
+    public void anUserTypesStreet(String address) throws IllegalAccessException {
 
         addressForm.setAddress1(address);
     }
 
     @And("Types {string} as a postcode")
-    public void anUserTypesPostcode(String postcode) {
+    public void anUserTypesPostcode(String postcode) throws IllegalAccessException {
 
         addressForm.setPostcode(postcode);
     }
 
     @And("Types {string} as a city")
-    public void anUserTypesCity(String city) {
+    public void anUserTypesCity(String city) throws IllegalAccessException {
 
         addressForm.setCity(city);
     }
 
     @And("Types {string} as a phone number")
-    public void anUserTypesPhoneNumber(String phoneNumber) {
+    public void anUserTypesPhoneNumber(String phoneNumber) throws IllegalAccessException {
 
         addressForm.setPhone(phoneNumber);
     }
 
     @And("Types {string} as a email")
-    public void anUserTypesEmail(String email) {
+    public void anUserTypesEmail(String email) throws IllegalAccessException {
 
         addressForm.setEmail(email);
     }
 
     @And("Clicks the \"Zapisz adres\" key")
-    public void clicksTheKey() {
+    public void clicksTheKey() throws IllegalAccessException {
 
         addressForm.clickSubmitButton();
     }
