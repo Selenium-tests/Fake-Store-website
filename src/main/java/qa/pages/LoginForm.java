@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithClickMethod;
+import qa.interactions.formfillable.FillWithSendKeysMethod;
 
 import java.util.List;
 
@@ -12,6 +14,9 @@ public class LoginForm extends BasePage {
     public LoginForm(WebDriver driver) {
 
         super(driver);
+
+        setClickable(new ClickWithClickMethod(driver));
+        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(id = "username")
@@ -26,19 +31,19 @@ public class LoginForm extends BasePage {
     @FindBy(xpath = ".//ul[@class='woocommerce-error']")
     List<WebElement> errorMessage;
 
-    public void setUsername(String username) {
+    public void setUsername(String username) throws IllegalAccessException {
 
-        usernameForm.sendKeys(username);
+        formFillable.fill(usernameForm, username);
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws IllegalAccessException {
 
-        passwordForm.sendKeys(password);
+        formFillable.fill(passwordForm, password);
     }
 
-    public void clickSubmitButton() {
+    public void clickSubmitButton() throws IllegalAccessException {
 
-        submitButton.click();
+        clickable.click(submitButton);
     }
 
     public boolean isErrorMessageDisplayed() {
