@@ -2,25 +2,27 @@ package qa.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithActions;
+import qa.interactions.formfillable.FillWithSendKeysMethod;
 
 public class SearchEngine extends BasePage {
 
-    Actions actions;
     public SearchEngine(WebDriver driver) {
 
         super(driver);
-        actions = new Actions(driver);
+
+        setClickable(new ClickWithActions(driver));
+        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(className = "search-field")
     WebElement searchField;
 
-    public void clickOnTheSearchField() {
+    public void clickOnTheSearchField() throws IllegalAccessException {
 
-        actions.click(searchField).perform();
+        clickable.click(searchField);
     }
 
     public String getPlaceholderText() {
@@ -28,9 +30,9 @@ public class SearchEngine extends BasePage {
         return searchField.getAttribute("placeholder");
     }
 
-    public void enterPhrase(String phrase) {
+    public void enterPhrase(String phrase) throws IllegalAccessException {
 
-        searchField.sendKeys(phrase);
+        formFillable.fill(searchField, phrase);
     }
 
     public void submit() {
