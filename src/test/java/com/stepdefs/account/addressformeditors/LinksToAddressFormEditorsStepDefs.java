@@ -15,7 +15,7 @@ public class LinksToAddressFormEditorsStepDefs {
     }
 
     @When("An user clicks the symbol in the {string} column")
-    public void anUserClicksTheButton(String column) {
+    public void anUserClicksTheButton(String column) throws IllegalAccessException {
 
         int index = column.equals("Adres rozliczeniowy") ? 0 : 1;
 
