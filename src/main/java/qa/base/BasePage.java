@@ -9,7 +9,6 @@ import qa.interactions.formfillable.FormFillable;
 public class BasePage {
 
     private final WebDriver driver;
-    //private final WebDriverWait wait;
     protected Clickable clickable;
     protected FormFillable formFillable;
 
