@@ -5,7 +5,7 @@ import qa.pages.checkout.CreditCardForm;
 
 public class CreditCardFormFactory {
 
-    public static CreditCardForm get(WebDriver driver) {
+    public static CreditCardForm get(WebDriver driver) throws IllegalAccessException {
 
         CreditCardForm creditCardForm = new CreditCardForm(driver);
 

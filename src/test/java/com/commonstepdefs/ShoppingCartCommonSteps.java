@@ -18,7 +18,7 @@ public class ShoppingCartCommonSteps {
     }
 
     @And("The shopping cart page is open")
-    public void theShoppingCartPagesIsOpen() {
+    public void theShoppingCartPagesIsOpen() throws IllegalAccessException {
 
         SiteHeaderCart siteHeaderCart = new SiteHeaderCart(getDriver());
         siteHeaderCart.clickCartMenu();

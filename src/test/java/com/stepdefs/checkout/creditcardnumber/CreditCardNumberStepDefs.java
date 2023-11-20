@@ -3,9 +3,9 @@ package com.stepdefs.checkout.creditcardnumber;
 import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.pages.checkout.CheckoutPage;
-
 
 public class CreditCardNumberStepDefs {
 
@@ -20,26 +20,27 @@ public class CreditCardNumberStepDefs {
         checkoutPage.hideNotice();
     }
 
+    @When("The user types the {string} as a card number")
     @And("Types {string} as a card number")
-    public void typesCardNumber(String cardNumber) {
+    public void typesCardNumber(String cardNumber) throws IllegalAccessException {
 
         checkoutPage.getCreditCardForm().setCardNumber(cardNumber);
     }
 
     @And("Types {string} as an expiration date")
-    public void typesExpirationDate(String expirationDate) {
+    public void typesExpirationDate(String expirationDate) throws IllegalAccessException {
 
         checkoutPage.getCreditCardForm().setExpirationDate(expirationDate);
     }
 
     @And("Types {string} as a CVC")
-    public void typesCVC(String CVC) {
+    public void typesCVC(String CVC) throws IllegalAccessException {
 
         checkoutPage.getCreditCardForm().setCVC(CVC);
     }
 
     @And("Clicks the \"Kupuję i płacę\" button")
-    public void clicksTheSubmitButton() throws InterruptedException {
+    public void clicksTheSubmitButton() throws InterruptedException, IllegalAccessException {
 
         checkoutPage.clickSubmitButton();
 

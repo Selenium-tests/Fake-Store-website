@@ -18,7 +18,7 @@ public class TermsLinkStepDefs {
     }
 
     @And("Clicks the \"regulamin\" link")
-    public void clicksTheTermsLink() {
+    public void clicksTheTermsLink() throws IllegalAccessException {
 
         checkoutPage.clickTermsLink();
     }

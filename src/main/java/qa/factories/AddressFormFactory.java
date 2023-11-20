@@ -5,7 +5,7 @@ import qa.pages.addressform.AddressForm;
 
 public class AddressFormFactory {
 
-    public static AddressForm get(WebDriver driver) {
+    public static AddressForm get(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -24,7 +24,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutFirstName(WebDriver driver) {
+    public static AddressForm withoutFirstName(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -42,7 +42,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutLastName(WebDriver driver) {
+    public static AddressForm withoutLastName(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -60,7 +60,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutAddress(WebDriver driver) {
+    public static AddressForm withoutAddress(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -78,7 +78,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutPostcode(WebDriver driver) {
+    public static AddressForm withoutPostcode(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -96,7 +96,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutCity(WebDriver driver) {
+    public static AddressForm withoutCity(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -114,7 +114,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutPhone(WebDriver driver) {
+    public static AddressForm withoutPhone(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
@@ -132,7 +132,7 @@ public class AddressFormFactory {
         return addressForm;
     }
 
-    public static AddressForm withoutEmail(WebDriver driver) {
+    public static AddressForm withoutEmail(WebDriver driver) throws IllegalAccessException {
 
         AddressForm addressForm = new AddressForm(driver, "billing");
 
