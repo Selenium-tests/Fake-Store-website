@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.base.BasePage;
 import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.interactions.formfillable.FillWithSendKeysMethod;
 
 public class Row extends BasePage {
 
@@ -19,6 +20,7 @@ public class Row extends BasePage {
         super(driver);
 
         setClickable(new ClickWithJSExecutor(driver));
+        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     public void setRow(WebElement product) {
@@ -33,7 +35,6 @@ public class Row extends BasePage {
     public void clickRemoveButton() throws IllegalAccessException {
 
         clickable.click(removeButton);
-        //clickElement(removeButton);
     }
 
     public String getName() {
@@ -46,10 +47,9 @@ public class Row extends BasePage {
         return price.getText();
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(String quantity) throws IllegalAccessException {
 
-        quantityField.clear();
-        quantityField.sendKeys(quantity);
+        formFillable.fill(quantityField, quantity);
     }
 
     public String getTotalPrice() {
