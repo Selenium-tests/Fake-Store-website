@@ -2,11 +2,7 @@ package com.stepdefs.checkout.addressform;
 
 import com.testutil.TestUtil;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import org.testng.Assert;
 import qa.factories.AddressFormFactory;
-import qa.pages.addressform.AddressForm;
-
 
 public class AddressFormStepDefs {
 
@@ -18,43 +14,43 @@ public class AddressFormStepDefs {
     }
 
     @And("Fills the address form leaving the 'Imię' field blank")
-    public void fillsTheAddressFormLeavesTheFirstNameFieldBlank() {
+    public void fillsTheAddressFormLeavesTheFirstNameFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutFirstName(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Nazwisko' field blank")
-    public void fillsTheAddressFormLeavesTheLastNameFieldBlank() {
+    public void fillsTheAddressFormLeavesTheLastNameFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutLastName(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Ulica' field blank")
-    public void fillsTheAddressFormLeavesTheAddressFieldBlank() {
+    public void fillsTheAddressFormLeavesTheAddressFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutAddress(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Kod pocztowy' field blank")
-    public void fillsTheAddressFormLeavesThePostcodeFieldBlank() {
+    public void fillsTheAddressFormLeavesThePostcodeFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutPostcode(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Miasto' field blank")
-    public void fillsTheAddressFormLeavesTheCItyFieldBlank() {
+    public void fillsTheAddressFormLeavesTheCItyFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutCity(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Telefon' field blank")
-    public void fillsTheAddressFormLeavesThePhoneFieldBlank() {
+    public void fillsTheAddressFormLeavesThePhoneFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutPhone(testUtil.getDriver());
     }
 
     @And("Fills the address form leaving the 'Adres email' field blank")
-    public void fillsTheAddressFormLeavesTheEmailFieldBlank() {
+    public void fillsTheAddressFormLeavesTheEmailFieldBlank() throws IllegalAccessException {
 
         AddressFormFactory.withoutEmail(testUtil.getDriver());
     }

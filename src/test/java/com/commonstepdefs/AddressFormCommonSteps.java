@@ -14,7 +14,7 @@ public class AddressFormCommonSteps {
 
     @And("Goes to the \"Adres rozliczeniowy\" form")
     @And("The \"Adres rozliczeniowy\" form is open")
-    public void goesToTheAddressForm() {
+    public void goesToTheAddressForm() throws IllegalAccessException {
 
         Account account = new Account(getDriver());
         account.clickLink("Adres");
@@ -24,21 +24,21 @@ public class AddressFormCommonSteps {
     }
 
     @When("An user clicks the country drop-down list arrow")
-    public void clicksTheCountryDropDownListArrow() {
+    public void clicksTheCountryDropDownListArrow() throws IllegalAccessException {
 
         CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
         countryDropdownList.clickArrow();
     }
 
     @And("Types {string} in the drop-down search field")
-    public void typesCountryInTheDropdownListSearchField(String country) {
+    public void typesCountryInTheDropdownListSearchField(String country) throws IllegalAccessException {
 
         CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
         countryDropdownList.setCountry(country);
     }
 
     @And("Presses the ENTER key")
-    public void pressesEnter() {
+    public void pressesEnter() throws IllegalAccessException {
 
         CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
         countryDropdownList.submit();
