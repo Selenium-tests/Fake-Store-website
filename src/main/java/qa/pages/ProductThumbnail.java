@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,8 +19,7 @@ public class ProductThumbnail extends BasePage {
     private WebElement price;
     private WebElement addToCartButton;
     private WebElement seeCartButton;
-
-    private FluentWait<WebDriver> fluentWait;
+    private final FluentWait<WebDriver> fluentWait;
 
     public ProductThumbnail(WebDriver driver) {
 
@@ -28,6 +29,8 @@ public class ProductThumbnail extends BasePage {
                 .withTimeout(Duration.ofSeconds(5))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NoSuchElementException.class);
+
+        setClickable(new ClickWithJSExecutor(driver));
     }
 
     public void setThumbnail(String xpath, int index) {
@@ -51,9 +54,9 @@ public class ProductThumbnail extends BasePage {
         return price.getText();
     }
 
-    public void clickTheProductLink() {
+    public void clickTheProductLink() throws IllegalAccessException {
 
-        clickElement(title);
+        clickable.click(title);
     }
 
     public void clickAddToCartButton() {
