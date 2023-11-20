@@ -4,12 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
 
 public class ProductPage extends BasePage {
 
     public ProductPage(WebDriver driver) {
 
         super(driver);
+
+        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(xpath = ".//h1[@class='product_title entry-title']")
@@ -31,8 +34,8 @@ public class ProductPage extends BasePage {
         return price.getText();
     }
 
-    public void clickAddToCartButton() {
+    public void clickAddToCartButton() throws IllegalAccessException {
 
-        clickElement(addToCartButton);
+        clickable.click(addToCartButton);
     }
 }
