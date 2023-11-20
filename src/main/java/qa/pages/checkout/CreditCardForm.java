@@ -2,53 +2,53 @@ package qa.pages.checkout;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.interactions.formfillable.FillWithActions;
 
 import java.util.List;
 
 public class CreditCardForm extends BasePage {
 
-    private final Actions actions;
     public CreditCardForm(WebDriver driver) {
 
         super(driver);
 
-        actions = new Actions(driver);
+        setClickable(new ClickWithJSExecutor(driver));
+        setFormFillable(new FillWithActions(driver));
     }
 
     @FindBy(id = "stripe-card-element")
-    WebElement cardNumberField;
+    public WebElement cardNumberField;
 
     @FindBy(id = "stripe-exp-element")
-    WebElement expirationDateField;
+    public WebElement expirationDateField;
 
     @FindBy(id = "stripe-cvc-element")
-    WebElement cvcField;
+    public WebElement cvcField;
 
     @FindBy(css = "div[class='stripe-source-errors']")
     List<WebElement> incorrectCardNumberMessage;
 
-    private void set(WebElement element, String data) {
+    public void setCardNumber(String cardNumber) throws IllegalAccessException {
 
-        actions.moveToElement(element).click().perform();
-        actions.sendKeys(data).perform();
+        formFillable.fill(cardNumberField, cardNumber);
     }
 
-    public void setCardNumber(String cardNumber) {
+    public void setExpirationDate(String expirationDate) throws IllegalAccessException {
 
-        set(cardNumberField, cardNumber);
+        formFillable.fill(expirationDateField, expirationDate);
     }
 
-    public void setExpirationDate(String expirationDate) {
+    public WebElement get() {
 
-        set(expirationDateField, expirationDate);
+        return expirationDateField;
     }
 
-    public void setCVC(String CVC) {
+    public void setCVC(String CVC) throws IllegalAccessException {
 
-        set(cvcField, CVC);
+        formFillable.fill(cvcField, CVC);
     }
 
     public boolean isIncorrectCardNumberMessageVisible() {
