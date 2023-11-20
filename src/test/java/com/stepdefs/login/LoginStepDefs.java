@@ -33,33 +33,33 @@ public class LoginStepDefs {
     @When("The user types a correct email address {string}")
     @When("The user types an incorrect username {string}")
     @When("The user types an incorrect email address {string}")
-    public void theUserTypesAnIncorrectUsername(String data) {
+    public void theUserTypesAnIncorrectUsername(String data) throws IllegalAccessException {
 
         loginForm.setUsername(data);
     }
 
     @And("Types a correct password {string}")
     @And("Types an incorrect password {string}")
-    public void andTypesACorrectPassword(String password) {
+    public void andTypesACorrectPassword(String password) throws IllegalAccessException {
 
         loginForm.setPassword(password);
     }
 
     @And("The user leaves the username or password field blank")
-    public void leavesTheUsernameOrEmailAddressField() {
+    public void leavesTheUsernameOrEmailAddressField() throws IllegalAccessException {
 
         loginForm.setUsername("");
     }
 
 
     @And("Leaves the password field blank")
-    public void leavesThePasswordField() {
+    public void leavesThePasswordField() throws IllegalAccessException {
 
         loginForm.setPassword("");
     }
 
     @And("Clicks the submit button")
-    public void andClicksTheSubmitButton() {
+    public void andClicksTheSubmitButton() throws IllegalAccessException {
 
         loginForm.clickSubmitButton();
     }

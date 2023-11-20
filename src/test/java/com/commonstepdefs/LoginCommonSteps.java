@@ -11,7 +11,7 @@ import static qa.driver.Driver.*;
 public class LoginCommonSteps {
 
     @Given("An user is logged in with email: {string} and password: {string}")
-    public void anUserIsLoggedIn(String email, String password) {
+    public void anUserIsLoggedIn(String email, String password) throws IllegalAccessException {
 
         MainMenu mainMenu = new MainMenu(getDriver());
         LoginForm loginForm = new LoginForm(getDriver());
@@ -23,7 +23,7 @@ public class LoginCommonSteps {
     }
 
     @And("The address editing section is open")
-    public void theAddressEditingSectionIsOpen() {
+    public void theAddressEditingSectionIsOpen() throws IllegalAccessException {
 
         Account account = new Account(getDriver());
         account.clickLink("Adres");
