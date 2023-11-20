@@ -34,7 +34,7 @@ public class AddingToCartStepDefs {
     }
 
     @When("The user clicks on the {int} product link from the {string} category")
-    public void theUserClicksOnTheProductFromCategory(int productNumber, String category) {
+    public void theUserClicksOnTheProductFromCategory(int productNumber, String category) throws IllegalAccessException {
 
         productsContainer.setProductThumbnail(category, productNumber);
         productsContainer.getProductThumbnail().clickTheProductLink();
@@ -47,7 +47,7 @@ public class AddingToCartStepDefs {
     }
 
     @And("Clicks the 'Dodaj do koszyka' button")
-    public void clicksTheAddToCartButton() throws InterruptedException {
+    public void clicksTheAddToCartButton() throws InterruptedException, IllegalAccessException {
 
         ProductPage productPage = new ProductPage(testUtil.getDriver());
         productPage.clickAddToCartButton();
@@ -71,7 +71,7 @@ public class AddingToCartStepDefs {
     }
 
     @And("The product is in the shopping cart")
-    public void theProductIsInTheShoppingCart() {
+    public void theProductIsInTheShoppingCart() throws IllegalAccessException {
 
         siteHeaderCart.clickCartMenu();
         shoppingCart.findProduct(0);
