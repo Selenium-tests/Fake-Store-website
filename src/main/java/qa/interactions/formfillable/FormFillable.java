@@ -1,5 +1,6 @@
 package qa.interactions.formfillable;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.interactions.focusexecutor.FocusExecutor;
@@ -17,4 +18,5 @@ public abstract class FormFillable {
     }
 
     public abstract void fill(WebElement element, String text) throws IllegalAccessException;
+    public abstract void fill(WebElement element, Keys keys) throws IllegalAccessException;
 }

@@ -1,5 +1,6 @@
 package qa.interactions.formfillable;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,26 @@ public class FillWithActions extends FormFillable {
 
             focusExecutor.setFocus(element);
             actions.moveToElement(element).sendKeys(text).perform();
+        }
+    }
+
+    @Override
+    public void fill(WebElement element, Keys keys) throws IllegalAccessException {
+
+        visibilityWait.untilElementIsVisible(element);
+
+        try {
+
+            focusExecutor.setFocus(element);
+            actions.moveToElement(element).click().perform();
+            actions.sendKeys(keys).perform();
+
+        } catch (StaleElementReferenceException e) {
+
+            visibilityWait.untilElementIsVisible(element);
+
+            focusExecutor.setFocus(element);
+            actions.moveToElement(element).sendKeys(keys).perform();
         }
     }
 }
