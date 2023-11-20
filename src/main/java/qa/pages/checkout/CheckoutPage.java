@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
 import qa.pages.addressform.AddressForm;
 
 import java.util.List;
@@ -18,13 +19,15 @@ public class CheckoutPage extends BasePage {
 
         this.addressForm = null;
         this.creditCardForm = new CreditCardForm(driver);
+
+        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(id = "terms")
     WebElement termsCheckbox;
 
     @FindBy(css = "button[name='woocommerce_checkout_place_order']")
-    WebElement submitButton;
+    public WebElement submitButton;
 
     @FindBy(className = "woocommerce-terms-and-conditions-link")
     WebElement termsLink;
@@ -32,14 +35,14 @@ public class CheckoutPage extends BasePage {
     @FindBy(className = "woocommerce-terms-and-conditions")
     List<WebElement> termsAndConditions;
 
-    public void clickTermsCheckbox() {
+    public void clickTermsCheckbox() throws IllegalAccessException {
 
-        termsCheckbox.click();
+        clickable.click(termsCheckbox);
     }
 
-    public void clickSubmitButton() {
+    public void clickSubmitButton() throws IllegalAccessException {
 
-        clickElement(submitButton);
+        clickable.click(submitButton);
     }
 
     public void setAddressForm(AddressForm addressForm) {
@@ -47,9 +50,9 @@ public class CheckoutPage extends BasePage {
         this.addressForm = addressForm;
     }
 
-    public void clickTermsLink() {
+    public void clickTermsLink() throws IllegalAccessException {
 
-        clickElement(termsLink);
+        clickable.click(termsLink);
     }
 
     public CreditCardForm getCreditCardForm() {
