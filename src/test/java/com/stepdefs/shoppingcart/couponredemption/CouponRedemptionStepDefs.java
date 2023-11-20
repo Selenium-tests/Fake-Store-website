@@ -30,14 +30,14 @@ public class CouponRedemptionStepDefs {
 
     @When("An user clicks on the coupon code field")
     @And("Clicks on the coupon code field")
-    public void anUserClicksOnTheCouponCodeField() {
+    public void anUserClicksOnTheCouponCodeField() throws IllegalAccessException {
 
         shoppingCart.getCouponForm().clickCouponCodeField();
     }
 
     @And("Enters the {string} as a coupon code")
     @And("Enters the {string} as a coupon code again")
-    public void entersTheStringAsACouponCode(String couponCode) {
+    public void entersTheStringAsACouponCode(String couponCode) throws IllegalAccessException {
 
         shoppingCart.getCouponForm().setCouponCode(couponCode);
         usedCouponCode = couponCode;
@@ -45,7 +45,7 @@ public class CouponRedemptionStepDefs {
 
     @And("Clicks the 'Zastosuj kupon' button")
     @And("Clicks the 'Zastosuj kupon' button leaving the coupon code field blank")
-    public void clicksTheButton() {
+    public void clicksTheButton() throws IllegalAccessException {
 
         shoppingCart.getCouponForm().clickApplyCouponButton();
     }
