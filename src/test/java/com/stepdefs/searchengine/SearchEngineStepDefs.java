@@ -24,7 +24,7 @@ public class SearchEngineStepDefs {
 
 
     @When("The user clicks on the search engine field")
-    public void theUserClicksOnTheSearchEngineField() throws InterruptedException {
+    public void theUserClicksOnTheSearchEngineField() throws InterruptedException, IllegalAccessException {
 
         searchEngine.clickOnTheSearchField();
 
@@ -32,7 +32,7 @@ public class SearchEngineStepDefs {
     }
 
     @And("Enters the '{string}' phrase")
-    public void entersThePhrase(String phrase) {
+    public void entersThePhrase(String phrase) throws IllegalAccessException {
 
         searchEngine.enterPhrase(phrase);
     }
