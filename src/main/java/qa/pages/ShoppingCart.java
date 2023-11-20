@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ShoppingCart extends BasePage {
         row = new Row(driver);
         couponForm = new CouponForm(driver);
         shoppingCartSummary = new ShoppingCartSummary(driver);
+
+        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
@@ -102,13 +105,13 @@ public class ShoppingCart extends BasePage {
         return shoppingCartSummary;
     }
 
-    public void clickUpdateCartButton() {
+    public void clickUpdateCartButton() throws IllegalAccessException {
 
-        updateCartButton.click();
+        clickable.click(updateCartButton);
     }
 
-    public void clickCheckoutButton() {
+    public void clickCheckoutButton() throws IllegalAccessException {
 
-        clickElement(checkoutButton);
+        clickable.click(checkoutButton);
     }
 }
