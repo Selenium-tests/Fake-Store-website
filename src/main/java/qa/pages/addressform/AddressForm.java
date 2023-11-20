@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
+import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.interactions.formfillable.FillWithSendKeysMethod;
 
 import java.util.List;
 
 public class AddressForm extends BasePage {
 
     private final CountryDropdownList countryDropdownList;
-
     private final String prefix;
 
     public AddressForm(WebDriver driver, String prefix) {
@@ -20,6 +21,9 @@ public class AddressForm extends BasePage {
 
         this.prefix = prefix;
         countryDropdownList = new CountryDropdownList(driver);
+
+        setClickable(new ClickWithJSExecutor(driver));
+        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(css = "[name='save_address']")
@@ -33,61 +37,54 @@ public class AddressForm extends BasePage {
         return prefix;
     }
 
-    private void setText(WebElement element, String text) {
+    public void setFirstName(String firstName) throws IllegalAccessException {
 
-        element.click();
-        element.clear();
-        element.sendKeys(text);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_first_name")), firstName);
     }
 
-    public void setFirstName(String firstName) {
+    public void setLastName(String lastName) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_first_name")), firstName);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_last_name")), lastName);
     }
 
-    public void setLastName(String lastName) {
+    public void setCompany(String company) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_last_name")), lastName);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_company")), company);
     }
 
-    public void setCompany(String company) {
+    public void setAddress1(String address) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_company")), company);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_address_1")), address);
     }
 
-    public void setAddress1(String address) {
+    public void setAddress2(String address) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_address_1")), address);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_address_2")), address);
     }
 
-    public void setAddress2(String address) {
+    public void setPostcode(String postcode) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_address_2")), address);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_postcode")), postcode);
     }
 
-    public void setPostcode(String postcode) {
+    public void setCity(String city) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_postcode")), postcode);
+        formFillable.fill(getDriver().findElement(By.id(prefix + "_city")), city);
     }
 
-    public void setCity(String city) {
+    public void setPhone(String phone) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(prefix + "_city")), city);
+        formFillable.fill(getDriver().findElement(By.id(getPrefix() + "_phone")), phone);
     }
 
-    public void setPhone(String phone) {
+    public void setEmail(String email) throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(getPrefix() + "_phone")), phone);
+        formFillable.fill(getDriver().findElement(By.id(getPrefix() + "_email")), email);
     }
 
-    public void setEmail(String email) {
+    public void clickSubmitButton() throws IllegalAccessException {
 
-        setText(getDriver().findElement(By.id(getPrefix() + "_email")), email);
-    }
-
-    public void clickSubmitButton() {
-
-        clickElement(submitButton);
+        clickable.click(submitButton);
     }
 
     public CountryDropdownList getCountryDropdownList() {
