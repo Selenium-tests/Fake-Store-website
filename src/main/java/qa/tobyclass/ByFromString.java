@@ -16,6 +16,13 @@ public class ByFromString {
         String using = locatorSplit[0];
         String value = locatorSplit[1];
 
+        if (using.equals("xpath")) {
+
+            String replacement = "";
+
+            value = value.substring(0, value.length() - 3) + replacement;
+        }
+
         switch (using) {
             case "By.cssSelector", "css selector" -> {
                 return By.cssSelector(value);
@@ -45,19 +52,5 @@ public class ByFromString {
                 throw new IllegalStateException("Cannot define locator for WebElement definition " + locatorToString);
             }
         }
-
-        /*return switch (locatorType) {
-            case "css selector":
-            case "By.cssSelector": By.cssSelector(locatorValue);
-            case "By.id" -> By.id(locatorValue);
-            case "By.linkText" -> By.linkText(locatorValue);
-            case "By.partialLinkText" -> By.partialLinkText(locatorValue);
-            case "By.tagName" -> By.tagName(locatorValue);
-            case "By.name" -> By.name(locatorValue);
-            case "By.className" -> By.className(locatorValue);
-            case "By.xpath" -> By.xpath(locatorValue);
-            default ->
-                    throw new IllegalStateException("Cannot define locator for WebElement definition " + locatorToString);
-        };*/
     }
 }
