@@ -24,7 +24,7 @@ public class LoginStepDefs {
     }
 
     @Given("The user goes to the login page")
-    public void theUserGoesToTheLoginPage() {
+    public void theUserGoesToTheLoginPage() throws IllegalAccessException {
 
         MainMenu mainMenu = new MainMenu(testUtil.getDriver());
         mainMenu.click("Moje konto");
