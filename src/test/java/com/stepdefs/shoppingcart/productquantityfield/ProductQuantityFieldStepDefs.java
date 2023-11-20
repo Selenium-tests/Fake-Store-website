@@ -23,7 +23,7 @@ public class ProductQuantityFieldStepDefs {
     }
 
     @When("The user types the {string} as quantity of the product")
-    public void theUserTypesTheQuantityOfTheProduct(String quantity) {
+    public void theUserTypesTheQuantityOfTheProduct(String quantity) throws IllegalAccessException {
 
         shoppingCart.findProduct(0);
         shoppingCart.getRow().setQuantity(quantity);
@@ -32,14 +32,14 @@ public class ProductQuantityFieldStepDefs {
     }
 
     @When("The user types the {string} as not a number")
-    public void theUserTypesNotANumber(String quantity) {
+    public void theUserTypesNotANumber(String quantity) throws IllegalAccessException {
 
         shoppingCart.findProduct(0);
         shoppingCart.getRow().setQuantity(quantity);
     }
 
     @When("The user clicks the 'Remove' button")
-    public void theUserClicksTheRemoveButton() throws InterruptedException {
+    public void theUserClicksTheRemoveButton() throws InterruptedException, IllegalAccessException {
 
         shoppingCart.findProduct(0);
         shoppingCart.getRow().clickRemoveButton();
@@ -48,7 +48,7 @@ public class ProductQuantityFieldStepDefs {
     }
 
     @And("Clicks the 'Zaktualizuj koszyk' button")
-    public void clicksTheUpdateCartButton() throws InterruptedException {
+    public void clicksTheUpdateCartButton() throws InterruptedException, IllegalAccessException {
 
         shoppingCart.clickUpdateCartButton();
 
