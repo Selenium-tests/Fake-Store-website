@@ -7,16 +7,22 @@ import org.testng.Assert;
 import qa.pages.account.Account;
 import qa.pages.addressform.AddressForm;
 import qa.pages.addressform.CountryDropdownList;
-
-import static qa.driver.Driver.getDriver;
+import qa.testutil.TestUtil;
 
 public class AddressFormCommonSteps {
+
+    private final TestUtil testUtil;
+
+    public AddressFormCommonSteps(TestUtil testUtil) {
+
+        this.testUtil = testUtil;
+    }
 
     @And("Goes to the \"Adres rozliczeniowy\" form")
     @And("The \"Adres rozliczeniowy\" form is open")
     public void goesToTheAddressForm() throws IllegalAccessException {
 
-        Account account = new Account(getDriver());
+        Account account = new Account(testUtil.getDriver());
         account.clickLink("Adres");
         account.hideNotice();
 
@@ -26,21 +32,21 @@ public class AddressFormCommonSteps {
     @When("An user clicks the country drop-down list arrow")
     public void clicksTheCountryDropDownListArrow() throws IllegalAccessException {
 
-        CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
+        CountryDropdownList countryDropdownList = new CountryDropdownList(testUtil.getDriver());
         countryDropdownList.clickArrow();
     }
 
     @And("Types {string} in the drop-down search field")
     public void typesCountryInTheDropdownListSearchField(String country) throws IllegalAccessException {
 
-        CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
+        CountryDropdownList countryDropdownList = new CountryDropdownList(testUtil.getDriver());
         countryDropdownList.setCountry(country);
     }
 
     @And("Presses the ENTER key")
     public void pressesEnter() throws IllegalAccessException {
 
-        CountryDropdownList countryDropdownList = new CountryDropdownList(getDriver());
+        CountryDropdownList countryDropdownList = new CountryDropdownList(testUtil.getDriver());
         countryDropdownList.submit();
     }
 
@@ -53,7 +59,7 @@ public class AddressFormCommonSteps {
     @Then("The message about blank 'Adres email' field has been displayed")
     public void messageHasBeenDisplayed() {
 
-        AddressForm addressForm = new AddressForm(getDriver(), "billing");
+        AddressForm addressForm = new AddressForm(testUtil.getDriver(), "billing");
 
         Assert.assertTrue(addressForm.isErrorMessageDisplayed());
     }
@@ -61,7 +67,7 @@ public class AddressFormCommonSteps {
     @And("The error message text is {string}")
     public void theErrorMessageTextIs(String message) {
 
-        AddressForm addressForm = new AddressForm(getDriver(), "billing");
+        AddressForm addressForm = new AddressForm(testUtil.getDriver(), "billing");
 
         Assert.assertEquals(addressForm.getErrorMessageText(), message);
     }
