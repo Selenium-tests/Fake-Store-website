@@ -34,7 +34,7 @@ public class ByFinder {
 
         } else {
 
-            return null;
+            return (By) FieldUtils.readField(element, BY, true);
         }
 
     }
