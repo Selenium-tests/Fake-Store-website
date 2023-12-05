@@ -1,6 +1,6 @@
 package com.stepdefs.checkout.addressform;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import qa.factories.AddressFormFactory;
 

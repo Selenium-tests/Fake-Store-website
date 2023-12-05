@@ -1,6 +1,6 @@
 package com.stepdefs.account.accountpagenavigation;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;

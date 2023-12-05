@@ -1,6 +1,6 @@
 package com.stepdefs.checkout.checkbox;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import qa.pages.addressform.AddressForm;

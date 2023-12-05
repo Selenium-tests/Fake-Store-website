@@ -1,6 +1,6 @@
 package com.stepdefs.account.addressformeditors;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.When;
 import qa.pages.account.Account;
 

@@ -1,6 +1,6 @@
 package com.stepdefs.login;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

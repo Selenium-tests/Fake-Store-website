@@ -1,6 +1,6 @@
 package com.stepdefs.checkout.creditcardnumber;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

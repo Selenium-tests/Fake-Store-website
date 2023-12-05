@@ -1,6 +1,6 @@
 package com.stepdefs.mainmenu;
 
-import com.testutil.TestUtil;
+import qa.testutil.TestUtil;
 import io.cucumber.java.en.When;
 import qa.pages.MainMenu;
 
