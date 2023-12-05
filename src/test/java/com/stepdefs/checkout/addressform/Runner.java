@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         glue = { "com.stepdefs.checkout.addressform",
                  "com.stepdefs.checkout.creditcardnumber",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

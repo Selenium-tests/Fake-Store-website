@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         glue = { "com.stepdefs.shoppingcart.productquantityfield",
                  "com.stepdefs.shoppingcart.functionalities",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

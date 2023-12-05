@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber-reports/addingProductToTheCart.html"},
         glue = { "com.stepdefs.shoppingcart.addingproduct",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

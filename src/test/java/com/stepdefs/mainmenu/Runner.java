@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/mainMenu.html" },
         glue = { "com.stepdefs.mainmenu",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

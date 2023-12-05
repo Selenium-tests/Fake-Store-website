@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/login.html" },
         glue = { "com.stepdefs.login",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

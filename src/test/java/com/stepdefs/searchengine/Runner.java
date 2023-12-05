@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/searchEngine.html" },
         glue = { "com.stepdefs.searchengine",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

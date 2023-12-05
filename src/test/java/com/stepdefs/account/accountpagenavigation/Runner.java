@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber-reports/accountPageNavigation.html"},
         glue = { "com.stepdefs.account.accountpagenavigation",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }

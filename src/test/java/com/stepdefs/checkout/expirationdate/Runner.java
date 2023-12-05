@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/expirationDate.html" },
         glue = { "com.stepdefs.checkout.creditcardnumber",
                  "com.commonstepdefs",
-                 "com.testutil" }
+                 "qa.testutil" }
 )
 public class Runner {
 }
