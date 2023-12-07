@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.shoppingcart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.mainmenu;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

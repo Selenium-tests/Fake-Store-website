@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.addressform;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
 import qa.interactions.clickable.ClickWithJSExecutor;
 
-public class Addresses extends BasePage {
+public class AddresseFormNavigation extends BasePage {
 
-    public Addresses(WebDriver driver) {
+    public AddresseFormNavigation(WebDriver driver) {
 
         super(driver);
 

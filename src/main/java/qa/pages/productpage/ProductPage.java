@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.productpage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.searchengine;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +8,9 @@ import qa.base.BasePage;
 
 import java.util.List;
 
-public class Products extends BasePage {
+public class ResultsPage extends BasePage {
 
-    public Products(WebDriver driver) {
+    public ResultsPage(WebDriver driver) {
 
         super(driver);
     }

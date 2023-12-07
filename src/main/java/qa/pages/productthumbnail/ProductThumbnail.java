@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.productthumbnail;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,6 +31,31 @@ public class ProductThumbnail extends BasePage {
                 .ignoring(NoSuchElementException.class);
 
         setClickable(new ClickWithJSExecutor(driver));
+    }
+
+    public void setProduct(WebElement product) {
+
+        this.product = product;
+    }
+
+    public void setPrice(WebElement price) {
+
+        this.price = price;
+    }
+
+    public void setTitle(WebElement title) {
+
+        this.title = title;
+    }
+
+    public void setAddToCartButton(WebElement addToCartButton) {
+
+        this.addToCartButton = addToCartButton;
+    }
+
+    public void setSeeCartButton(WebElement seeCartButton) {
+
+        this.seeCartButton = seeCartButton;
     }
 
     public void setThumbnail(String xpath, int index) {

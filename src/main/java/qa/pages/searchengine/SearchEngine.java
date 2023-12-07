@@ -1,4 +1,4 @@
-package qa.pages;
+package qa.pages.searchengine;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
