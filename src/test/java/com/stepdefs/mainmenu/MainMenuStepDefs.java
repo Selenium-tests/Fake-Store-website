@@ -2,7 +2,7 @@ package com.stepdefs.mainmenu;
 
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.When;
-import qa.pages.MainMenu;
+import qa.pages.mainmenu.MainMenu;
 
 
 public class MainMenuStepDefs {

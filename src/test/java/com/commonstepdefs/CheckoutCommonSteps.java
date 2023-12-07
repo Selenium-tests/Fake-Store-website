@@ -2,11 +2,15 @@ package com.commonstepdefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
-import qa.factories.AddressFormFactory;
-import qa.factories.CreditCardFormFactory;
-import qa.pages.ShoppingCart;
+import qa.enums.AddressFormMethods;
+import qa.enums.CreditCardFormMethods;
+import qa.helpers.fillers.AddressFormFiller;
+import qa.helpers.fillers.CreditCardFormFiller;
+import qa.pages.shoppingcart.ShoppingCart;
 import qa.pages.checkout.CheckoutPage;
 import qa.testutil.TestUtil;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class CheckoutCommonSteps {
 
@@ -32,22 +36,21 @@ public class CheckoutCommonSteps {
     }
 
     @And("Fills the credit card form")
-    public void fillsTheCreditCardForm() throws IllegalAccessException {
+    public void fillsTheCreditCardForm() {
 
-        CreditCardFormFactory.get(testUtil.getDriver());
+        CreditCardFormFiller.fill(testUtil.getDriver(), CreditCardFormMethods.ALL);
     }
 
     @And("Fills the payment details form")
-    public void fillsThePaymentDetailsForm() throws IllegalAccessException {
+    public void fillsThePaymentDetailsForm() throws IllegalAccessException, InvocationTargetException {
 
-        AddressFormFactory.get(testUtil.getDriver());
+        AddressFormFiller.fill(testUtil.getDriver(), AddressFormMethods.ALL);
     }
 
     @And("Accepts terms")
     public void acceptsTerms() throws IllegalAccessException {
 
         CheckoutPage checkoutPage = new CheckoutPage(testUtil.getDriver());
-
         checkoutPage.clickTermsCheckbox();
     }
 }

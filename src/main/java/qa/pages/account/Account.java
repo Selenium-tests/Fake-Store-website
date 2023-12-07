@@ -6,19 +6,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import qa.base.BasePage;
 import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.pages.Addresses;
+import qa.pages.addressform.AddresseFormNavigation;
 
 import java.util.List;
 
 public class Account extends BasePage {
 
-    private final Addresses addresses;
+    private final AddresseFormNavigation addresseFormNavigation;
 
     public Account(WebDriver driver) {
 
         super(driver);
 
-        addresses = new Addresses(driver);
+        addresseFormNavigation = new AddresseFormNavigation(driver);
         setClickable(new ClickWithJSExecutor(driver));
     }
 
@@ -35,8 +35,8 @@ public class Account extends BasePage {
         clickable.click(getDriver().findElement(By.linkText(linkText)));
     }
 
-    public Addresses getAddresses() {
+    public AddresseFormNavigation getAddresses() {
 
-        return addresses;
+        return addresseFormNavigation;
     }
 }

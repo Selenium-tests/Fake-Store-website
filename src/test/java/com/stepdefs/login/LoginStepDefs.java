@@ -7,8 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.pages.account.Account;
-import qa.pages.LoginForm;
-import qa.pages.MainMenu;
+import qa.pages.loginform.LoginForm;
+import qa.pages.mainmenu.MainMenu;
 
 
 public class LoginStepDefs {

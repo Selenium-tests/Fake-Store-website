@@ -1,18 +1,22 @@
 package com.stepdefs.shoppingcart.addingproduct;
 
+import qa.pages.productpage.ProductPage;
+import qa.pages.productthumbnail.ProductThumbnail;
+import qa.pages.productthumbnail.ThumbnailProvider;
+import qa.pages.shoppingcart.ShoppingCart;
+import qa.pages.siteheadercart.SiteHeaderCart;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.pages.*;
 
 
 public class AddingToCartStepDefs {
 
     private final TestUtil testUtil;
     private final SiteHeaderCart siteHeaderCart;
-    private final ProductsContainer productsContainer;
+    private ProductThumbnail productThumbnail;
     private final ShoppingCart shoppingCart;
     private String productName;
     private String price;
@@ -22,28 +26,27 @@ public class AddingToCartStepDefs {
         this.testUtil = testUtil;
 
         siteHeaderCart = new SiteHeaderCart(testUtil.getDriver());
-        productsContainer = new ProductsContainer(testUtil.getDriver());
         shoppingCart = new ShoppingCart(testUtil.getDriver());
     }
 
     @When("The user clicks the 'Dodaj do koszyka' button of {int} product from category: {string}")
     public void theUserClicksTheAddToCartButton(int productNumber, String category) {
 
-        productsContainer.setProductThumbnail(category, productNumber);
-        productsContainer.getProductThumbnail().clickAddToCartButton();
+        productThumbnail = ThumbnailProvider.getThumbnail(testUtil.getDriver(), category, productNumber);
+        productThumbnail.clickAddToCartButton();
     }
 
     @When("The user clicks on the {int} product link from the {string} category")
     public void theUserClicksOnTheProductFromCategory(int productNumber, String category) throws IllegalAccessException {
 
-        productsContainer.setProductThumbnail(category, productNumber);
-        productsContainer.getProductThumbnail().clickTheProductLink();
+        productThumbnail = ThumbnailProvider.getThumbnail(testUtil.getDriver(), category, productNumber);
+        productThumbnail.clickTheProductLink();
     }
 
     @And("Waits until the 'Zobacz koszyk' button is visible")
     public void waitsUntilTheSeeCartButtonIsVisible() {
 
-        productsContainer.getProductThumbnail().waitForSeeCartButton();
+        productThumbnail.waitForSeeCartButton();
     }
 
     @And("Clicks the 'Dodaj do koszyka' button")

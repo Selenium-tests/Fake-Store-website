@@ -2,8 +2,8 @@ package com.commonstepdefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import qa.pages.LoginForm;
-import qa.pages.MainMenu;
+import qa.pages.loginform.LoginForm;
+import qa.pages.mainmenu.MainMenu;
 import qa.pages.account.Account;
 import qa.testutil.TestUtil;
 
