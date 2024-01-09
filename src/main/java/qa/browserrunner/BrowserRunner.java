@@ -12,11 +12,8 @@ public class BrowserRunner {
 
     public static void run(WebDriver driver) {
 
-        logger.info("Opening the page: \"" + url + "\" on the " +
-                ((RemoteWebDriver) driver).getCapabilities().getBrowserName() + " " +
-                ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion());
+        logger.info("Initializing WebDriver...");
 
-        driver.navigate().to(url);
         driver.manage().window().maximize();
     }
 
