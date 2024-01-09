@@ -1,7 +1,7 @@
 Feature: Login
 
   Background:
-    Given The user goes to the login page
+    Given The page with url "https://fakestore.testelka.pl/moje-konto/" is open
 
   @LFCorrectCredentials
   Scenario: I test the login form using correct credentials
