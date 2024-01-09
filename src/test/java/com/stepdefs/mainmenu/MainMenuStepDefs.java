@@ -14,8 +14,8 @@ public class MainMenuStepDefs {
         this.testUtil = testUtil;
     }
 
-    @When("The user clicks {string} link")
-    public void theUserClicksLink(String linkText) throws IllegalAccessException {
+    @When("The user clicks the {string} link")
+    public void theUserClicksTheLink(String linkText) throws IllegalAccessException {
 
         MainMenu mainMenu = new MainMenu(testUtil.getDriver());
         mainMenu.click(linkText);
