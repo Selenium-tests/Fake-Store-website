@@ -1,5 +1,8 @@
 Feature: Search engine
 
+  Background:
+    Given The page with url "https://fakestore.testelka.pl/" is open
+
   @SEPlaceholder
   Scenario: Disappearing the search engine placeholder
     When The user clicks on the search engine field
