@@ -1,9 +1,11 @@
 Feature: Coupon redemption
 
+  Background:
+    Given A product is in the shopping cart
+    And The shopping cart page is open
+
   @CCCorrectPlain
   Scenario Outline: I test using correct plain coupon code
-    Given The product number 0 from the "Popularne" category has been added to the shopping cart
-    And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the <couponCode> as a coupon code
     And Clicks the 'Zastosuj kupon' button
