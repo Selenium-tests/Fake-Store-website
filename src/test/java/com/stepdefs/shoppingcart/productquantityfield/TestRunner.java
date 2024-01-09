@@ -9,9 +9,8 @@ import org.junit.runner.RunWith;
         features = "./src/main/resources/features/shoppingCart/productQuantityField.feature",
         plugin = { "pretty", "html:target/cucumber-reports/productQuantityField.html" },
         glue = { "com.stepdefs.shoppingcart.productquantityfield",
-                 "com.stepdefs.shoppingcart.functionalities",
                  "com.commonstepdefs",
                  "qa.testutil" }
 )
-public class Runner {
+public class TestRunner {
 }
