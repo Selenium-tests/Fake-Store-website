@@ -1,7 +1,10 @@
 Feature: Main menu
 
-  Scenario Outline: I test the main menu
-    When The user clicks <link> link
+  Background:
+    Given The page with url "https://fakestore.testelka.pl/" is open
+
+  Scenario Outline: Main menu links
+    When The user clicks the <link> link
     Then The page with url <url> has been opened
     Examples:
     |link           |url                                         |
