@@ -38,15 +38,6 @@ public class ProductQuantityFieldStepDefs {
         shoppingCart.getRow().setQuantity(quantity);
     }
 
-    @When("The user clicks the 'Remove' button")
-    public void theUserClicksTheRemoveButton() throws InterruptedException, IllegalAccessException {
-
-        shoppingCart.findProduct(0);
-        shoppingCart.getRow().clickRemoveButton();
-
-        Thread.sleep(2000);
-    }
-
     @And("Clicks the 'Zaktualizuj koszyk' button")
     public void clicksTheUpdateCartButton() throws InterruptedException, IllegalAccessException {
 
@@ -64,33 +55,15 @@ public class ProductQuantityFieldStepDefs {
         Assert.assertEquals(givenTotalPrice, expectedTotalPrice);
     }
 
-    @Then("The message about empty shopping cart is displayed")
-    public void theMessageAboutEmptyShoppingCartIsDisplayed() {
-
-        Assert.assertTrue(shoppingCart.isEmptyCartMessageVisible());
-    }
-
     @Then("The message about incorrect quantity value is displayed")
     public void theAlertIsPresent() {
 
         Assert.assertTrue(shoppingCart.getRow().isValidationMessageVisible());
     }
 
-    @Then("The shopping cart is empty")
-    public void theShoppingCartIsEmpty() {
-
-        Assert.assertFalse(shoppingCart.isContentsLocatorPresent());
-    }
-
     @And("The validation message is: {string}")
     public void theValidationMessageIs(String message) {
 
         Assert.assertEquals(shoppingCart.getRow().getValidationMessageText(), message);
-    }
-
-    @And("The empty shopping cart message is: {string}")
-    public void theEmptyShoppingCartMessageIs(String message) {
-
-        Assert.assertEquals(shoppingCart.getEmptyCartMessageText(), message);
     }
 }
