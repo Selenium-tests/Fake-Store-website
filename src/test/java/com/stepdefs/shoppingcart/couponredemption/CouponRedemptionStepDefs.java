@@ -21,7 +21,6 @@ public class CouponRedemptionStepDefs {
         shoppingCart = new ShoppingCart(testUtil.getDriver());
     }
 
-
     @And("Waits for 2 seconds")
     public void waitsFor2Seconds() throws InterruptedException {
 
