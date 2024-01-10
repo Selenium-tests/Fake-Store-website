@@ -3,9 +3,12 @@ package qa.pages.loginform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
+import qa.enums.PerformType;
 import qa.interactions.clickable.ClickWithClickMethod;
 import qa.interactions.formfillable.FillWithSendKeysMethod;
+import qa.tobyclass.ByFinder;
 
 import java.util.List;
 
@@ -33,17 +36,20 @@ public class LoginForm extends BasePage {
 
     public void setUsername(String username) throws IllegalAccessException {
 
-        formFillable.fill(usernameForm, username);
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(usernameForm)));
+        getInteractions().fill(usernameForm, PerformType.CLASS_METHOD, username);
     }
 
-    public void setPassword(String password) throws IllegalAccessException {
+    public void setPassword(String password) {
 
-        formFillable.fill(passwordForm, password);
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(passwordForm));
+        getInteractions().fill(passwordForm, PerformType.CLASS_METHOD, password);
     }
 
-    public void clickSubmitButton() throws IllegalAccessException {
+    public void clickSubmitButton() {
 
-        clickable.click(submitButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(submitButton));
+        getInteractions().click(submitButton, PerformType.CLASS_METHOD);
     }
 
     public boolean isErrorMessageDisplayed() {
