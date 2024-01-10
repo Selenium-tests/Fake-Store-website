@@ -2,9 +2,10 @@ package qa.pages.addressform;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithActions;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
+import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
 
 import java.util.List;
 
@@ -14,9 +15,6 @@ public class CountryDropdownList extends BasePage {
     public CountryDropdownList(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithActions(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(xpath = ".//span[@class='select2-selection__arrow']")
@@ -30,17 +28,21 @@ public class CountryDropdownList extends BasePage {
 
     public void clickArrow() throws IllegalAccessException {
 
-        clickable.click(arrow);
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(arrow)));
+        getInteractions().scrollIntoView(arrow);
+        getInteractions().click(arrow, PerformType.ACTIONS);
     }
 
     public void setCountry(String country) throws IllegalAccessException {
 
-        formFillable.fill(searchField, country);
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(searchField)));
+        getInteractions().fill(searchField, PerformType.CLASS_METHOD, country);
     }
 
     public void submit() throws IllegalAccessException {
 
-        formFillable.fill(searchField, Keys.ENTER);
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(searchField)));
+        getInteractions().fill(searchField, PerformType.CLASS_METHOD, Keys.ENTER);
     }
 
     public boolean isMessageDisplayed() {
