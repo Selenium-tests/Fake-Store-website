@@ -2,7 +2,7 @@ Feature: Country drop-down list
 
   Background:
     Given The user is logged in with email: "my_email@gmail.com" and password: "secret_password"
-    And The "Adres rozliczeniowy" form is open
+    And The page with url "https://fakestore.testelka.pl/moje-konto/edytuj-adres/rozliczeniowy/" is open
 
   @CDLCorrectCityName
   Scenario Outline: Correct country name
