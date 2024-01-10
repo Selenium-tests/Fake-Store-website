@@ -12,5 +12,5 @@ import org.junit.runner.RunWith;
         glue = {"com.stepdefs.account.countrydropdownlist", "com.commonstepdefs", "qa.testutil"},
         tags = "@CDLCorrectCityName"
 )
-public class Runner {
+public class TestRunner {
 }
