@@ -4,8 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.enums.PerformType;
 import qa.pages.addressform.AddresseFormNavigation;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class Account extends BasePage {
         super(driver);
 
         addresseFormNavigation = new AddresseFormNavigation(driver);
-        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(xpath = ".//ul[@class='phoen_nav_tab']")
@@ -32,7 +32,8 @@ public class Account extends BasePage {
 
     public void clickLink(String linkText) throws IllegalAccessException {
 
-        clickable.click(getDriver().findElement(By.linkText(linkText)));
+        WebElement link = getWebDriverWait().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.linkText(linkText))));
+        getInteractions().click(link, PerformType.JS_EXECUTOR);
     }
 
     public AddresseFormNavigation getAddresses() {
