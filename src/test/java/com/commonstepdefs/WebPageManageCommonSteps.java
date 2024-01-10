@@ -7,7 +7,6 @@ public class WebPageManageCommonSteps {
 
     private final TestUtil testUtil;
 
-
     public WebPageManageCommonSteps(TestUtil testUtil) {
 
         this.testUtil = testUtil;
