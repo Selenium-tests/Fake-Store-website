@@ -4,14 +4,14 @@ Feature: Login
     Given The page with url "https://fakestore.testelka.pl/moje-konto/" is open
 
   @LFCorrectCredentials
-  Scenario: I test the login form using correct credentials
+  Scenario: Correct credentials
     When The user types a correct email address "my_email@gmail.com"
     And Types a correct password "secret_password"
     And Clicks the submit button
     Then The user is logged in
 
   @LFIncorrectUsername
-  Scenario: I test login with an incorrect username
+  Scenario: Incorrect username
     When The user types an incorrect username "theUser1"
     And Types a correct password "secret_password"
     And Clicks the submit button
@@ -19,7 +19,7 @@ Feature: Login
     And The error message text is "Błąd: brak theUser1 wśród zarejestrowanych w witrynie użytkowników. Jeśli nie masz pewności co do nazwy użytkownika, użyj adresu e-mail."
 
   @LFIncorrectEmail
-  Scenario: I test using an incorrect email address
+  Scenario: Incorrect email address
     When The user types an incorrect email address "the_user2@gmail.com"
     And Types a correct password "secret_password"
     And Clicks the submit button
@@ -35,7 +35,7 @@ Feature: Login
     And The error message text is "Błąd: Nazwa użytkownika jest wymagana."
 
   @LFBIncorrectPassword
-  Scenario: I test using an incorrect password
+  Scenario: Incorrect password
     When The user types a correct email address "my_email@gmail.com"
     And Types an incorrect password "secret_password_11234"
     And Clicks the submit button
