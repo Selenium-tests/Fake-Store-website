@@ -7,19 +7,19 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
-import qa.pages.addressform.AddresseFormNavigation;
+import qa.pages.addressform.AddressFormsNavigation;
 
 import java.util.List;
 
 public class Account extends BasePage {
 
-    private final AddresseFormNavigation addresseFormNavigation;
+    private final AddressFormsNavigation addressFormsNavigation;
 
     public Account(WebDriver driver) {
 
         super(driver);
 
-        addresseFormNavigation = new AddresseFormNavigation(driver);
+        addressFormsNavigation = new AddressFormsNavigation(driver);
     }
 
     @FindBy(xpath = ".//ul[@class='phoen_nav_tab']")
@@ -36,8 +36,8 @@ public class Account extends BasePage {
         getInteractions().click(link, PerformType.JS_EXECUTOR);
     }
 
-    public AddresseFormNavigation getAddresses() {
+    public AddressFormsNavigation getAddresses() {
 
-        return addresseFormNavigation;
+        return addressFormsNavigation;
     }
 }
