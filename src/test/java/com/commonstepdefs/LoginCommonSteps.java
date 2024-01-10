@@ -3,8 +3,6 @@ package com.commonstepdefs;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import qa.pages.loginform.LoginForm;
-import qa.pages.mainmenu.MainMenu;
-import qa.pages.account.Account;
 import qa.testutil.TestUtil;
 
 public class LoginCommonSteps {
@@ -16,13 +14,12 @@ public class LoginCommonSteps {
         this.testUtil = testUtil;
     }
 
-    @Given("An user is logged in with email: {string} and password: {string}")
-    public void anUserIsLoggedIn(String email, String password) throws IllegalAccessException {
+    @Given("The user is logged in with email: {string} and password: {string}")
+    public void userIsLoggedIn(String email, String password) throws IllegalAccessException {
 
-        MainMenu mainMenu = new MainMenu(testUtil.getDriver());
+        testUtil.goToUrl("https://fakestore.testelka.pl/moje-konto/");
+
         LoginForm loginForm = new LoginForm(testUtil.getDriver());
-
-        mainMenu.click("Moje konto");
         loginForm.setUsername(email);
         loginForm.setPassword(password);
         loginForm.clickSubmitButton();
@@ -31,7 +28,6 @@ public class LoginCommonSteps {
     @And("The address editing section is open")
     public void theAddressEditingSectionIsOpen() throws IllegalAccessException {
 
-        Account account = new Account(testUtil.getDriver());
-        account.clickLink("Adres");
+        testUtil.goToUrl("https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
     }
 }
