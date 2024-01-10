@@ -1,11 +1,11 @@
 Feature: Address forms
 
   Background:
-    Given An user is logged in with email: "my_email@gmail.com" and password: "secret_password"
-    And Goes to the "Adres rozliczeniowy" form
+    Given The user is logged in with email: "my_email@gmail.com" and password: "secret_password"
+    And The page with url "https://fakestore.testelka.pl/moje-konto/edytuj-adres/rozliczeniowy/" is open
 
   @AFCorrectData
-  Scenario: I test the billing address form using a correct data
+  Scenario: Correct data
     When An user clicks the country drop-down list arrow
     And Types "Polska" in the drop-down search field
     And Presses the ENTER key
@@ -21,7 +21,7 @@ Feature: Address forms
     Then The data has been saved
 
   @AFIncorrectFName
-  Scenario: I test the billing address form using an incorrect first name
+  Scenario: Incorrect first name
     When An user clicks the country drop-down list arrow
     And Types "Polska" in the drop-down search field
     And Presses the ENTER key
@@ -37,7 +37,7 @@ Feature: Address forms
     Then The data has not been saved
 
   @AFIncorrectLName
-  Scenario: I test the shipping address form using an incorrect last name
+  Scenario: Incorrect last name
     When An user clicks the country drop-down list arrow
     And Types "Niemcy" in the drop-down search field
     And Presses the ENTER key
@@ -53,7 +53,7 @@ Feature: Address forms
     Then The data has not been saved
 
   @AFIncorrectAddress
-  Scenario: I test the shipping address form using an incorrect address
+  Scenario: Incorrect address
     When An user clicks the country drop-down list arrow
     And Types "Polska" in the drop-down search field
     And Presses the ENTER key
@@ -69,7 +69,7 @@ Feature: Address forms
     Then The data has not been saved
 
   @AFIncorrectPostcode
-  Scenario Outline: I test the shipping address form using an incorrect postcode
+  Scenario Outline: Incorrect postcode
     When An user clicks the country drop-down list arrow
     And Types "Polska" in the drop-down search field
     And Presses the ENTER key
@@ -94,7 +94,7 @@ Feature: Address forms
     |"44-34!"|
 
   @AFIncorrectCity
-  Scenario: I test the shipping address form using an incorrect city
+  Scenario: Incorrect city
     When An user clicks the country drop-down list arrow
     And Types "Niemcy" in the drop-down search field
     And Presses the ENTER key
@@ -110,7 +110,7 @@ Feature: Address forms
     Then The data has not been saved
 
   @AFIncorrectPhone
-  Scenario Outline: I test the shipping address form using an incorrect phone number
+  Scenario Outline: Incorrect phone number
     When An user clicks the country drop-down list arrow
     And Types "Polska" in the drop-down search field
     And Presses the ENTER key
