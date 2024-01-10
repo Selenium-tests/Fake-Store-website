@@ -17,15 +17,15 @@ public class AccountPageNavigationStepDefs {
         this.testUtil = testUtil;
     }
 
-    @When("An user clicks the {string} link")
-    public void anUserClicksTheLink(String link) throws IllegalAccessException {
+    @When("The user clicks the {string} link")
+    public void userClicksTheLink(String link) throws IllegalAccessException {
 
         account = new Account(testUtil.getDriver());
         account.clickLink(link);
     }
 
-    @Then("An user is logged out")
-    public void anUserIsLoggedOut() {
+    @Then("The user is logged out")
+    public void userIsLoggedOut() {
 
         Assert.assertFalse(account.areNavigationButtonsVisible());
     }
