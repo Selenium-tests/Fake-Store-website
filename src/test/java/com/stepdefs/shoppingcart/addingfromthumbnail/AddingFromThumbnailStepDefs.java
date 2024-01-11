@@ -23,7 +23,7 @@ public class AddingFromThumbnailStepDefs {
     }
 
     @When("The user clicks the \"Dodaj do koszyka\" button of the {string} product thumbnail")
-    public void theUserClicksTheAddToCartButton(String productName) throws InterruptedException {
+    public void theUserClicksTheAddToCartButton(String productName) {
 
         ThumbnailData thumbnailData = ThumbnailDataProvider.getThumbnailData(productName);
 
