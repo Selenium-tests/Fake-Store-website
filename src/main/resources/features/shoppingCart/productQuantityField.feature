@@ -1,7 +1,7 @@
 Feature: Product quantity field
 
   Background:
-    Given A product is in the shopping cart
+    Given A product has been added to the shopping cart
     And The shopping cart page is open
 
   @SCCQtyCorrectValue
