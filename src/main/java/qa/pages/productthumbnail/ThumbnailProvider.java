@@ -32,13 +32,13 @@ public class ThumbnailProvider extends BasePage {
         WebElement category = driver.findElement(By.xpath(xpathPart + categoriesMap.get(data.getCategory())));
         List<WebElement> products = category.findElements(By.xpath(".//li[@class]"));
 
-        WebElement product = products.get(data.getNumber());
-        WebElement title = product.findElement(By.xpath(".//h2[@class='woocommerce-loop-product__title']"));
-        WebElement price = product.findElement(By.xpath(".//span[@class='price']"));
-        WebElement addToCartButton = product.findElement(By.linkText("Dodaj do koszyka"));
+        WebElement parent = products.get(data.getNumber());
+        WebElement productName = parent.findElement(By.xpath(".//h2[@class='woocommerce-loop-product__title']"));
+        WebElement price = parent.findElement(By.xpath(".//span[@class='price']"));
+        WebElement addToCartButton = parent.findElement(By.linkText("Dodaj do koszyka"));
 
-        productThumbnail.setProduct(product);
-        productThumbnail.setTitleLocator(title);
+        productThumbnail.setParent(parent);
+        productThumbnail.setProductNameLocator(productName);
         productThumbnail.setPriceLocator(price);
         productThumbnail.setAddToCartButtonLocator(addToCartButton);
 
