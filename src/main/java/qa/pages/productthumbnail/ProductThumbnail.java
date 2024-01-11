@@ -1,16 +1,12 @@
 package qa.pages.productthumbnail;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.enums.PerformType;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ProductThumbnail extends BasePage {
 
@@ -19,18 +15,10 @@ public class ProductThumbnail extends BasePage {
     private WebElement price;
     private WebElement addToCartButton;
     private WebElement seeCartButton;
-    private final FluentWait<WebDriver> fluentWait;
 
     public ProductThumbnail(WebDriver driver) {
 
         super(driver);
-
-        fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(5))
-                .pollingEvery(Duration.ofMillis(250))
-                .ignoring(NoSuchElementException.class);
-
-        setClickable(new ClickWithJSExecutor(driver));
     }
 
     public void setProduct(WebElement product) {
@@ -38,37 +26,20 @@ public class ProductThumbnail extends BasePage {
         this.product = product;
     }
 
-    public void setPrice(WebElement price) {
+    public void setPriceLocator(WebElement price) {
 
         this.price = price;
     }
 
-    public void setTitle(WebElement title) {
+    public void setTitleLocator(WebElement title) {
 
         this.title = title;
     }
 
-    public void setAddToCartButton(WebElement addToCartButton) {
+    public void setAddToCartButtonLocator(WebElement addToCartButton) {
 
         this.addToCartButton = addToCartButton;
     }
-
-    public void setSeeCartButton(WebElement seeCartButton) {
-
-        this.seeCartButton = seeCartButton;
-    }
-
-    public void setThumbnail(String xpath, int index) {
-
-        WebElement category = getDriver().findElement(By.xpath(xpath));
-        List<WebElement> products = category.findElements(By.xpath(".//li[@class]"));
-
-        product = products.get(index);
-        title = product.findElement(By.xpath(".//h2[@class='woocommerce-loop-product__title']"));
-        price = product.findElement(By.xpath(".//span[@class='price']"));
-        addToCartButton = products.get(index).findElement(By.linkText("Dodaj do koszyka"));
-    }
-
     public String getTitle() {
 
         return title.getText();
@@ -86,17 +57,21 @@ public class ProductThumbnail extends BasePage {
 
     public void clickAddToCartButton() {
 
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
-        javascriptExecutor.executeScript("arguments[0].click()", addToCartButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(addToCartButton));
+        getInteractions().scrollIntoView(addToCartButton);
+        getInteractions().click(addToCartButton, PerformType.JS_EXECUTOR);
     }
 
     public void waitForSeeCartButton() {
 
-        seeCartButton = fluentWait.until(driver->product.findElement(By.xpath(".//a[@title='Zobacz koszyk']")));
+        seeCartButton = getWebDriverWait().until(ExpectedConditions.elementToBeClickable(
+                product.findElement(By.xpath(".//a[@title='Zobacz koszyk']"))
+        ));
     }
 
     public void clickSeeCartButton() {
 
+        waitForSeeCartButton();
         seeCartButton.click();
     }
 }
