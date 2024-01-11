@@ -19,24 +19,20 @@ public class RemoveButtonStepDefs {
     }
 
     @When("The user clicks the 'Remove' button")
-    public void theUserClicksTheRemoveButton() throws InterruptedException, IllegalAccessException {
+    public void theUserClicksTheRemoveButton() throws IllegalAccessException {
 
         shoppingCart.findProduct(0);
         shoppingCart.getRow().clickRemoveButton();
-
-        Thread.sleep(2000);
     }
 
     @Then("The message about empty shopping cart is displayed")
     public void theMessageAboutEmptyShoppingCartIsDisplayed() {
 
-        Assert.assertTrue(shoppingCart.isEmptyCartMessageVisible());
-    }
-
-    @Then("The shopping cart is empty")
-    public void theShoppingCartIsEmpty() {
-
-        Assert.assertFalse(shoppingCart.isContentsLocatorPresent());
+        try {
+            shoppingCart.waitForEmptyCartMessageLocator();
+        } catch (Exception e) {
+            Assert.fail("The message about empty shopping cart is not visible");
+        }
     }
 
     @And("The empty shopping cart message is: {string}")
