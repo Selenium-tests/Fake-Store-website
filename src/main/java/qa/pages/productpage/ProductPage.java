@@ -3,8 +3,11 @@ package qa.pages.productpage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
+import qa.enums.PerformType;
 import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.tobyclass.ByFinder;
 
 public class ProductPage extends BasePage {
 
@@ -24,6 +27,9 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = ".//button[@name='add-to-cart']")
     WebElement addToCartButton;
 
+    @FindBy(className = "woocommerce-message")
+    WebElement message;
+
     public String getProductTitle() {
 
         return productTitle.getText();
@@ -36,6 +42,12 @@ public class ProductPage extends BasePage {
 
     public void clickAddToCartButton() throws IllegalAccessException {
 
-        clickable.click(addToCartButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(addToCartButton));
+        getInteractions().click(addToCartButton, PerformType.JS_EXECUTOR);
+    }
+
+    public void waitForMessage() throws IllegalAccessException {
+
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(message)));
     }
 }
