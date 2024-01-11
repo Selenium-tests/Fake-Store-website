@@ -29,7 +29,7 @@ public class ShoppingCartCommonSteps {
         testUtil.goToUrl("https://fakestore.testelka.pl/koszyk/");
     }
 
-    @Given("The product has been added to the shopping cart")
+    @Given("A product has been added to the shopping cart")
     public void productHasBeenAddedToShoppingCart() {
 
         testUtil.goToUrl("https://fakestore.testelka.pl/product/gran-koscielcow/");
@@ -44,7 +44,13 @@ public class ShoppingCartCommonSteps {
 
         ConditionalUrlNavigator.openIfUrlIsNot(testUtil, "https://fakestore.testelka.pl/koszyk/");
 
-        Assert.assertFalse(shoppingCart.isEmptyCartMessageVisible());
+        try {
+            shoppingCart.waitForEmptyCartMessageLocator();
+            Assert.fail("The message about empty shopping cart is visible");
+        } catch (Exception ignored) {
+
+        }
+        //Assert.assertFalse(shoppingCart.isEmptyCartMessageVisible());
     }
 
     @And("Product name and price match")
