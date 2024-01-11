@@ -4,7 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import qa.pages.account.Account;
 import qa.pages.addressform.AddressForm;
 import qa.pages.addressform.CountryDropdownList;
 import qa.testutil.TestUtil;
@@ -18,15 +17,10 @@ public class AddressFormCommonSteps {
         this.testUtil = testUtil;
     }
 
-    @And("Goes to the \"Adres rozliczeniowy\" form")
     @And("The \"Adres rozliczeniowy\" form is open")
-    public void goesToTheAddressForm() throws IllegalAccessException {
+    public void billingAddressFormIsOpen() throws IllegalAccessException {
 
-        Account account = new Account(testUtil.getDriver());
-        account.clickLink("Adres");
-        account.hideNotice();
-
-        account.getAddresses().clickAddButton(0);
+        testUtil.goToUrl("https://fakestore.testelka.pl/moje-konto/edytuj-adres/rozliczeniowy/");
     }
 
     @When("An user clicks the country drop-down list arrow")
