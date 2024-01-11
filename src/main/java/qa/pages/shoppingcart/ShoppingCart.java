@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
+import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
 
 import java.util.List;
 
@@ -23,12 +25,10 @@ public class ShoppingCart extends BasePage {
         row = new Row(driver);
         couponForm = new CouponForm(driver);
         shoppingCartSummary = new ShoppingCartSummary(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
-    List<WebElement> contents;
+    WebElement contents;
 
     @FindBy(className = "woocommerce-message")
     List<WebElement> message;
@@ -37,7 +37,7 @@ public class ShoppingCart extends BasePage {
     List<WebElement> errorMessage;
 
     @FindBy(css = "div[class='cart-empty woocommerce-info']")
-    List<WebElement> emptyCartMessage;
+    WebElement emptyCartMessage;
     @FindBy(xpath = ".//button[@name='update_cart']")
     WebElement updateCartButton;
     @FindBy(css = "a[class='checkout-button button alt wc-forward']")
@@ -45,7 +45,7 @@ public class ShoppingCart extends BasePage {
 
     public void findProducts() {
 
-        products = contents.get(0).findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
+        products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
     }
 
     public void findProduct(int index) {
@@ -53,11 +53,6 @@ public class ShoppingCart extends BasePage {
         findProducts();
 
         row.setRow(products.get(index));
-    }
-
-    public boolean isContentsLocatorPresent() {
-
-        return !(contents.isEmpty());
     }
 
     public Row getRow() {
@@ -85,14 +80,14 @@ public class ShoppingCart extends BasePage {
         return errorMessage.get(0).getText();
     }
 
-    public boolean isEmptyCartMessageVisible() {
+    public void waitForEmptyCartMessageLocator() throws IllegalAccessException {
 
-        return !(emptyCartMessage.isEmpty());
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(emptyCartMessage)));
     }
 
     public String getEmptyCartMessageText() {
 
-        return emptyCartMessage.get(0).getText();
+        return emptyCartMessage.getText();
     }
 
     public CouponForm getCouponForm() {
@@ -107,11 +102,12 @@ public class ShoppingCart extends BasePage {
 
     public void clickUpdateCartButton() throws IllegalAccessException {
 
-        clickable.click(updateCartButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateCartButton));
+        getInteractions().click(updateCartButton, PerformType.JS_EXECUTOR);
     }
 
     public void clickCheckoutButton() throws IllegalAccessException {
 
-        clickable.click(checkoutButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(checkoutButton));
     }
 }
