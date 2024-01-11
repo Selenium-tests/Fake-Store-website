@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.base.BasePage;
+import qa.utils.ThumbnailData;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,22 +25,22 @@ public class ThumbnailProvider extends BasePage {
         super(driver);
     }
 
-    public static ProductThumbnail getThumbnail(WebDriver driver, String category, int number) {
+    public static ProductThumbnail getThumbnail(WebDriver driver, ThumbnailData data) {
 
         ProductThumbnail productThumbnail = new ProductThumbnail(driver);
 
-        WebElement cat = driver.findElement(By.xpath(xpathPart + categoriesMap.get(category)));
-        List<WebElement> products = cat.findElements(By.xpath(".//li[@class]"));
+        WebElement category = driver.findElement(By.xpath(xpathPart + categoriesMap.get(data.getCategory())));
+        List<WebElement> products = category.findElements(By.xpath(".//li[@class]"));
 
-        WebElement product = products.get(number);
+        WebElement product = products.get(data.getNumber());
         WebElement title = product.findElement(By.xpath(".//h2[@class='woocommerce-loop-product__title']"));
         WebElement price = product.findElement(By.xpath(".//span[@class='price']"));
         WebElement addToCartButton = product.findElement(By.linkText("Dodaj do koszyka"));
 
-        productThumbnail.setProduct(products.get(number));
-        productThumbnail.setTitle(title);
-        productThumbnail.setPrice(price);
-        productThumbnail.setAddToCartButton(addToCartButton);
+        productThumbnail.setProduct(product);
+        productThumbnail.setTitleLocator(title);
+        productThumbnail.setPriceLocator(price);
+        productThumbnail.setAddToCartButtonLocator(addToCartButton);
 
         return productThumbnail;
     }
