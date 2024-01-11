@@ -40,7 +40,7 @@ public class ProductPage extends BasePage {
         return price.getText();
     }
 
-    public void clickAddToCartButton() throws IllegalAccessException {
+    public void clickAddToCartButton() {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(addToCartButton));
         getInteractions().click(addToCartButton, PerformType.JS_EXECUTOR);
