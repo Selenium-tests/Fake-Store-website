@@ -42,12 +42,10 @@ public class ProductQuantityFieldStepDefs {
     public void clicksTheUpdateCartButton() throws InterruptedException, IllegalAccessException {
 
         shoppingCart.clickUpdateCartButton();
-
-        Thread.sleep(2000);
     }
 
     @Then("The quantity of the product has been changed")
-    public void theQuantityOfTheProductHasBeenChanged() {
+    public void theQuantityOfTheProductHasBeenChanged() throws IllegalAccessException {
 
         shoppingCart.findProduct(0);
         double givenTotalPrice = PriceParser.parse(shoppingCart.getRow().getTotalPrice());
