@@ -10,8 +10,8 @@ import qa.enums.PerformType;
 
 public class ProductThumbnail extends BasePage {
 
-    private WebElement product;
-    private WebElement title;
+    private WebElement parent;
+    private WebElement productName;
     private WebElement price;
     private WebElement addToCartButton;
     private WebElement seeCartButton;
@@ -21,9 +21,14 @@ public class ProductThumbnail extends BasePage {
         super(driver);
     }
 
-    public void setProduct(WebElement product) {
+    public void setParent(WebElement parent) {
 
-        this.product = product;
+        this.parent = parent;
+    }
+
+    public void setProductNameLocator(WebElement title) {
+
+        this.productName = title;
     }
 
     public void setPriceLocator(WebElement price) {
@@ -31,18 +36,13 @@ public class ProductThumbnail extends BasePage {
         this.price = price;
     }
 
-    public void setTitleLocator(WebElement title) {
-
-        this.title = title;
-    }
-
     public void setAddToCartButtonLocator(WebElement addToCartButton) {
 
         this.addToCartButton = addToCartButton;
     }
-    public String getTitle() {
+    public String getName() {
 
-        return title.getText();
+        return productName.getText();
     }
 
     public String getPrice() {
@@ -52,7 +52,7 @@ public class ProductThumbnail extends BasePage {
 
     public void clickTheProductLink() throws IllegalAccessException {
 
-        clickable.click(title);
+        clickable.click(productName);
     }
 
     public void clickAddToCartButton() {
@@ -65,7 +65,7 @@ public class ProductThumbnail extends BasePage {
     public void waitForSeeCartButton() {
 
         seeCartButton = getWebDriverWait().until(ExpectedConditions.elementToBeClickable(
-                product.findElement(By.xpath(".//a[@title='Zobacz koszyk']"))
+                parent.findElement(By.xpath(".//a[@title='Zobacz koszyk']"))
         ));
     }
 
