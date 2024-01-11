@@ -109,5 +109,6 @@ public class ShoppingCart extends BasePage {
     public void clickCheckoutButton() throws IllegalAccessException {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(checkoutButton));
+        getInteractions().click(checkoutButton, PerformType.JS_EXECUTOR);
     }
 }
