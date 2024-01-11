@@ -1,8 +1,6 @@
 package com.stepdefs.shoppingcart.addingfromproductpage;
 
 import qa.pages.productpage.ProductPage;
-import qa.pages.productthumbnail.ProductThumbnail;
-import qa.pages.productthumbnail.ThumbnailProvider;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.pages.siteheadercart.SiteHeaderCart;
 import qa.testutil.TestUtil;
@@ -51,16 +49,5 @@ public class AddingFromProductPageStepDefs {
         } catch (Exception e) {
             Assert.fail("The message is not displayed");
         }
-    }
-
-    @And("The product is in the shopping cart")
-    public void theProductIsInTheShoppingCart() throws IllegalAccessException {
-
-        //siteHeaderCart.clickCartMenu();
-        shoppingCart.findProduct(0);
-
-        Assert.assertTrue(shoppingCart.isContentsLocatorPresent());
-        Assert.assertEquals(shoppingCart.getRow().getName(), ProductData.getName());
-        Assert.assertEquals(shoppingCart.getRow().getPrice(), ProductData.getPrice());
     }
 }
