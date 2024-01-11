@@ -1,20 +1,19 @@
 package qa.pages.searchengine;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithActions;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
+import qa.enums.PerformType;
+
 
 public class SearchEngine extends BasePage {
 
     public SearchEngine(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithActions(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(className = "search-field")
@@ -22,7 +21,8 @@ public class SearchEngine extends BasePage {
 
     public void clickOnTheSearchField() throws IllegalAccessException {
 
-        clickable.click(searchField);
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(searchField));
+        getInteractions().click(searchField, PerformType.JS_EXECUTOR);
     }
 
     public String getPlaceholderText() {
@@ -32,11 +32,11 @@ public class SearchEngine extends BasePage {
 
     public void enterPhrase(String phrase) throws IllegalAccessException {
 
-        formFillable.fill(searchField, phrase);
+        getInteractions().fill(searchField, PerformType.CLASS_METHOD, phrase);
     }
 
     public void submit() {
 
-        searchField.submit();
+        getInteractions().fill(searchField, PerformType.CLASS_METHOD, Keys.ENTER);
     }
 }
