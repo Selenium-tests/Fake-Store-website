@@ -3,19 +3,15 @@ package qa.pages.shoppingcart;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
-
+import qa.enums.PerformType;
 
 public class CouponForm extends BasePage {
 
     public CouponForm(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(id = "coupon_code")
@@ -23,18 +19,20 @@ public class CouponForm extends BasePage {
     @FindBy(xpath = ".//button[@name='apply_coupon']")
     WebElement applyCouponButton;
 
-    public void clickCouponCodeField() throws IllegalAccessException {
+    public void clickCouponCodeField() {
 
-        clickable.click(couponCodeField);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(couponCodeField));
+        getInteractions().click(couponCodeField, PerformType.JS_EXECUTOR);
     }
 
-    public void setCouponCode(String code) throws IllegalAccessException {
+    public void setCouponCode(String code) {
 
-        formFillable.fill(couponCodeField, code);
+        getInteractions().fill(couponCodeField, PerformType.CLASS_METHOD, code);
     }
 
-    public void clickApplyCouponButton() throws IllegalAccessException {
+    public void clickApplyCouponButton() {
 
-        clickable.click(applyCouponButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(applyCouponButton));
+        getInteractions().click(applyCouponButton, PerformType.JS_EXECUTOR);
     }
 }
