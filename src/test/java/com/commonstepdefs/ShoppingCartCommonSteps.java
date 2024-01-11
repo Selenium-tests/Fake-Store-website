@@ -2,9 +2,11 @@ package com.commonstepdefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.testutil.TestUtil;
+import qa.utils.ConditionalUrlNavigator;
 import qa.utils.ProductData;
 
 public class ShoppingCartCommonSteps {
@@ -26,10 +28,11 @@ public class ShoppingCartCommonSteps {
         testUtil.goToUrl("https://fakestore.testelka.pl/koszyk/");
     }
 
-    @And("The shopping cart is not empty")
+    @Then("The shopping cart is not empty")
+    @And("The opened shopping cart is not empty")
     public void shoppingCartIsNotEmpty() {
 
-        testUtil.goToUrl("https://fakestore.testelka.pl/koszyk/");
+        ConditionalUrlNavigator.openIfUrlIsNot(testUtil, "https://fakestore.testelka.pl/koszyk/");
 
         Assert.assertFalse(shoppingCart.isEmptyCartMessageVisible());
     }
