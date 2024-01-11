@@ -7,6 +7,7 @@ import org.testng.Assert;
 import qa.pages.productthumbnail.ProductThumbnail;
 import qa.pages.productthumbnail.ThumbnailProvider;
 import qa.testutil.TestUtil;
+import qa.utils.ProductData;
 import qa.utils.ThumbnailData;
 import qa.utils.ThumbnailDataProvider;
 
@@ -21,13 +22,16 @@ public class AddingFromThumbnailStepDefs {
         productThumbnail = new ProductThumbnail(testUtil.getDriver());
     }
 
-    @When("The user clicks the 'Dodaj do koszyka' button of the {string} product thumbnail")
+    @When("The user clicks the \"Dodaj do koszyka\" button of the {string} product thumbnail")
     public void theUserClicksTheAddToCartButton(String productName) throws InterruptedException {
 
         ThumbnailData thumbnailData = ThumbnailDataProvider.getThumbnailData(productName);
 
         productThumbnail = ThumbnailProvider.getThumbnail(testUtil.getDriver(), thumbnailData);
         productThumbnail.clickAddToCartButton();
+
+        ProductData.setName(productThumbnail.getName());
+        ProductData.setPrice(productThumbnail.getPrice());
     }
 
     @And("Clicks the \"Zobacz koszyk\" button")
