@@ -1,7 +1,7 @@
 Feature: Coupon redemption
 
   Background:
-    Given The product has been added to the shopping cart
+    Given A product has been added to the shopping cart
     And The shopping cart page is open
 
   @CCCorrectPlain
