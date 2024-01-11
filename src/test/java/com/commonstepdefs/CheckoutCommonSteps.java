@@ -21,13 +21,6 @@ public class CheckoutCommonSteps {
         this.testUtil = testUtil;
     }
 
-    @When("The user clicks the 'Przejdź do płatności' button")
-    public void theUserClicksTheButton() throws IllegalAccessException {
-
-        ShoppingCart shoppingCart = new ShoppingCart(testUtil.getDriver());
-        shoppingCart.clickCheckoutButton();
-    }
-
     @And("The checkout page is open")
     public void theCheckoutPageIsOpen() throws IllegalAccessException {
 
