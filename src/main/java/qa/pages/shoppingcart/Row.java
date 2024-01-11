@@ -3,9 +3,10 @@ package qa.pages.shoppingcart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
+import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
 
 public class Row extends BasePage {
 
@@ -18,9 +19,6 @@ public class Row extends BasePage {
     public Row(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     public void setRow(WebElement product) {
@@ -34,7 +32,8 @@ public class Row extends BasePage {
 
     public void clickRemoveButton() throws IllegalAccessException {
 
-        clickable.click(removeButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(removeButton));
+        getInteractions().click(removeButton, PerformType.JS_EXECUTOR);
     }
 
     public String getName() {
@@ -49,10 +48,16 @@ public class Row extends BasePage {
 
     public void setQuantity(String quantity) throws IllegalAccessException {
 
-        formFillable.fill(quantityField, quantity);
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(quantityField)));
+        getInteractions().fill(quantityField, PerformType.CLASS_METHOD, quantity);
     }
 
-    public String getTotalPrice() {
+    public String getTotalPrice() throws IllegalAccessException {
+
+        getWebDriverWait().until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(totalPrice)),
+                ExpectedConditions.refreshed(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(totalPrice)))
+        ));
 
         return totalPrice.getText();
     }
