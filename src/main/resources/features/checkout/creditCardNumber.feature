@@ -3,14 +3,13 @@ Feature: Credit card number
   Background:
     Given A product has been added to the shopping cart
     And The checkout page is open
+    And The payment details form is filled
 
   @CN_CorrectNumber
   Scenario Outline: I test the credit card form using a correct card number
-    ##When The user clicks the 'Przejdź do płatności' button
     When The user types the <cardNumber> as a card number
     And Types "09/25" as an expiration date
     And Types <CVC> as a CVC
-    And Fills the payment details form
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
     Then The order confirmation page has been opened
@@ -39,25 +38,21 @@ Feature: Credit card number
 
   @CN_IncorrectNumber
   Scenario: I test the credit card form using an incorrect card number
-    When The user clicks the 'Przejdź do płatności' button
-    And Types "3782 822463 33332" as a card number
+    When The user types the "3782 822463 33332" as a card number
     Then The message about an incorrect card number has been displayed
     And The text of the invalid card number message is "Numer karty nie jest prawidłowym numerem karty kredytowej."
 
   @CN_Incomplete
   Scenario: I am testing a credit card form using an incomplete card number
-    When The user clicks the 'Przejdź do płatności' button
-    And Types "3782 822463" as a card number
+    And The user types the "3782 822463" as a card number
     And Types "" as an expiration date
     Then The message about incomplete card number has been displayed
     And The text of the invalid card number message is "Numer karty jest niekompletny."
 
   @CN_BlankField
   Scenario: I am testing the credit card form without providing the card number
-    When The user clicks the 'Przejdź do płatności' button
-    And Types "09/25" as an expiration date
+    And The user types "09/25" as an expiration date
     And Types "233" as a CVC
-    And Fills the payment details form
     And Accepts terms
     And Clicks the "Kupuję i płacę" button
     Then The message about incomplete card number has been displayed
