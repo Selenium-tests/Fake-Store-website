@@ -3,24 +3,20 @@ package qa.pages.checkout;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.pages.addressform.AddressForm;
+import qa.enums.PerformType;
 
 import java.util.List;
 
 public class CheckoutPage extends BasePage {
 
-    private AddressForm addressForm;
     private final CreditCardForm creditCardForm;
     public CheckoutPage(WebDriver driver) {
 
         super(driver);
 
-        this.addressForm = null;
         this.creditCardForm = new CreditCardForm(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(id = "terms")
@@ -37,17 +33,14 @@ public class CheckoutPage extends BasePage {
 
     public void clickTermsCheckbox() throws IllegalAccessException {
 
-        clickable.click(termsCheckbox);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(termsCheckbox));
+        getInteractions().click(termsCheckbox, PerformType.JS_EXECUTOR);
     }
 
     public void clickSubmitButton() throws IllegalAccessException {
 
-        clickable.click(submitButton);
-    }
-
-    public void setAddressForm(AddressForm addressForm) {
-
-        this.addressForm = addressForm;
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(submitButton));
+        getInteractions().click(submitButton, PerformType.JS_EXECUTOR);
     }
 
     public void clickTermsLink() throws IllegalAccessException {
