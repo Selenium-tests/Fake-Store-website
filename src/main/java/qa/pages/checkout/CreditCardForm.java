@@ -3,61 +3,79 @@ package qa.pages.checkout;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.interactions.formfillable.FillWithActions;
+import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
+import qa.utils.CreditCardData;
 
-import java.util.List;
 
 public class CreditCardForm extends BasePage {
 
     public CreditCardForm(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
-        setFormFillable(new FillWithActions(driver));
     }
 
-    @FindBy(id = "stripe-card-element")
+    @FindBy(css = "#stripe-card-element iframe")
+    public WebElement cardNumberFrame;
+
+    @FindBy(css = "#stripe-exp-element iframe")
+    WebElement expirationDateFrame;
+
+    @FindBy(css = "#stripe-cvc-element iframe")
+    WebElement cvcFrame;
+
+    @FindBy(css = ".InputElement[name='cardnumber']")
     public WebElement cardNumberField;
 
-    @FindBy(id = "stripe-exp-element")
+    @FindBy(css = "[name='exp-date']")
     public WebElement expirationDateField;
 
-    @FindBy(id = "stripe-cvc-element")
+    @FindBy(css = "[name='cvc']")
     public WebElement cvcField;
 
     @FindBy(css = "div[class='stripe-source-errors']")
-    List<WebElement> incorrectCardNumberMessage;
+    WebElement incorrectCardNumberMessage;
 
-    public void setCardNumber(String cardNumber) throws IllegalAccessException {
+    private void action(WebElement frame, WebElement element, String text) {
 
-        formFillable.fill(cardNumberField, cardNumber);
+        getWebDriverWait().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame));
+        getInteractions().fill(element, PerformType.CLASS_METHOD, text);
+        getDriver().switchTo().parentFrame();
     }
 
-    public void setExpirationDate(String expirationDate) throws IllegalAccessException {
+    public void setCreditCardData(CreditCardData data) {
 
-        formFillable.fill(expirationDateField, expirationDate);
+        setCardNumber(data.getNumber());
+        setExpirationDate(data.getExpirationDate());
+        setCVC(data.getCvc());
     }
 
-    public WebElement get() {
+    public void setCardNumber(String cardNumber) {
 
-        return expirationDateField;
+        action(cardNumberFrame, cardNumberField, cardNumber);
     }
 
-    public void setCVC(String CVC) throws IllegalAccessException {
+    public void setExpirationDate(String expirationDate) {
 
-        formFillable.fill(cvcField, CVC);
+        action(expirationDateFrame, expirationDateField, expirationDate);
     }
 
-    public boolean isIncorrectCardNumberMessageVisible() {
+    public void setCVC(String CVC) {
 
-        return !(incorrectCardNumberMessage.isEmpty());
+        action(cvcFrame, cvcField, CVC);
     }
 
-    public String getIncorrectCardNumberMessageText() {
+    public void waitForIncorrectCardNumberMessageLocator() throws IllegalAccessException {
 
-        return incorrectCardNumberMessage.get(0).getText();
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(incorrectCardNumberMessage)));
+    }
+
+    public String getIncorrectCardNumberMessageText() throws IllegalAccessException {
+
+        waitForIncorrectCardNumberMessageLocator();
+
+        return incorrectCardNumberMessage.getText();
     }
 }
