@@ -1,18 +1,13 @@
 Feature: Credit card number
 
   Background:
-    Given The product number 0 from the "Popularne" category has been added to the shopping cart
-    And The shopping cart page is open
-
-  @CN_Clicking
-  Scenario: I test clicking the "Przejdź do płatności" button
-    When The user clicks the 'Przejdź do płatności' button
-    Then The page with url "https://fakestore.testelka.pl/zamowienie/" has been opened
+    Given A product has been added to the shopping cart
+    And The checkout page is open
 
   @CN_CorrectNumber
   Scenario Outline: I test the credit card form using a correct card number
-    When The user clicks the 'Przejdź do płatności' button
-    And Types <cardNumber> as a card number
+    ##When The user clicks the 'Przejdź do płatności' button
+    When The user types the <cardNumber> as a card number
     And Types "09/25" as an expiration date
     And Types <CVC> as a CVC
     And Fills the payment details form
