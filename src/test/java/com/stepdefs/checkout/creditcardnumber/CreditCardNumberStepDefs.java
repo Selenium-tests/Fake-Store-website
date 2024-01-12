@@ -17,7 +17,6 @@ public class CreditCardNumberStepDefs {
         this.testUtil = testUtil;
 
         checkoutPage = new CheckoutPage(testUtil.getDriver());
-        checkoutPage.hideNotice();
     }
 
     @When("The user types the {string} as a card number")
@@ -27,6 +26,7 @@ public class CreditCardNumberStepDefs {
         checkoutPage.getCreditCardForm().setCardNumber(cardNumber);
     }
 
+    @When("The user types {string} as an expiration date")
     @And("Types {string} as an expiration date")
     public void typesExpirationDate(String expirationDate) throws IllegalAccessException {
 
@@ -58,12 +58,16 @@ public class CreditCardNumberStepDefs {
     @Then("The message about incorrect month has been displayed")
     public void theMessageAboutAnIncorrectCardNumberHasBeenDisplayed() {
 
-        Assert.assertTrue(checkoutPage.getCreditCardForm().isIncorrectCardNumberMessageVisible());
+        try {
+            checkoutPage.getCreditCardForm().waitForIncorrectCardNumberMessageLocator();
+        } catch (Exception e) {
+            Assert.fail("The message is not visible");
+        }
     }
 
     @And("The text of the invalid card number message is {string}")
     @And("The message text for the invalid month is {string}")
-    public void theIncorrectCardNumberMessageTextIs(String message) {
+    public void theIncorrectCardNumberMessageTextIs(String message) throws IllegalAccessException {
 
         Assert.assertEquals(checkoutPage.getCreditCardForm().getIncorrectCardNumberMessageText(), message);
     }
