@@ -3,7 +3,8 @@ package qa.driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.Arrays;
 
 public class ChromeDriverFactory extends WebDriverFactory {
 
@@ -11,7 +12,7 @@ public class ChromeDriverFactory extends WebDriverFactory {
     public WebDriver createDriver() {
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
         options.merge(getCapabilities(ChromeOptions.CAPABILITY, options));
         setProperty("chromedriver.exe", "webdriver.chrome.driver");
 
