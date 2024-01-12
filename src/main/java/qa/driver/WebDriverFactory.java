@@ -1,9 +1,21 @@
 package qa.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import qa.enums.Browser;
 
 public abstract class WebDriverFactory {
+
+    protected void setup(Browser browser) {
+
+        switch (browser) {
+
+            case CHROME -> WebDriverManager.chromedriver().setup();
+            case FIREFOX -> WebDriverManager.firefoxdriver().setup();
+            case EDGE -> WebDriverManager.edgedriver();
+        }
+    }
 
     protected DesiredCapabilities getCapabilities(String key, Object value) {
 
