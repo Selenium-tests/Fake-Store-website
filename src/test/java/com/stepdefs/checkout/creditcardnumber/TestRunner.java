@@ -11,7 +11,8 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/creditCardNumber.html" },
         glue = { "com.stepdefs.checkout.creditcardnumber",
                  "com.commonstepdefs",
-                 "qa.testutil" }
+                 "qa.testutil" },
+        tags = "@CN_CorrectNumber"
 )
-public class Runner {
+public class TestRunner {
 }
