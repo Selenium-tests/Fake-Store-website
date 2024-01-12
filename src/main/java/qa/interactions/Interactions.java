@@ -32,12 +32,18 @@ public class Interactions {
         switch (type) {
 
             case CLASS_METHOD -> { element.sendKeys(keys); }
-            case ACTIONS -> { actions.moveToElement(element).click().perform(); actions.sendKeys(keys); }
+            case JS_EXECUTOR -> { javascriptExecutor.executeScript("arguments[0].value = arguments[1];", element, keys); }
+            case ACTIONS -> { actions.moveToElement(element).click().perform(); actions.sendKeys(keys).perform(); }
         }
     }
 
     public void scrollIntoView(WebElement element) {
 
         javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public void focus(WebElement element) {
+
+        javascriptExecutor.executeScript("arguments[0].focus();", element);
     }
 }
