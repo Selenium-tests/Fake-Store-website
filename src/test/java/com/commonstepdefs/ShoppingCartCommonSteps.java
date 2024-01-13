@@ -50,7 +50,6 @@ public class ShoppingCartCommonSteps {
         } catch (Exception ignored) {
 
         }
-        //Assert.assertFalse(shoppingCart.isEmptyCartMessageVisible());
     }
 
     @And("Product name and price match")
