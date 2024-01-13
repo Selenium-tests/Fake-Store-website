@@ -1,30 +1,30 @@
 package qa.base;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import qa.interactions.clickable.Clickable;
-import qa.interactions.formfillable.FormFillable;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import qa.interactions.Interactions;
+
+import java.time.Duration;
 
 public class BasePage {
 
     private final WebDriver driver;
-    protected Clickable clickable;
-    protected FormFillable formFillable;
+    private final WebDriverWait webDriverWait;
+    private final Interactions interactions;
 
     public BasePage(WebDriver driver) {
 
         this.driver = driver;
 
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(this.driver, this);
+        interactions = new Interactions(driver);
     }
 
-    private @FindBy(xpath = ".//a[@class='woocommerce-store-notice__dismiss-link']")
-    WebElement notice;
+    public WebDriverWait getWebDriverWait() {
 
-    public void hideNotice() {
-
-        notice.click();
+        return webDriverWait;
     }
 
     protected WebDriver getDriver() {
@@ -32,13 +32,8 @@ public class BasePage {
         return driver;
     }
 
-    protected void setClickable(Clickable clickable) {
+    protected Interactions getInteractions() {
 
-        this.clickable = clickable;
-    }
-
-    protected void setFormFillable(FormFillable formFillable) {
-
-        this.formFillable = formFillable;
+        return interactions;
     }
 }
