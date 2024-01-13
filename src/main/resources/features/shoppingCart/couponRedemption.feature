@@ -1,11 +1,9 @@
 Feature: Coupon redemption
 
-  Background:
-    Given A product has been added to the shopping cart
-    And The shopping cart page is open
-
   @CCCorrectPlain
   Scenario Outline: I test using correct plain coupon code
+    Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
+    And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the <couponCode> as a coupon code
     And Clicks the 'Zastosuj kupon' button
@@ -23,7 +21,7 @@ Feature: Coupon redemption
 
   @CC300Success
   Scenario Outline: I test using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
-    Given The product number <productNumber> from the <category> category has been added to the shopping cart
+    Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "kwotowy300" as a coupon code
@@ -41,7 +39,7 @@ Feature: Coupon redemption
 
   @CC300Fail
   Scenario Outline: I test using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
-    Given The product number <productNumber> from the <category> category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "kwotowy300" as a coupon code
@@ -58,7 +56,7 @@ Feature: Coupon redemption
 
   @CC300Windsurfing
   Scenario Outline: I test using "windsurfing350" coupon code for a product from the windsurfing category
-    Given The product number <productNumber> from the <category> category has been added to the shopping cart
+    Given The product: "Windsurfing w Lanzarote (Costa Teguise)" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "windsurfing350" as a coupon code 
@@ -74,7 +72,7 @@ Feature: Coupon redemption
 
   @CC350NonWindsurfing
   Scenario Outline: I test using "windsurfing350" coupon code for a product from the non-windsurfing category
-    Given The product number <productNumber> from the <category> category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "windsurfing350" as a coupon code
@@ -90,14 +88,13 @@ Feature: Coupon redemption
 
   @CCReusingRedeemed
   Scenario Outline: I test reusing a redeemed coupon
-    Given The product number 3 from the "Popularne" category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the <couponCode> as a coupon code
     And Clicks the 'Zastosuj kupon' button
-    And Waits for 2 seconds
     And Clicks on the coupon code field
-    And Enters the <couponCode> as a coupon code again
+    And Enters the used <couponCode> coupon code
     And Clicks the 'Zastosuj kupon' button
     Then The "Kupon został zastosowany!" error message has been displayed
 
@@ -113,14 +110,13 @@ Feature: Coupon redemption
 
   @CC250Reusing
   Scenario Outline: I test an attemption to link coupon "kwotowy250pojedynczy" to other coupons
-  Given The product number 0 from the "Popularne" category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "kwotowy250pojedynczy" as a coupon code
     And Clicks the 'Zastosuj kupon' button
-    And Waits for 2 seconds
     And Clicks on the coupon code field
-    And Enters the <couponCode> as a coupon code again
+    And Enters the used <couponCode> coupon code
     And Clicks the 'Zastosuj kupon' button
     Then The "Przepraszamy, kupon \"kwotowy250pojedynczy\" został już użyty nie może być powiązany z innymi kuponami." error message has been displayed
 
@@ -136,7 +132,7 @@ Feature: Coupon redemption
 
   @CCIncorrectCode
   Scenario Outline: I test using an incorrect coupon code
-    Given The product number 2 from the "W promocji" category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the <couponCode> as a coupon code
@@ -153,7 +149,7 @@ Feature: Coupon redemption
 
   @CCBlankCCodeField
   Scenario: Blank coupon code field
-    Given The product number 3 from the "Bestsellery" category has been added to the shopping cart
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Clicks the 'Zastosuj kupon' button leaving the coupon code field blank
