@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithJSExecutor;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
+import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
 
-import java.util.List;
 
 public class AddressForm extends BasePage {
 
@@ -20,71 +20,77 @@ public class AddressForm extends BasePage {
         super(driver);
 
         this.prefix = prefix;
-        countryDropdownList = new CountryDropdownList(driver);
 
-        setClickable(new ClickWithJSExecutor(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
+        countryDropdownList = new CountryDropdownList(driver);
     }
 
     @FindBy(css = "[name='save_address']")
     WebElement submitButton;
 
     @FindBy(className = "woocommerce-error")
-    List<WebElement> errorMessage;
+    WebElement errorMessage;
 
     private String getPrefix() {
 
         return prefix;
     }
 
+    private void fill(By locator, String text) {
+
+        WebElement element = getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(locator));
+        element.clear();
+        getInteractions().fill(element, PerformType.CLASS_METHOD, text);
+    }
+
     public void setFirstName(String firstName) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_first_name")), firstName);
+        fill(By.id(prefix + "_first_name"), firstName);
     }
 
     public void setLastName(String lastName) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_last_name")), lastName);
+        fill(By.id(prefix + "_last_name"), lastName);
     }
 
     public void setCompany(String company) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_company")), company);
+        fill(By.id(prefix + "_company"), company);
     }
 
     public void setAddress1(String address) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_address_1")), address);
+        fill(By.id(prefix + "_address_1"), address);
     }
 
     public void setAddress2(String address) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_address_2")), address);
+        fill(By.id(prefix + "_address_2"), address);
     }
 
     public void setPostcode(String postcode) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_postcode")), postcode);
+        fill(By.id(prefix + "_postcode"), postcode);
     }
 
     public void setCity(String city) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(prefix + "_city")), city);
+        fill(By.id(prefix + "_city"), city);
     }
 
     public void setPhone(String phone) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(getPrefix() + "_phone")), phone);
+        fill(By.id(prefix + "_phone"), phone);
     }
 
     public void setEmail(String email) throws IllegalAccessException {
 
-        formFillable.fill(getDriver().findElement(By.id(getPrefix() + "_email")), email);
+        fill(By.id(prefix + "_email"), email);
     }
 
     public void clickSubmitButton() throws IllegalAccessException {
 
-        clickable.click(submitButton);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(submitButton));
+        getInteractions().click(submitButton, PerformType.JS_EXECUTOR);
     }
 
     public CountryDropdownList getCountryDropdownList() {
@@ -92,13 +98,13 @@ public class AddressForm extends BasePage {
         return countryDropdownList;
     }
 
-    public boolean isErrorMessageDisplayed() {
+    public void waitForErrorMessage() throws IllegalAccessException {
 
-        return !(errorMessage.isEmpty());
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
     }
 
     public String getErrorMessageText() {
 
-        return errorMessage.get(0).getText();
+        return errorMessage.getText();
     }
 }
