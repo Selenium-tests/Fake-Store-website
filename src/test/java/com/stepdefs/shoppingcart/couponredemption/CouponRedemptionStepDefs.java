@@ -1,5 +1,6 @@
 package com.stepdefs.shoppingcart.couponredemption;
 
+import qa.animation.CouponCodeRefreshLoader;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -12,6 +13,7 @@ public class CouponRedemptionStepDefs {
 
     private final TestUtil testUtil;
     private final ShoppingCart shoppingCart;
+    private final CouponCodeRefreshLoader couponCodeRefreshLoader;
     private String usedCouponCode;
 
     public CouponRedemptionStepDefs(TestUtil testUtil) {
@@ -19,12 +21,7 @@ public class CouponRedemptionStepDefs {
         this.testUtil = testUtil;
 
         shoppingCart = new ShoppingCart(testUtil.getDriver());
-    }
-
-    @And("Waits for 2 seconds")
-    public void waitsFor2Seconds() throws InterruptedException {
-
-        Thread.sleep(2000);
+        couponCodeRefreshLoader = new CouponCodeRefreshLoader(testUtil.getDriver());
     }
 
     @When("An user clicks on the coupon code field")
@@ -35,11 +32,17 @@ public class CouponRedemptionStepDefs {
     }
 
     @And("Enters the {string} as a coupon code")
-    @And("Enters the {string} as a coupon code again")
-    public void entersTheStringAsACouponCode(String couponCode) throws IllegalAccessException {
+    public void entersCouponCode(String couponCode) {
 
         shoppingCart.getCouponForm().setCouponCode(couponCode);
         usedCouponCode = couponCode;
+    }
+
+    @And("Enters the used {string} coupon code")
+    public void entersUsedCouponCode(String couponCode) throws IllegalAccessException {
+
+        couponCodeRefreshLoader.waitUntilLoaderIsInvisible();
+        shoppingCart.getCouponForm().setCouponCode(couponCode);
     }
 
     @And("Clicks the 'Zastosuj kupon' button")
@@ -52,7 +55,12 @@ public class CouponRedemptionStepDefs {
     @Then("The {string} message has been displayed")
     public void theMessageHasBeenDisplayed(String message) {
 
-        Assert.assertTrue(shoppingCart.isMessageVisible());
+        try {
+            shoppingCart.waitForMessage();
+        } catch (Exception e) {
+            Assert.fail("The message is not visible");
+        }
+
         Assert.assertEquals(shoppingCart.getMessageText(), message);
     }
 
@@ -65,7 +73,12 @@ public class CouponRedemptionStepDefs {
     @Then("The {string} error message has been displayed")
     public void theErrorMessageHasBeenDisplayed(String message) {
 
-        Assert.assertTrue(shoppingCart.isErrorMessageVisible());
-        Assert.assertEquals(message, shoppingCart.getErrorMessageText());
+        try {
+            shoppingCart.waitForErrorMessage();
+        } catch (Exception e) {
+            Assert.fail("The error message is not visible");
+        }
+
+        Assert.assertEquals(shoppingCart.getErrorMessageText(), message);
     }
 }
