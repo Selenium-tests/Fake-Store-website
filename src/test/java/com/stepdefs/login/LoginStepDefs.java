@@ -71,7 +71,11 @@ public class LoginStepDefs {
     @Then("The blank password field has been displayed")
     public void theIncorrectUsernameMessageHasBeenDisplayed() {
 
-        Assert.assertTrue(loginForm.isErrorMessageDisplayed());
+        try {
+            loginForm.waitForErrorMessage();
+        } catch (Exception e) {
+            Assert.fail("The error message is not visible");
+        }
     }
 
     @Then("The user is logged in")
