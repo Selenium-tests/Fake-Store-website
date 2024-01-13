@@ -53,9 +53,12 @@ public class AddressFormCommonSteps {
     @Then("The message about blank 'Adres email' field has been displayed")
     public void messageHasBeenDisplayed() {
 
-        AddressForm addressForm = new AddressForm(testUtil.getDriver(), "billing");
-
-        Assert.assertTrue(addressForm.isErrorMessageDisplayed());
+        try {
+            AddressForm addressForm = new AddressForm(testUtil.getDriver(), "billing");
+            addressForm.waitForErrorMessage();
+        } catch (Exception e) {
+            Assert.fail("The error message is not visible");
+        }
     }
 
     @And("The error message text is {string}")
