@@ -3,16 +3,15 @@ package qa.pages.siteheadercart;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
-import qa.interactions.clickable.ClickWithClickMethod;
+import qa.enums.PerformType;
 
 public class SiteHeaderCart extends BasePage {
 
     public SiteHeaderCart(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithClickMethod(driver));
     }
 
     @FindBy(xpath = ".//span[@class='woocommerce-Price-amount amount']")
@@ -26,8 +25,9 @@ public class SiteHeaderCart extends BasePage {
         return priceAmount.getText();
     }
 
-    public void clickCartMenu() throws IllegalAccessException {
+    public void clickCartMenu() {
 
-        clickable.click(cartMenu);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(cartMenu));
+        getInteractions().click(cartMenu, PerformType.CLASS_METHOD);
     }
 }
