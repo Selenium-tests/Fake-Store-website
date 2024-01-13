@@ -6,20 +6,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
-import qa.interactions.clickable.ClickWithClickMethod;
-import qa.interactions.formfillable.FillWithSendKeysMethod;
 import qa.tobyclass.ByFinder;
 
-import java.util.List;
 
 public class LoginForm extends BasePage {
 
     public LoginForm(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithClickMethod(driver));
-        setFormFillable(new FillWithSendKeysMethod(driver));
     }
 
     @FindBy(id = "username")
@@ -32,7 +26,7 @@ public class LoginForm extends BasePage {
     WebElement submitButton;
 
     @FindBy(xpath = ".//ul[@class='woocommerce-error']")
-    List<WebElement> errorMessage;
+    WebElement errorMessage;
 
     public void setUsername(String username) throws IllegalAccessException {
 
@@ -52,13 +46,13 @@ public class LoginForm extends BasePage {
         getInteractions().click(submitButton, PerformType.CLASS_METHOD);
     }
 
-    public boolean isErrorMessageDisplayed() {
+    public void waitForErrorMessage() throws IllegalAccessException {
 
-        return !errorMessage.isEmpty();
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
     }
 
     public String getErrorMessageText() {
 
-        return errorMessage.get(0).getText();
+        return errorMessage.getText();
     }
 }
