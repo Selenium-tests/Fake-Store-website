@@ -6,8 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
+import qa.tobyclass.ByFinder;
 
-import java.util.List;
 
 public class CheckoutPage extends BasePage {
 
@@ -29,23 +29,27 @@ public class CheckoutPage extends BasePage {
     WebElement termsLink;
 
     @FindBy(className = "woocommerce-terms-and-conditions")
-    List<WebElement> termsAndConditions;
+    WebElement termsAndConditions;
 
-    public void clickTermsCheckbox() throws IllegalAccessException {
+    @FindBy(css = ".wc-block-components-notice-banner.is-error")
+    WebElement errorMessage;
+
+    public void clickTermsCheckbox() {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(termsCheckbox));
         getInteractions().click(termsCheckbox, PerformType.JS_EXECUTOR);
     }
 
-    public void clickSubmitButton() throws IllegalAccessException {
+    public void clickSubmitButton() {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(submitButton));
         getInteractions().click(submitButton, PerformType.JS_EXECUTOR);
     }
 
-    public void clickTermsLink() throws IllegalAccessException {
+    public void clickTermsLink() {
 
-        clickable.click(termsLink);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(termsLink));
+        getInteractions().click(termsLink, PerformType.CLASS_METHOD);
     }
 
     public CreditCardForm getCreditCardForm() {
@@ -53,8 +57,18 @@ public class CheckoutPage extends BasePage {
         return creditCardForm;
     }
 
-    public boolean isTermsAndConditionsTextBoxVisible() {
+    public void waitForTermsAndConditionsLocator() throws IllegalAccessException {
 
-        return !(termsAndConditions.isEmpty());
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(termsAndConditions)));
+    }
+
+    public void waitForErrorMessageLocator() throws IllegalAccessException {
+
+        getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
+    }
+
+    public String getErrorMessageText() {
+
+        return errorMessage.getText();
     }
 }
