@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
-import qa.interactions.clickable.ClickWithJSExecutor;
 import qa.tobyclass.ByFinder;
 
 public class ProductPage extends BasePage {
@@ -14,8 +13,6 @@ public class ProductPage extends BasePage {
     public ProductPage(WebDriver driver) {
 
         super(driver);
-
-        setClickable(new ClickWithJSExecutor(driver));
     }
 
     @FindBy(xpath = ".//h1[@class='product_title entry-title']")
