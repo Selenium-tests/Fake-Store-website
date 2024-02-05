@@ -1,5 +1,6 @@
 package com.stepdefs.searchengine;
 
+import org.testng.asserts.SoftAssert;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,6 +14,7 @@ public class SearchEngineStepDefs {
     private final TestUtil testUtil;
     private final SearchEngine searchEngine;
     private final ResultsPage resultsPage;
+    private final SoftAssert softAssert;
 
     public SearchEngineStepDefs(TestUtil testUtil) {
 
@@ -20,15 +22,14 @@ public class SearchEngineStepDefs {
 
         searchEngine = new SearchEngine(testUtil.getDriver());
         resultsPage = new ResultsPage(testUtil.getDriver());
+        softAssert = new SoftAssert();
     }
 
 
     @When("The user clicks on the search engine field")
-    public void theUserClicksOnTheSearchEngineField() throws InterruptedException, IllegalAccessException {
+    public void theUserClicksOnTheSearchEngineField() throws IllegalAccessException {
 
         searchEngine.clickOnTheSearchField();
-
-        Thread.sleep(2000);
     }
 
     @And("Enters the '{string}' phrase")
@@ -38,11 +39,9 @@ public class SearchEngineStepDefs {
     }
 
     @And("Submits")
-    public void submits() throws InterruptedException {
+    public void submits() {
 
         searchEngine.submit();
-
-        Thread.sleep(2000);
     }
 
     @Then("The placeholder disappears")
@@ -51,16 +50,33 @@ public class SearchEngineStepDefs {
         Assert.assertEquals(searchEngine.getPlaceholderText(), "");
     }
 
-    @Then("The products count text is present")
-    public void theProductsCountTextIsPresent() {
+    @Then("Products have been found")
+    public void productsHaveBeenFound() {
 
-        Assert.assertFalse(resultsPage.isResultCountEmpty());
+        Assert.assertTrue(resultsPage.hasColumns(),
+                "Products have not been found");
+
+        resultsPage.findProducts();
+
+        Assert.assertTrue(resultsPage.getProductsColumnsSize() > 0,
+                "Products have not been found");
     }
 
-    @Then("The products count text is not present")
-    public void theProductsCountTextIsNotPresent() {
+    @Then("Products have not been found")
+    public void productsHaveNotBeenFound() {
 
-        Assert.assertTrue(resultsPage.isResultCountEmpty());
+        Assert.assertFalse(resultsPage.hasColumns(),
+                "Products have been found");
+    }
+
+    @And("Product names contain the phrase {string}")
+    public void productNamesContainThePhrase(String phrase) {
+
+        resultsPage.getProductsTitles().forEach(
+                i -> softAssert.assertTrue(i.toLowerCase().contains(phrase.toLowerCase()))
+        );
+
+        softAssert.assertAll();
     }
 
     @And("The number of products is {int}")
