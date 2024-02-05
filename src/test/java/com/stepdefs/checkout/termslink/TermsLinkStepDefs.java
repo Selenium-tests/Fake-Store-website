@@ -1,7 +1,7 @@
 package com.stepdefs.checkout.termslink;
 
+import io.cucumber.java.en.When;
 import qa.testutil.TestUtil;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import qa.pages.checkout.CheckoutPage;
@@ -17,8 +17,8 @@ public class TermsLinkStepDefs {
         checkoutPage = new CheckoutPage(testUtil.getDriver());
     }
 
-    @And("Clicks the \"regulamin\" link")
-    public void clicksTheTermsLink() throws IllegalAccessException {
+    @When("The user clicks the \"regulamin\" link")
+    public void clicksTheTermsLink() {
 
         checkoutPage.clickTermsLink();
     }
@@ -26,6 +26,10 @@ public class TermsLinkStepDefs {
     @Then("Information about the regulations has been displayed")
     public void termsAndConditionsHaveBeenDisplayed() {
 
-        Assert.assertTrue(checkoutPage.isTermsAndConditionsTextBoxVisible());
+        try {
+            checkoutPage.waitForTermsAndConditionsLocator();
+        } catch (Exception e) {
+            Assert.fail("The terms and conditions text is not visible");
+        }
     }
 }
