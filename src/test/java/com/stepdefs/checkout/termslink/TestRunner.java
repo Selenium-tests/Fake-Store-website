@@ -13,5 +13,5 @@ import org.junit.runner.RunWith;
                  "com.commonstepdefs",
                  "qa.testutil" }
 )
-public class Runner {
+public class TestRunner {
 }

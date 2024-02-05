@@ -50,9 +50,10 @@ public class ProductThumbnail extends BasePage {
         return price.getText();
     }
 
-    public void clickTheProductLink() throws IllegalAccessException {
+    public void clickTheProductLink() {
 
-        clickable.click(productName);
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(productName));
+        getInteractions().click(productName, PerformType.CLASS_METHOD);
     }
 
     public void clickAddToCartButton() {
