@@ -30,7 +30,7 @@ public class Account extends BasePage {
         return !navigation.isEmpty();
     }
 
-    public void clickLink(String linkText) throws IllegalAccessException {
+    public void clickLink(String linkText) {
 
         WebElement link = getWebDriverWait().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.linkText(linkText))));
         getInteractions().click(link, PerformType.JS_EXECUTOR);
