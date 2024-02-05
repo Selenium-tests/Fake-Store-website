@@ -10,31 +10,35 @@ import java.util.List;
 
 public class ResultsPage extends BasePage {
 
+    private List<WebElement> products;
+
     public ResultsPage(WebDriver driver) {
 
         super(driver);
     }
 
-    @FindBy(xpath = ".//p[@class='woocommerce-result-count']")
-    List<WebElement> resultCount;
-
     @FindBy(xpath = ".//ul[@class='products columns-3']")
-    WebElement productsColumns;
+    List<WebElement> productsColumns;
 
-    public boolean isResultCountEmpty() {
+    public boolean hasColumns() {
 
-        return resultCount.isEmpty();
+        return !productsColumns.isEmpty();
     }
 
-    public String getResultCountText() {
+    public void findProducts() {
 
-        return resultCount.get(0).getText();
+        products = productsColumns.get(0).findElements(By.cssSelector("li[class]"));
     }
 
     public int getProductsColumnsSize() {
 
-        List<WebElement> products = productsColumns.findElements(By.xpath(".//li[@class]"));
-
         return products.size();
+    }
+
+    public List<String> getProductsTitles() {
+
+        return products.stream()
+                .map(i -> i.findElement(By.cssSelector("h2")).getText())
+                .toList();
     }
 }
