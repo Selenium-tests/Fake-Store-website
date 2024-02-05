@@ -13,7 +13,8 @@ Feature: Search engine
     When The user clicks on the search engine field
     And Enters the '<phrase>' phrase
     And Submits
-    Then The products count text is present
+    Then Products have been found
+    And Product names contain the phrase <phrase>
 
     Examples:
     |phrase           |
@@ -27,7 +28,7 @@ Feature: Search engine
     When The user clicks on the search engine field
     And Enters the '<phrase>' phrase
     And Submits
-    Then The products count text is not present
+    Then Products have not been found
 
     Examples:
     |phrase|
