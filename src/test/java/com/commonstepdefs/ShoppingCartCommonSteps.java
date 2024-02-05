@@ -9,6 +9,8 @@ import qa.pages.shoppingcart.ShoppingCart;
 import qa.testutil.TestUtil;
 import qa.utils.ConditionalUrlNavigator;
 import qa.utils.ProductData;
+import qa.utils.ThumbnailData;
+import qa.utils.ThumbnailDataProvider;
 
 public class ShoppingCartCommonSteps {
 
@@ -20,6 +22,16 @@ public class ShoppingCartCommonSteps {
         this.testUtil = testUtil;
 
         shoppingCart = new ShoppingCart(testUtil.getDriver());
+    }
+
+    @Given("The product: {string} is in the shopping cart")
+    public void givenProductIsInTheShoppingCart(String productName) {
+
+        ThumbnailData thumbnailData = ThumbnailDataProvider.getThumbnailData(productName);
+        testUtil.goToUrl(thumbnailData.getProductPageUrl());
+
+        ProductPage productPage = new ProductPage(testUtil.getDriver());
+        productPage.clickAddToCartButton();
     }
 
     @Given("The shopping cart is open")
