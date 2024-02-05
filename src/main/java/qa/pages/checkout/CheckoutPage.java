@@ -49,7 +49,7 @@ public class CheckoutPage extends BasePage {
     public void clickTermsLink() {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(termsLink));
-        getInteractions().click(termsLink, PerformType.CLASS_METHOD);
+        getInteractions().click(termsLink, PerformType.JS_EXECUTOR);
     }
 
     public CreditCardForm getCreditCardForm() {
