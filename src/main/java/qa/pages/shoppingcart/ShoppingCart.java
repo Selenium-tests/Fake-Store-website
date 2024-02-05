@@ -31,10 +31,10 @@ public class ShoppingCart extends BasePage {
     WebElement contents;
 
     @FindBy(className = "woocommerce-message")
-    List<WebElement> message;
+    WebElement message;
 
     @FindBy(className = "woocommerce-error")
-    List<WebElement> errorMessage;
+    WebElement errorMessage;
 
     @FindBy(css = "div[class='cart-empty woocommerce-info']")
     WebElement emptyCartMessage;
@@ -60,24 +60,24 @@ public class ShoppingCart extends BasePage {
         return row;
     }
 
-    public boolean isMessageVisible() {
+    public void waitForMessage() throws IllegalAccessException {
 
-        return !(message.isEmpty());
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(message)));
     }
 
     public String getMessageText() {
 
-        return message.get(0).getText();
+        return message.getText();
     }
 
-    public boolean isErrorMessageVisible() {
+    public void waitForErrorMessage() throws IllegalAccessException {
 
-        return !(errorMessage.isEmpty());
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
     }
 
     public String getErrorMessageText() {
 
-        return errorMessage.get(0).getText();
+        return errorMessage.getText();
     }
 
     public void waitForEmptyCartMessageLocator() throws IllegalAccessException {
