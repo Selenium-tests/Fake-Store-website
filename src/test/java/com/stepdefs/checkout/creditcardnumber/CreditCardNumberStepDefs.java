@@ -21,30 +21,22 @@ public class CreditCardNumberStepDefs {
 
     @When("The user types the {string} as a card number")
     @And("Types {string} as a card number")
-    public void typesCardNumber(String cardNumber) throws IllegalAccessException {
+    public void typesCardNumber(String cardNumber) {
 
         checkoutPage.getCreditCardForm().setCardNumber(cardNumber);
     }
 
     @When("The user types {string} as an expiration date")
     @And("Types {string} as an expiration date")
-    public void typesExpirationDate(String expirationDate) throws IllegalAccessException {
+    public void typesExpirationDate(String expirationDate) {
 
         checkoutPage.getCreditCardForm().setExpirationDate(expirationDate);
     }
 
     @And("Types {string} as a CVC")
-    public void typesCVC(String CVC) throws IllegalAccessException {
+    public void typesCVC(String CVC) {
 
         checkoutPage.getCreditCardForm().setCVC(CVC);
-    }
-
-    @And("Clicks the \"Kupuję i płacę\" button")
-    public void clicksTheSubmitButton() throws InterruptedException, IllegalAccessException {
-
-        checkoutPage.clickSubmitButton();
-
-        Thread.sleep(6000);
     }
 
     @Then("The order confirmation page has been opened")
