@@ -38,6 +38,7 @@ public class CheckoutCommonSteps {
     @Then("The message about blank 'Miasto' field on the checkout page has been displayed")
     @Then("The message about blank 'Telefon' field on the checkout page has been displayed")
     @Then("The message about blank 'Adres email' field on the checkout page has been displayed")
+    @Then("A message about not accepting the terms was displayed")
     public void messageOnTheCheckoutPageHasBeenDisplayed() {
 
         try {
