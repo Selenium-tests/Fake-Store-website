@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import qa.enums.URLs;
 import qa.pages.addressform.AddressForm;
 import qa.pages.addressform.CountryDropdownList;
 import qa.testutil.TestUtil;
@@ -20,7 +21,7 @@ public class AddressFormCommonSteps {
     @And("The \"Adres rozliczeniowy\" form is open")
     public void billingAddressFormIsOpen() throws IllegalAccessException {
 
-        testUtil.goToUrl("https://fakestore.testelka.pl/moje-konto/edytuj-adres/rozliczeniowy/");
+        testUtil.goToUrl(URLs.BILLING_ADDRESS_FORM.getName());
     }
 
     @When("An user clicks the country drop-down list arrow")

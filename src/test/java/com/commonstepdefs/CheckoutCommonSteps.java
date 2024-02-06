@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.AddressFormMethods;
+import qa.enums.URLs;
 import qa.helpers.fillers.AddressFormFiller;
 import qa.helpers.fillers.CreditCardFormFiller;
 import qa.pages.checkout.CheckoutPage;
@@ -65,7 +66,7 @@ public class CheckoutCommonSteps {
     @And("The checkout page is open")
     public void theCheckoutPageIsOpen() throws IllegalAccessException {
 
-        testUtil.goToUrl("https://fakestore.testelka.pl/zamowienie/");
+        testUtil.goToUrl(URLs.CHECKOUT_PAGE.getName());
     }
 
     @And("Fills the credit card form")

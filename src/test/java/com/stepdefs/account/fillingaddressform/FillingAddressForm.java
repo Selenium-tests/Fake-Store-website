@@ -1,5 +1,6 @@
 package com.stepdefs.account.fillingaddressform;
 
+import qa.enums.URLs;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -76,12 +77,12 @@ public class FillingAddressForm {
     @Then("The data has been saved")
     public void theDataHasBeenSaved() {
 
-        Assert.assertEquals(testUtil.getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
+        Assert.assertEquals(testUtil.getDriver().getCurrentUrl(), URLs.ADDRESS_EDITING_SECTION.getName());
     }
 
     @Then("The data has not been saved")
     public void theDataHasNotBeenSaved() {
 
-        Assert.assertNotEquals(testUtil.getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/moje-konto/edytuj-adres/");
+        Assert.assertNotEquals(testUtil.getDriver().getCurrentUrl(), URLs.ADDRESS_EDITING_SECTION.getName());
     }
 }

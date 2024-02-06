@@ -1,5 +1,6 @@
 package com.stepdefs.checkout.creditcardnumber;
 
+import qa.enums.URLs;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -42,7 +43,7 @@ public class CreditCardNumberStepDefs {
     @Then("The order confirmation page has been opened")
     public void theOrderConfirmationPageHasBeenOpened() {
 
-        Assert.assertTrue(testUtil.getDriver().getCurrentUrl().contains("https://fakestore.testelka.pl/zamowienie/zamowienie-otrzymane/"));
+        Assert.assertTrue(testUtil.getDriver().getCurrentUrl().contains(URLs.RECEIVED_ORDER_PAGE.getName()));
     }
 
     @Then("The message about an incorrect card number has been displayed")

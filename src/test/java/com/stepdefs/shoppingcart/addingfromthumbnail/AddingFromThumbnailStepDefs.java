@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import qa.enums.URLs;
 import qa.pages.productthumbnail.ProductThumbnail;
 import qa.pages.productthumbnail.ThumbnailProvider;
 import qa.testutil.TestUtil;
@@ -53,6 +54,6 @@ public class AddingFromThumbnailStepDefs {
     @Then("The shopping cart has been opened")
     public void shoppingCartHasBeenOpened() {
 
-        Assert.assertEquals(testUtil.getDriver().getCurrentUrl(), "https://fakestore.testelka.pl/koszyk/");
+        Assert.assertEquals(testUtil.getDriver().getCurrentUrl(), URLs.SHOPPING_CART.getName());
     }
 }

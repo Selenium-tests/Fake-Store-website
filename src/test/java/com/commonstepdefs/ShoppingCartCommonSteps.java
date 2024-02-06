@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import qa.enums.URLs;
 import qa.pages.productpage.ProductPage;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.testutil.TestUtil;
@@ -38,13 +39,13 @@ public class ShoppingCartCommonSteps {
     @And("The shopping cart page is open")
     public void theShoppingCartPagesIsOpen() {
 
-        testUtil.goToUrl("https://fakestore.testelka.pl/koszyk/");
+        testUtil.goToUrl(URLs.SHOPPING_CART.getName());
     }
 
     @Given("A product has been added to the shopping cart")
     public void productHasBeenAddedToShoppingCart() {
 
-        testUtil.goToUrl("https://fakestore.testelka.pl/product/gran-koscielcow/");
+        testUtil.goToUrl(URLs.GRAN_KOSCIELCOW_PRODUCT_PAGE.getName());
 
         ProductPage productPage = new ProductPage(testUtil.getDriver());
         productPage.clickAddToCartButton();
@@ -54,7 +55,7 @@ public class ShoppingCartCommonSteps {
     @And("The opened shopping cart is not empty")
     public void shoppingCartIsNotEmpty() {
 
-        ConditionalUrlNavigator.openIfUrlIsNot(testUtil, "https://fakestore.testelka.pl/koszyk/");
+        ConditionalUrlNavigator.openIfUrlIsNot(testUtil, URLs.SHOPPING_CART.getName());
 
         try {
             shoppingCart.waitForEmptyCartMessageLocator();
