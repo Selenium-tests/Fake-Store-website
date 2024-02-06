@@ -8,10 +8,10 @@ import qa.enums.URLs;
 import qa.pages.productpage.ProductPage;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.testutil.TestUtil;
-import qa.utils.ConditionalUrlNavigator;
-import qa.utils.ProductData;
-import qa.utils.ThumbnailData;
-import qa.utils.ThumbnailDataProvider;
+import qa.support.ConditionalUrlNavigator;
+import qa.models.ProductData;
+import qa.models.ThumbnailData;
+import qa.support.ThumbnailDataProvider;
 
 public class ShoppingCartCommonSteps {
 

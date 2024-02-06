@@ -8,9 +8,9 @@ import qa.enums.URLs;
 import qa.pages.productthumbnail.ProductThumbnail;
 import qa.pages.productthumbnail.ThumbnailProvider;
 import qa.testutil.TestUtil;
-import qa.utils.ProductData;
-import qa.utils.ThumbnailData;
-import qa.utils.ThumbnailDataProvider;
+import qa.models.ProductData;
+import qa.models.ThumbnailData;
+import qa.support.ThumbnailDataProvider;
 
 public class AddingFromThumbnailStepDefs {
 

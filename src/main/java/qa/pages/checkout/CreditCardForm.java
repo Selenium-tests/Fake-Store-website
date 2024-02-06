@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
 import qa.tobyclass.ByFinder;
-import qa.utils.CreditCardData;
+import qa.models.CreditCardData;
 
 
 public class CreditCardForm extends BasePage {

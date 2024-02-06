@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import qa.base.BasePage;
-import qa.utils.ThumbnailData;
+import qa.models.ThumbnailData;
 
 import java.util.HashMap;
 import java.util.List;

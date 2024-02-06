@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.pages.shoppingcart.ShoppingCart;
-import qa.utils.PriceParser;
+import qa.support.PriceParser;
 
 
 public class ProductQuantityFieldStepDefs {

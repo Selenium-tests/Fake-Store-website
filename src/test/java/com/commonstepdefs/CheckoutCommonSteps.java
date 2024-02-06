@@ -6,8 +6,8 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.AddressFormMethods;
 import qa.enums.URLs;
-import qa.helpers.fillers.AddressFormFiller;
-import qa.helpers.fillers.CreditCardFormFiller;
+import qa.support.AddressFormFiller;
+import qa.support.CreditCardFormFiller;
 import qa.pages.checkout.CheckoutPage;
 import qa.testutil.TestUtil;
 

@@ -3,7 +3,7 @@ package com.stepdefs.checkout.addressform;
 import io.cucumber.java.en.When;
 import qa.enums.AddressFormMethods;
 import qa.testutil.TestUtil;
-import qa.helpers.fillers.AddressFormFiller;
+import qa.support.AddressFormFiller;
 
 import java.lang.reflect.InvocationTargetException;
 
