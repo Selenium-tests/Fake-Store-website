@@ -39,7 +39,7 @@ public class ProductQuantityFieldStepDefs {
     }
 
     @And("Clicks the 'Zaktualizuj koszyk' button")
-    public void clicksTheUpdateCartButton() throws InterruptedException, IllegalAccessException {
+    public void clicksTheUpdateCartButton() throws IllegalAccessException {
 
         shoppingCart.clickUpdateCartButton();
     }

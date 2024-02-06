@@ -40,7 +40,7 @@ public class LoginStepDefs {
 
     @And("Types a correct password {string}")
     @And("Types an incorrect password {string}")
-    public void andTypesACorrectPassword(String password) throws IllegalAccessException {
+    public void andTypesACorrectPassword(String password) {
 
         loginForm.setPassword(password);
     }
@@ -53,13 +53,13 @@ public class LoginStepDefs {
 
 
     @And("Leaves the password field blank")
-    public void leavesThePasswordField() throws IllegalAccessException {
+    public void leavesThePasswordField() {
 
         loginForm.setPassword("");
     }
 
     @And("Clicks the submit button")
-    public void andClicksTheSubmitButton() throws IllegalAccessException {
+    public void andClicksTheSubmitButton() {
 
         loginForm.clickSubmitButton();
     }
