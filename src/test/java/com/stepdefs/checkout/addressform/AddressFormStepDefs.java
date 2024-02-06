@@ -3,7 +3,7 @@ package com.stepdefs.checkout.addressform;
 import io.cucumber.java.en.When;
 import qa.enums.AddressFormMethods;
 import qa.testutil.TestUtil;
-import qa.support.AddressFormFiller;
+import qa.support.AddressFormHandler;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,7 +18,7 @@ public class AddressFormStepDefs {
 
     private void fillAddressForm(AddressFormMethods omitted) throws InvocationTargetException, IllegalAccessException {
 
-        AddressFormFiller.fill(testUtil.getDriver(), omitted);
+        AddressFormHandler.fill(testUtil.getDriver(), omitted);
     }
 
     @When("The user fills the address form leaving the 'Imię' field blank")

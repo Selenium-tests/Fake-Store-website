@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import qa.enums.AddressFormMethods;
 import qa.enums.URLs;
-import qa.support.AddressFormFiller;
+import qa.support.AddressFormHandler;
 import qa.support.CreditCardFormFiller;
 import qa.pages.checkout.CheckoutPage;
 import qa.testutil.TestUtil;
@@ -54,7 +54,7 @@ public class CheckoutCommonSteps {
     @And("The payment details form is filled")
     public void paymentDetailsFormIsFilled() throws IllegalAccessException, InvocationTargetException {
 
-        AddressFormFiller.fill(testUtil.getDriver(), AddressFormMethods.ALL);
+        AddressFormHandler.fill(testUtil.getDriver(), AddressFormMethods.ALL);
     }
 
     @And("The credit card form is filled")
