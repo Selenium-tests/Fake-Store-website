@@ -1,8 +1,8 @@
-package qa.helpers.fillers;
+package qa.support;
 
 import org.openqa.selenium.WebDriver;
 import qa.pages.checkout.CreditCardForm;
-import qa.utils.CreditCardData;
+import qa.models.CreditCardData;
 
 public class CreditCardFormFiller {
 

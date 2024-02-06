@@ -1,4 +1,6 @@
-package qa.utils;
+package qa.support;
+
+import qa.models.ThumbnailData;
 
 import java.util.HashMap;
 

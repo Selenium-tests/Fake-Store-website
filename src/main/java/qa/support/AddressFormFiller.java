@@ -1,13 +1,12 @@
-package qa.helpers.fillers;
+package qa.support;
 
 import org.openqa.selenium.WebDriver;
 import qa.enums.AddressFormMethods;
 import qa.pages.addressform.AddressForm;
-import qa.utils.MethodsRetriever;
+import qa.support.MethodsRetriever;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class AddressFormFiller {

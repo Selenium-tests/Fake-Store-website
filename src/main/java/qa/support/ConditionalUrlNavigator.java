@@ -1,4 +1,4 @@
-package qa.utils;
+package qa.support;
 
 import qa.testutil.TestUtil;
 

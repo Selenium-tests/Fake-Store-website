@@ -1,4 +1,4 @@
-package qa.utils;
+package qa.support;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
