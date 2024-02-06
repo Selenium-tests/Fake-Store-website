@@ -28,7 +28,7 @@ public class AddingFromProductPageStepDefs {
     }
 
     @When("The user clicks the \"Dodaj do koszyka\" button")
-    public void theUserClicksTheAddToCartButton() throws IllegalAccessException {
+    public void theUserClicksTheAddToCartButton() {
 
         productPage.clickAddToCartButton();
         ProductData.setName(productPage.getProductTitle());
