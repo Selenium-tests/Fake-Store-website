@@ -29,4 +29,14 @@ public class QuantityField extends BasePage {
 
         return field.getAttribute("value");
     }
+
+    public void waitForValidationMessage() {
+
+        getWebDriverWait().until(ExpectedConditions.attributeToBeNotEmpty(field, "validationMessage"));
+    }
+
+    public String getValidationMessageText() {
+
+        return field.getAttribute("validationMessage");
+    }
 }
