@@ -1,16 +1,19 @@
 package qa.models;
 
 import lombok.Getter;
-import lombok.Setter;
 
 
+@Getter
 public class ProductData {
 
-    @Setter
-    @Getter
-    private static String name;
+    private final String name;
+    private final String price;
+    private final String quantity;
 
-    @Setter
-    @Getter
-    private static String price;
+    public ProductData(String name, String price, String quantity) {
+
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
