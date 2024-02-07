@@ -10,8 +10,7 @@ import org.junit.runner.RunWith;
         plugin = { "pretty", "html:target/cucumber-reports/removeButton.html" },
         glue = {"com.stepdefs.shoppingcart.removingproducts",
                 "com.commonstepdefs",
-                "qa.testutil" },
-        tags = "@SCCRemovingWithQuantityField"
+                "qa.testutil" }
 )
 public class TestRunner {
 }
