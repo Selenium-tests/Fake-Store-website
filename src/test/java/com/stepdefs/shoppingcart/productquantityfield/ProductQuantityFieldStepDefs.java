@@ -1,5 +1,6 @@
 package com.stepdefs.shoppingcart.productquantityfield;
 
+import qa.models.CartItemDetails;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -8,12 +9,11 @@ import org.testng.Assert;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.support.PriceParser;
 
-
 public class ProductQuantityFieldStepDefs {
 
     private final TestUtil testUtil;
     private final ShoppingCart shoppingCart;
-    private double expectedTotalPrice;
+    private CartItemDetails cartItemDetails;
 
     public ProductQuantityFieldStepDefs(TestUtil testUtil) {
 
@@ -23,39 +23,46 @@ public class ProductQuantityFieldStepDefs {
     }
 
     @When("The user types the {string} as quantity of the product")
-    public void theUserTypesTheQuantityOfTheProduct(String quantity) throws IllegalAccessException {
+    public void theUserTypesTheQuantityOfTheProduct(String quantity) {
 
-        shoppingCart.findProduct(0);
-        shoppingCart.getRow().setQuantity(quantity);
-
-        expectedTotalPrice = PriceParser.parse(shoppingCart.getRow().getPrice()) * Double.parseDouble(quantity);
+        shoppingCart.getTable().findRows();
+        shoppingCart.getTable().getQuantityField(0).setQuantity(quantity);
+        cartItemDetails = new CartItemDetails(quantity, shoppingCart.getTable().getProductPrice(0));
     }
 
     @When("The user types the {string} as not a number")
-    public void theUserTypesNotANumber(String quantity) throws IllegalAccessException {
+    public void theUserTypesNotANumber(String quantity) {
 
-        shoppingCart.findProduct(0);
-        shoppingCart.getRow().setQuantity(quantity);
+        shoppingCart.getTable().findRows();
+        shoppingCart.getTable().getQuantityField(0).setQuantity(quantity);
     }
 
-    @Then("The quantity of the product has been changed")
-    public void theQuantityOfTheProductHasBeenChanged() throws IllegalAccessException {
+    @Then("The amount of the product is correct")
+    public void theAmountOfProductIsCorrect() {
 
-        shoppingCart.findProduct(0);
-        double givenTotalPrice = PriceParser.parse(shoppingCart.getRow().getTotalPrice());
+        shoppingCart.getTable().findRows();
+        double givenTotalPrice = PriceParser.parse(shoppingCart.getTable().getAmount(0));
 
-        Assert.assertEquals(givenTotalPrice, expectedTotalPrice);
+        Assert.assertEquals(givenTotalPrice, cartItemDetails.getAmount(),
+                "Incorrect amount");
     }
 
-    @Then("The message about incorrect quantity value is displayed")
-    public void theAlertIsPresent() {
+    @And("The quantity of the product is correct")
+    public void quantityOfProductIsCorrect() {
 
-        Assert.assertTrue(shoppingCart.getRow().isValidationMessageVisible());
+        Assert.assertEquals(shoppingCart.getTable().getQuantityField(0).getValue(), String.valueOf(cartItemDetails.getQuantity()),
+                "Incorrect quantity of product");
     }
 
-    @And("The validation message is: {string}")
-    public void theValidationMessageIs(String message) {
+    @And("The validation message is displayed")
+    public void theValidationMessageIsDisplayed() {
 
-        Assert.assertEquals(shoppingCart.getRow().getValidationMessageText(), message);
+        try {
+            shoppingCart.getTable().getQuantityField(0).waitForValidationMessage();
+        } catch (Exception e) {
+            Assert.fail("The validation message is not displayed");
+        }
+
+        System.out.println(shoppingCart.getTable().getQuantityField(0).getValidationMessageText());
     }
 }
