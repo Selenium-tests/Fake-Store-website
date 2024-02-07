@@ -38,12 +38,6 @@ public class ProductQuantityFieldStepDefs {
         shoppingCart.getRow().setQuantity(quantity);
     }
 
-    @And("Clicks the 'Zaktualizuj koszyk' button")
-    public void clicksTheUpdateCartButton() throws IllegalAccessException {
-
-        shoppingCart.clickUpdateCartButton();
-    }
-
     @Then("The quantity of the product has been changed")
     public void theQuantityOfTheProductHasBeenChanged() throws IllegalAccessException {
 
