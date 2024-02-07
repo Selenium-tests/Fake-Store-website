@@ -1,7 +1,6 @@
 package qa.pages.shoppingcart;
 
 import lombok.Getter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,6 @@ public class ShoppingCart extends BasePage {
     private final Table table;
     @Getter
     private final Row row;
-    private List<WebElement> products;
     @Getter
     private final CouponForm couponForm;
     @Getter
@@ -34,8 +32,6 @@ public class ShoppingCart extends BasePage {
         shoppingCartSummary = new ShoppingCartSummary(driver);
     }
 
-    @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
-    WebElement contents;
     @FindBy(className = "woocommerce-error")
     WebElement errorMessage;
     @FindBy(css = "div.wc-block-components-notice-banner__content")
@@ -45,17 +41,6 @@ public class ShoppingCart extends BasePage {
     @FindBy(css = "a[class='checkout-button button alt wc-forward']")
     WebElement checkoutButton;
 
-    public void findProducts() {
-
-        products = contents.findElements(By.xpath(".//tr[@class='woocommerce-cart-form__cart-item cart_item']"));
-    }
-
-    public void findProduct(int index) {
-
-        findProducts();
-
-        row.setRow(products.get(index));
-    }
 
     public String getErrorMessageText() {
 
@@ -67,7 +52,7 @@ public class ShoppingCart extends BasePage {
         return messages.get(1).getText();
     }
 
-    public void clickUpdateCartButton() throws IllegalAccessException {
+    public void clickUpdateCartButton()  {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateCartButton));
         getInteractions().click(updateCartButton, PerformType.JS_EXECUTOR);
