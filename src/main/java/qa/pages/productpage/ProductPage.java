@@ -1,11 +1,13 @@
 package qa.pages.productpage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
+import qa.pages.quantityfield.QuantityField;
 import qa.tobyclass.ByFinder;
 
 public class ProductPage extends BasePage {
@@ -15,10 +17,10 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = ".//h1[@class='product_title entry-title']")
-    WebElement productTitle;
+    @FindBy(css = "h1[class='product_title entry-title']")
+    WebElement productName;
 
-    @FindBy(xpath = ".//span[@class='woocommerce-Price-amount amount']")
+    @FindBy(className = "price")
     WebElement price;
 
     @FindBy(xpath = ".//button[@name='add-to-cart']")
@@ -27,14 +29,19 @@ public class ProductPage extends BasePage {
     @FindBy(className = "woocommerce-message")
     WebElement message;
 
-    public String getProductTitle() {
+    public String getProductName() {
 
-        return productTitle.getText();
+        return productName.getText();
     }
 
     public String getPrice() {
 
         return price.getText();
+    }
+
+    public QuantityField getQuantityField() {
+
+        return new QuantityField(getDriver(), getDriver().findElement(By.name("quantity")));
     }
 
     public void clickAddToCartButton() {
