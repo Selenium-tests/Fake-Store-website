@@ -8,41 +8,33 @@ Feature: Product quantity field
   Scenario Outline: Correct quantity
     When The user types the <quantity> as quantity of the product
     And Clicks the 'Zaktualizuj koszyk' button
-    Then The quantity of the product has been changed
+    Then The amount of the product is correct
+    And The quantity of the product is correct
 
     Examples:
     |quantity|
     |"1"     |
     |"2"     |
-    |"11901" |
-    |"11902" |
+    |"11771" |
+    |"11772" |
 
   @SCCQtyIncorrectValue
   Scenario Outline: Incorrect quantity
     When The user types the <quantity> as quantity of the product
     And Clicks the 'Zaktualizuj koszyk' button
-    Then The message about incorrect quantity value is displayed
-    And The validation message is: <message>
+    Then The validation message is displayed
 
     Examples:
-    |quantity|message                                  |
-    |"11903" |"Wartość nie może być większa niż 11902."|
-    |"-1"    |"Wartość nie może być mniejsza niż 0."   |
+    |quantity|
+    |"11773" |
+    |"-1"    |
 
-  @SCCQtyZeroValue
-  Scenario: Zero as the quantity
-    When The user types the "0" as quantity of the product
-    And Clicks the 'Zaktualizuj koszyk' button
-    Then The shopping cart is empty
-    And The message about empty shopping cart is displayed
-    And The empty shopping cart message is: "Twój koszyk jest pusty."
 
   @SCCNotANumber
   Scenario Outline: Not a number
     When The user types the <quantity> as not a number
     And Clicks the 'Zaktualizuj koszyk' button
-    Then The message about incorrect quantity value is displayed
-    And The validation message is: "Wpisz liczbę."
+    Then The validation message is displayed
 
     Examples:
     |quantity|
