@@ -18,9 +18,10 @@ public class QuantityField extends BasePage {
         this.field = field;
     }
 
-    public void setQuantity(String quantity) throws IllegalAccessException {
+    public void setQuantity(String quantity) {
 
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(field)));
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(field));
+        field.clear();
         getInteractions().fill(field, PerformType.JS_EXECUTOR, quantity);
     }
 
