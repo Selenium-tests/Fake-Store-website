@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+import qa.animation.CouponCodeRefreshLoader;
 import qa.enums.URLs;
 import qa.models.ProductDataList;
 import qa.pages.productpage.ProductPage;
@@ -54,6 +55,12 @@ public class ShoppingCartCommonSteps {
         productPage.clickAddToCartButton();
     }
 
+    @And("Clicks the 'Zaktualizuj koszyk' button")
+    public void clicksTheUpdateCartButton() throws IllegalAccessException {
+
+        shoppingCart.clickUpdateCartButton();
+    }
+
     @Then("The shopping cart is not empty")
     public void shoppingCartIsNotEmpty() {
 
@@ -65,12 +72,17 @@ public class ShoppingCartCommonSteps {
     }
 
     @Then("The shopping cart is empty")
-    public void shoppingCartIsEmpty() {
+    public void shoppingCartIsEmpty() throws IllegalAccessException {
 
-        shoppingCart.getTable().findRows();
+        CouponCodeRefreshLoader animation = new CouponCodeRefreshLoader(testUtil.getDriver());
+        animation.waitUntilLoaderIsInvisible();
 
-        Assert.assertEquals(shoppingCart.getTable().getRowsCount(), 0,
-                "The shopping cart is not empty");
+        try {
+            shoppingCart.getTable().waitForTable();
+            Assert.fail("The shopping cart is not empty");
+        } catch (Exception ignored) {
+
+        }
     }
 
     @And("The number of products is correct")
@@ -92,5 +104,17 @@ public class ShoppingCartCommonSteps {
             softAssert.assertEquals(shoppingCart.getTable().getProductPrice(i), data.get(i).getPrice());
             softAssert.assertEquals(shoppingCart.getTable().getQuantityField(i).getValue(), data.get(i).getQuantity());
         }
+    }
+
+    @And("The message about empty shopping cart is displayed")
+    public void theMessageAboutEmptyShoppingCartIsDisplayed() {
+
+        Assert.assertTrue(shoppingCart.hasMessageListMoreThanOneElement());
+    }
+
+    @And("The empty shopping cart message is: {string}")
+    public void theEmptyShoppingCartMessageIs(String message) {
+
+        Assert.assertEquals(shoppingCart.getEmptyCartMessageText(), message);
     }
 }
