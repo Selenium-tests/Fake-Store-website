@@ -5,7 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-import qa.animation.CouponCodeRefreshLoader;
+import qa.pages.animation.Animation;
 import qa.enums.URLs;
 import qa.models.ProductDataList;
 import qa.pages.productpage.ProductPage;
@@ -59,6 +59,9 @@ public class ShoppingCartCommonSteps {
     public void clicksTheUpdateCartButton() throws IllegalAccessException {
 
         shoppingCart.clickUpdateCartButton();
+
+        Animation animation = new Animation(testUtil.getDriver());
+        animation.waitUntilIsInvisible();
     }
 
     @Then("The shopping cart is not empty")
@@ -72,10 +75,7 @@ public class ShoppingCartCommonSteps {
     }
 
     @Then("The shopping cart is empty")
-    public void shoppingCartIsEmpty() throws IllegalAccessException {
-
-        CouponCodeRefreshLoader animation = new CouponCodeRefreshLoader(testUtil.getDriver());
-        animation.waitUntilLoaderIsInvisible();
+    public void shoppingCartIsEmpty() {
 
         try {
             shoppingCart.getTable().waitForTable();
