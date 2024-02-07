@@ -31,8 +31,8 @@ public class AddingFromThumbnailStepDefs {
         productThumbnail = ThumbnailProvider.getThumbnail(testUtil.getDriver(), thumbnailData);
         productThumbnail.clickAddToCartButton();
 
-        ProductData.setName(productThumbnail.getName());
-        ProductData.setPrice(productThumbnail.getPrice());
+        //ProductData.setName(productThumbnail.getName());
+        //ProductData.setPrice(productThumbnail.getPrice());
     }
 
     @And("Clicks the \"Zobacz koszyk\" button")

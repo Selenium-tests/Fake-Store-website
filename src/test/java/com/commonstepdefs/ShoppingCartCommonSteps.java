@@ -4,14 +4,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import qa.enums.URLs;
+import qa.models.ProductDataList;
 import qa.pages.productpage.ProductPage;
 import qa.pages.shoppingcart.ShoppingCart;
 import qa.testutil.TestUtil;
-import qa.support.ConditionalUrlNavigator;
 import qa.models.ProductData;
 import qa.models.ThumbnailData;
 import qa.support.ThumbnailDataProvider;
+
+import java.util.List;
 
 public class ShoppingCartCommonSteps {
 
@@ -52,25 +55,42 @@ public class ShoppingCartCommonSteps {
     }
 
     @Then("The shopping cart is not empty")
-    @And("The opened shopping cart is not empty")
     public void shoppingCartIsNotEmpty() {
 
-        ConditionalUrlNavigator.openIfUrlIsNot(testUtil, URLs.SHOPPING_CART.getName());
+        testUtil.goToUrl(URLs.SHOPPING_CART.getName());
+        shoppingCart.getTable().findRows();
 
-        try {
-            shoppingCart.waitForEmptyCartMessageLocator();
-            Assert.fail("The message about empty shopping cart is visible");
-        } catch (Exception ignored) {
-
-        }
+        Assert.assertTrue(shoppingCart.getTable().getRowsCount() > 0,
+                "The shopping cart is empty");
     }
 
-    @And("Product name and price match")
-    public void productNameAndPriceMatch() {
+    @Then("The shopping cart is empty")
+    public void shoppingCartIsEmpty() {
 
-        shoppingCart.findProduct(0);
+        shoppingCart.getTable().findRows();
 
-        Assert.assertEquals(shoppingCart.getRow().getName(), ProductData.getName());
-        Assert.assertEquals(shoppingCart.getRow().getPrice(), ProductData.getPrice());
+        Assert.assertEquals(shoppingCart.getTable().getRowsCount(), 0,
+                "The shopping cart is not empty");
+    }
+
+    @And("The number of products is correct")
+    public void numberOfProductsIs() {
+
+        Assert.assertEquals(shoppingCart.getTable().getRowsCount(), ProductDataList.getProducts().size(),
+                "Incorrect number of products in the shopping cart");
+    }
+
+    @And("Product data matches the data displayed on the product page")
+    public void productDataMatches() {
+
+        List<ProductData> data = ProductDataList.getProducts();
+        SoftAssert softAssert = new SoftAssert();
+
+        for (int i = 0; i < data.size(); i++) {
+
+            softAssert.assertEquals(shoppingCart.getTable().getProductName(i), data.get(i).getName());
+            softAssert.assertEquals(shoppingCart.getTable().getProductPrice(i), data.get(i).getPrice());
+            softAssert.assertEquals(shoppingCart.getTable().getQuantityField(i).getValue(), data.get(i).getQuantity());
+        }
     }
 }

@@ -21,8 +21,8 @@ public class RemoveButtonStepDefs {
     @When("The user clicks the 'Remove' button")
     public void theUserClicksTheRemoveButton() throws IllegalAccessException {
 
-        shoppingCart.findProduct(0);
-        shoppingCart.getRow().clickRemoveButton();
+        shoppingCart.getTable().findRows();
+        shoppingCart.getTable().clickRemoveButton(0);
     }
 
     @Then("The message about empty shopping cart is displayed")

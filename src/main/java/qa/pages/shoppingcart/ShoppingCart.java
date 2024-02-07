@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ShoppingCart extends BasePage {
 
+    private final Table table;
     private final Row row;
     private List<WebElement> products;
     private final CouponForm couponForm;
@@ -22,6 +23,7 @@ public class ShoppingCart extends BasePage {
 
         super(driver);
 
+        table = new Table(driver);
         row = new Row(driver);
         couponForm = new CouponForm(driver);
         shoppingCartSummary = new ShoppingCartSummary(driver);
@@ -53,6 +55,11 @@ public class ShoppingCart extends BasePage {
         findProducts();
 
         row.setRow(products.get(index));
+    }
+
+    public Table getTable() {
+
+        return table;
     }
 
     public Row getRow() {
@@ -100,7 +107,7 @@ public class ShoppingCart extends BasePage {
         return shoppingCartSummary;
     }
 
-    public void clickUpdateCartButton() throws IllegalAccessException {
+    public void clickUpdateCartButton() {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateCartButton));
         getInteractions().click(updateCartButton, PerformType.JS_EXECUTOR);

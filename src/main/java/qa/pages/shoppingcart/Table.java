@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
+import qa.enums.PerformType;
 import qa.pages.quantityfield.QuantityField;
 
 import java.util.List;
@@ -44,7 +45,8 @@ public class Table extends BasePage {
 
     public void clickRemoveButton(int row) {
 
-        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(rows.get(row).findElement(By.className("product-remove")))).click();
+        WebElement element = getWebDriverWait().until(ExpectedConditions.elementToBeClickable(rows.get(row).findElement(By.className("remove"))));
+        getInteractions().click(element, PerformType.JS_EXECUTOR);
     }
 
     public QuantityField getQuantityField(int row) {
