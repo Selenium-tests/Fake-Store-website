@@ -1,4 +1,4 @@
-package qa.animation;
+package qa.pages.animation;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.tobyclass.ByFinder;
 
-public class CouponCodeRefreshLoader extends BasePage {
+public class Animation extends BasePage {
 
 
-    public CouponCodeRefreshLoader(WebDriver driver) {
+    public Animation(WebDriver driver) {
 
         super(driver);
     }
@@ -18,7 +18,7 @@ public class CouponCodeRefreshLoader extends BasePage {
     @FindBy(css = ".woocommerce-cart-form.processing")
     WebElement cartFormProcessing;
 
-    public void waitUntilLoaderIsInvisible() throws IllegalAccessException {
+    public void waitUntilIsInvisible() throws IllegalAccessException {
 
         getWebDriverWait().until(ExpectedConditions.invisibilityOfElementLocated(ByFinder.getByFromWebElement(cartFormProcessing)));
     }
