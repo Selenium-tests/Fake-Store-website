@@ -1,5 +1,6 @@
 package qa.pages.shoppingcart;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,10 +14,14 @@ import java.util.List;
 
 public class ShoppingCart extends BasePage {
 
+    @Getter
     private final Table table;
+    @Getter
     private final Row row;
     private List<WebElement> products;
+    @Getter
     private final CouponForm couponForm;
+    @Getter
     private final ShoppingCartSummary shoppingCartSummary;
 
     public ShoppingCart(WebDriver driver) {
@@ -31,16 +36,11 @@ public class ShoppingCart extends BasePage {
 
     @FindBy(xpath = ".//table[@class='shop_table shop_table_responsive cart woocommerce-cart-form__contents']")
     WebElement contents;
-
-    @FindBy(className = "woocommerce-message")
-    WebElement message;
-
     @FindBy(className = "woocommerce-error")
     WebElement errorMessage;
-
-    @FindBy(css = "div[class='cart-empty woocommerce-info']")
-    WebElement emptyCartMessage;
-    @FindBy(xpath = ".//button[@name='update_cart']")
+    @FindBy(css = "div.wc-block-components-notice-banner__content")
+    List<WebElement> messages;
+    @FindBy(css = "button[name='update_cart']")
     WebElement updateCartButton;
     @FindBy(css = "a[class='checkout-button button alt wc-forward']")
     WebElement checkoutButton;
@@ -57,24 +57,26 @@ public class ShoppingCart extends BasePage {
         row.setRow(products.get(index));
     }
 
-    public Table getTable() {
+    public String getErrorMessageText() {
 
-        return table;
+        return errorMessage.getText();
     }
 
-    public Row getRow() {
+    public String getEmptyCartMessageText() {
 
-        return row;
+        return messages.get(1).getText();
     }
 
-    public void waitForMessage() throws IllegalAccessException {
+    public void clickUpdateCartButton() throws IllegalAccessException {
 
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(message)));
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateCartButton));
+        getInteractions().click(updateCartButton, PerformType.JS_EXECUTOR);
     }
 
-    public String getMessageText() {
+    public void clickCheckoutButton() {
 
-        return message.getText();
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(checkoutButton));
+        getInteractions().click(checkoutButton, PerformType.JS_EXECUTOR);
     }
 
     public void waitForErrorMessage() throws IllegalAccessException {
@@ -82,40 +84,8 @@ public class ShoppingCart extends BasePage {
         getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
     }
 
-    public String getErrorMessageText() {
+    public boolean hasMessageListMoreThanOneElement() {
 
-        return errorMessage.getText();
-    }
-
-    public void waitForEmptyCartMessageLocator() throws IllegalAccessException {
-
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(emptyCartMessage)));
-    }
-
-    public String getEmptyCartMessageText() {
-
-        return emptyCartMessage.getText();
-    }
-
-    public CouponForm getCouponForm() {
-
-        return couponForm;
-    }
-
-    public ShoppingCartSummary getShoppingCartSummary() {
-
-        return shoppingCartSummary;
-    }
-
-    public void clickUpdateCartButton() {
-
-        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateCartButton));
-        getInteractions().click(updateCartButton, PerformType.JS_EXECUTOR);
-    }
-
-    public void clickCheckoutButton() throws IllegalAccessException {
-
-        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(checkoutButton));
-        getInteractions().click(checkoutButton, PerformType.JS_EXECUTOR);
+        return messages.size() > 1;
     }
 }
