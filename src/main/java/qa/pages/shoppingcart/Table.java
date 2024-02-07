@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Table extends BasePage {
 
-    List<WebElement> rows;
+    private List<WebElement> rows;
 
     public Table(WebDriver driver) {
 
@@ -42,6 +42,11 @@ public class Table extends BasePage {
     public String getProductPrice(int row) {
 
         return rows.get(row).findElement(By.cssSelector("span[class='woocommerce-Price-amount amount']")).getText();
+    }
+
+    public String getAmount(int row) {
+
+        return rows.get(row).findElement(By.cssSelector("td.product-subtotal")).getText();
     }
 
     public void clickRemoveButton(int row) {
