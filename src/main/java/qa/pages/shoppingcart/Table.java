@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import qa.base.BasePage;
 import qa.enums.PerformType;
 import qa.pages.quantityfield.QuantityField;
+import qa.tobyclass.ByFinder;
 
 import java.util.List;
 
@@ -52,5 +53,10 @@ public class Table extends BasePage {
     public QuantityField getQuantityField(int row) {
 
         return new QuantityField(getDriver(), rows.get(row).findElement(By.cssSelector(".input-text.qty.text")));
+    }
+
+    public void waitForTable() throws IllegalAccessException {
+
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(table)));
     }
 }
