@@ -30,6 +30,16 @@ public class QuantityField extends BasePage {
         return field.getAttribute("value");
     }
 
+    public String getMin() {
+
+        return field.getAttribute("min");
+    }
+
+    public String getMax() {
+
+        return field.getAttribute("max");
+    }
+
     public void waitForValidationMessage() {
 
         getWebDriverWait().until(ExpectedConditions.attributeToBeNotEmpty(field, "validationMessage"));
