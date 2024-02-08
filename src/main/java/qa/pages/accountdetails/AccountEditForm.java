@@ -24,19 +24,22 @@ public class AccountEditForm extends BasePage {
     @FindBy(id = "account_email")
     WebElement emailForm;
 
-    public void setFirstName(String firstName) {
+    public AccountEditForm setFirstName(String firstName) {
 
         firstNameField.sendKeys(firstName);
+        return this;
     }
 
-    public void setLastName(String lastName) {
+    public AccountEditForm setLastName(String lastName) {
 
         lastNameField.sendKeys(lastName);
+        return this;
     }
 
-    public void setDisplayName(String displayName) {
+    public AccountEditForm setDisplayName(String displayName) {
 
         displayNameField.sendKeys(displayName);
+        return this;
     }
 
     public void setEmail(String email) {
