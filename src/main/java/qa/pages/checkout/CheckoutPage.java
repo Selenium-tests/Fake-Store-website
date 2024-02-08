@@ -1,5 +1,6 @@
 package qa.pages.checkout;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +12,7 @@ import qa.tobyclass.ByFinder;
 
 public class CheckoutPage extends BasePage {
 
+    @Getter
     private final CreditCardForm creditCardForm;
     public CheckoutPage(WebDriver driver) {
 
@@ -50,11 +52,6 @@ public class CheckoutPage extends BasePage {
 
         getWebDriverWait().until(ExpectedConditions.elementToBeClickable(termsLink));
         getInteractions().click(termsLink, PerformType.JS_EXECUTOR);
-    }
-
-    public CreditCardForm getCreditCardForm() {
-
-        return creditCardForm;
     }
 
     public void waitForTermsAndConditionsLocator() throws IllegalAccessException {
