@@ -21,18 +21,21 @@ public class PasswordChangeForm extends BasePage {
     @FindBy(id = "password_2")
     WebElement passwordConfirmationField;
 
-    public void setCurrentPassword(String currentPassword) {
+    public PasswordChangeForm setCurrentPassword(String currentPassword) {
 
         currentPasswordField.sendKeys(currentPassword);
+        return this;
     }
 
-    public void setNewPassword(String newPassword) {
+    public PasswordChangeForm setNewPassword(String newPassword) {
 
         newPasswordField.sendKeys(newPassword);
+        return this;
     }
 
-    public void confirmNewPassword(String newPassword) {
+    public PasswordChangeForm confirmNewPassword(String newPassword) {
 
         passwordConfirmationField.sendKeys(newPassword);
+        return this;
     }
 }
