@@ -1,147 +1,149 @@
 Feature: Coupon redemption
 
-  @CCCorrectPlain
-  Scenario Outline: I test using correct plain coupon code
+  @CC250Success
+  Scenario: Using the kwotowy250 coupon code
     Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
-    And Enters the <couponCode> as a coupon code
+    And Enters the "kwotowy250" as a coupon code
     And Clicks the 'Zastosuj kupon' button
     Then The "Kupon został pomyślnie użyty." message has been displayed
-    And The <couponDescription> coupon is displayed on the shopping cart summary
+    And The "Kupon: kwotowy250" coupon is displayed on the shopping cart summary
 
-    Examples:
-    |couponCode             |couponDescription             |
-    |"kwotowy250"           |"Kupon: kwotowy250"           |
-    |"kwotowy250pojedynczy" |"Kupon: kwotowy250pojedynczy" |
-    |"10procent"            |"Kupon: 10procent"            |
-    |"kwotowy300bezpromocji"|"Kupon: kwotowy300bezpromocji"|
-    |"10procent1"           |"Kupon: 10procent1"           |
-
-
-  @CC300Success
-  Scenario Outline: I test using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
+  @CC250SingleSuccess
+  Scenario: Using the "kwotowy250pojedynczy" coupon code
     Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
-    And Enters the "kwotowy300" as a coupon code
+    And Enters the "kwotowy250pojedynczy" as a coupon code
     And Clicks the 'Zastosuj kupon' button
     Then The "Kupon został pomyślnie użyty." message has been displayed
+    And The "Kupon: kwotowy250pojedynczy" coupon is displayed on the shopping cart summary
 
-    Examples:
-    |productNumber|category     |
-    |0            |"Nowości"    |
-    |2            |"Nowości"    |
-    |3            |"Nowości"    |
-    |0            |"Bestsellery"|
-    |2            |"Bestsellery"|
-
-
-  @CC300Fail
-  Scenario Outline: I test using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
-    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
-    And The shopping cart page is open
-    When An user clicks on the coupon code field
-    And Enters the "kwotowy300" as a coupon code
-    And Clicks the 'Zastosuj kupon' button
-    Then The "Minimalna wartość zamówienia dla tego kuponu to 3 000,00 zł." error message has been displayed
-
-    Examples:
-    |productNumber|category     |
-    |1            |"Nowości"    |
-    |1            |"W promocji" |
-    |2            |"W promocji" |
-    |1            |"Bestsellery"|
-
-
-  @CC300Windsurfing
-  Scenario Outline: I test using "windsurfing350" coupon code for a product from the windsurfing category
-    Given The product: "Windsurfing w Lanzarote (Costa Teguise)" is in the shopping cart
-    And The shopping cart page is open
-    When An user clicks on the coupon code field
-    And Enters the "windsurfing350" as a coupon code 
-    And Clicks the 'Zastosuj kupon' button
-    Then The "Kupon został pomyślnie użyty." message has been displayed
-
-    Examples:
-    |productNumber|category |
-    |0            |"Nowości"|
-    |2            |"Nowości"|
-    |3            |"Nowości"|
-
-
-  @CC350NonWindsurfing
-  Scenario Outline: I test using "windsurfing350" coupon code for a product from the non-windsurfing category
-    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
-    And The shopping cart page is open
-    When An user clicks on the coupon code field
-    And Enters the "windsurfing350" as a coupon code
-    And Clicks the 'Zastosuj kupon' button
-    Then The "Przepraszamy, tego kuponu nie można zastosować do wybranych produktów." error message has been displayed
-
-    Examples:
-    |productNumber|category     |
-    |1            |"Popularne"  |
-    |3            |"W promocji" |
-    |1            |"Bestsellery"|
-
-
-  @CCReusingRedeemed
-  Scenario Outline: I test reusing a redeemed coupon
-    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
-    And The shopping cart page is open
-    When An user clicks on the coupon code field
-    And Enters the <couponCode> as a coupon code
-    And Clicks the 'Zastosuj kupon' button
-    And Clicks on the coupon code field
-    And Enters the used <couponCode> coupon code
-    And Clicks the 'Zastosuj kupon' button
-    Then The "Kupon został zastosowany!" error message has been displayed
-
-    Examples:
-    |couponCode             |
-    |"kwotowy250"           |
-    |"10procent"            |
-    |"kwotowy300"           |
-    |"kwotowy300bezpromocji"|
-    |"10procent1"           |
-    |"windsurfing350"       |
-
-
-  @CC250Reusing
-  Scenario Outline: I test an attemption to link coupon "kwotowy250pojedynczy" to other coupons
+  @CC250SingleReusing
+  Scenario Outline: Linking the "kwotowy250pojedynczy" coupon to other coupons
     Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the "kwotowy250pojedynczy" as a coupon code
     And Clicks the 'Zastosuj kupon' button
     And Clicks on the coupon code field
-    And Enters the used <couponCode> coupon code
+    And Enters the <couponCode> as a coupon code
     And Clicks the 'Zastosuj kupon' button
-    Then The "Przepraszamy, kupon \"kwotowy250pojedynczy\" został już użyty nie może być powiązany z innymi kuponami." error message has been displayed
+    Then The "Przepraszamy, kupon \"kwotowy250pojedynczy\" został już użyty nie może być powiązany z innymi kuponami." message has been displayed
 
     Examples:
-    |couponCode             |
-    |"kwotowy250"           |
-    |"10procent"            |
-    |"kwotowy300"           |
-    |"kwotowy300bezpromocji"|
-    |"10procent1"           |
-    |"windsurfing350"       |
+      |couponCode             |
+      |"kwotowy250"           |
+      |"10procent"            |
+      |"10procent1"           |
+
+
+  @CC300Success
+  Scenario: Using the "kwotowy300" coupon code when value of the shopping cart is 3000 zł or greater
+    Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "kwotowy300" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Kupon został pomyślnie użyty." message has been displayed
+
+
+  @CC300Fail
+  Scenario: Using the "kwotowy300" coupon code when a value of the shopping cart is less than 3000 zł
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "kwotowy300" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Minimalna wartość zamówienia dla tego kuponu to 3 000,00 zł." message has been displayed
+
+
+  @CC300NoPromotionSuccess
+  Scenario: Using the "kwotowy300bezpromocji" coupon code
+    Given The product: "Windsurfing w Lanzarote (Costa Teguise)" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "kwotowy300bezpromocji" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Kupon został pomyślnie użyty." message has been displayed
+
+
+  @CC300NoPromotionFail
+  Scenario: Using the "kwotowy300bezpromocji" coupon code when the product is on promotion
+    Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "kwotowy300bezpromocji" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Przepraszamy, ten kupon nie może być zastosowany do przecenionych produktów." message has been displayed
+
+
+  @CC10Percent1
+  Scenario: Using the "10procent1" coupon code when value of the shopping cart is 3000 zł or greater
+    Given The product: "Wakacje z yogą w Kraju Kwitnącej Wiśni" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "10procent1" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Kupon został pomyślnie użyty." message has been displayed
+
+
+  @CC10Percent1Reusing
+  Scenario: Reusing the 10procent1 coupon code
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "10procent1" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    And Clicks on the coupon code field
+    And Enters the "10procent1" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Kupon został zastosowany!" message has been displayed
+
+
+  @CC300WindsurfingSuccess
+  Scenario: Using the "windsurfing350" coupon code for a product from the windsurfing category
+    Given The product: "Windsurfing w Lanzarote (Costa Teguise)" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "windsurfing350" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Kupon został pomyślnie użyty." message has been displayed
+
+
+  @CC350WindsurfingFail
+  Scenario: Using the "windsurfing350" coupon code for a product from the non-windsurfing category
+    Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "windsurfing350" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Przepraszamy, tego kuponu nie można zastosować do wybranych produktów." message has been displayed
+
+
+  @CCOld
+  Scenario: Using the "starośćnieradość" coupon code
+    Given The product: "Windsurfing w Lanzarote (Costa Teguise)" is in the shopping cart
+    And The shopping cart page is open
+    When An user clicks on the coupon code field
+    And Enters the "starośćnieradość" as a coupon code
+    And Clicks the 'Zastosuj kupon' button
+    Then The "Ten kupon stracił ważność." message has been displayed
 
 
   @CCIncorrectCode
-  Scenario Outline: I test using an incorrect coupon code
+  Scenario Outline: Using an incorrect coupon code
     Given The product: "Yoga i pilates w Portugalii" is in the shopping cart
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Enters the <couponCode> as a coupon code
     And Clicks the 'Zastosuj kupon' button
-    Then The <message> error message has been displayed
+    Then The <message> message has been displayed
 
     Examples:
     |couponCode     |message                                |
-    |"my_coupon123" |"Kupon \"myCoupon123\" nie istnieje!"  |
+    |"my_coupon123" |"Kupon \"my_coupon123\" nie istnieje!"  |
     |"code_094"     |"Kupon \"code_094\" nie istnieje!"     |
     |"blablacoupon" |"Kupon \"blablacoupon\" nie istnieje!" |
     |"bad_coupon^5%"|"Kupon \"bad_coupon^5%\" nie istnieje!"|
@@ -153,4 +155,4 @@ Feature: Coupon redemption
     And The shopping cart page is open
     When An user clicks on the coupon code field
     And Clicks the 'Zastosuj kupon' button leaving the coupon code field blank
-    Then The "Proszę wpisać kod kuponu." error message has been displayed
+    Then The "Proszę wpisać kod kuponu." message has been displayed
