@@ -41,9 +41,4 @@ public class Interactions {
 
         javascriptExecutor.executeScript("arguments[0].scrollIntoView();", element);
     }
-
-    public void focus(WebElement element) {
-
-        javascriptExecutor.executeScript("arguments[0].focus();", element);
-    }
 }
