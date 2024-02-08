@@ -47,6 +47,11 @@ public class ShoppingCart extends BasePage {
         return errorMessage.getText();
     }
 
+    public String getMessageText() {
+
+        return messages.get(0).getText();
+    }
+
     public String getEmptyCartMessageText() {
 
         return messages.get(1).getText();
@@ -67,6 +72,11 @@ public class ShoppingCart extends BasePage {
     public void waitForErrorMessage() throws IllegalAccessException {
 
         getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(ByFinder.getByFromWebElement(errorMessage)));
+    }
+
+    public boolean isMessageListNotEmpty() {
+
+        return !messages.isEmpty();
     }
 
     public boolean hasMessageListMoreThanOneElement() {
