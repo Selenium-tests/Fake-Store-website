@@ -19,7 +19,7 @@ public class AddressFormCommonSteps {
     }
 
     @And("The \"Adres rozliczeniowy\" form is open")
-    public void billingAddressFormIsOpen() throws IllegalAccessException {
+    public void billingAddressFormIsOpen() {
 
         testUtil.goToUrl(URLs.BILLING_ADDRESS_FORM.getName());
     }

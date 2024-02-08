@@ -24,7 +24,7 @@ public class CheckoutCommonSteps {
 
     @When("The user clicks the \"Kupuję i płacę\" button")
     @And("Clicks the \"Kupuję i płacę\" button")
-    public void clicksTheSubmitButton() throws InterruptedException, IllegalAccessException {
+    public void clicksTheSubmitButton() throws InterruptedException {
 
         CheckoutPage checkoutPage = new CheckoutPage(testUtil.getDriver());
         checkoutPage.clickSubmitButton();
@@ -64,7 +64,7 @@ public class CheckoutCommonSteps {
     }
 
     @And("The checkout page is open")
-    public void theCheckoutPageIsOpen() throws IllegalAccessException {
+    public void theCheckoutPageIsOpen() {
 
         testUtil.goToUrl(URLs.CHECKOUT_PAGE.getName());
     }

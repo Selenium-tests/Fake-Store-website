@@ -27,7 +27,7 @@ public class LoginCommonSteps {
     }
 
     @And("The address editing section is open")
-    public void theAddressEditingSectionIsOpen() throws IllegalAccessException {
+    public void theAddressEditingSectionIsOpen() {
 
         testUtil.goToUrl(URLs.ADDRESS_EDITING_SECTION.getName());
     }

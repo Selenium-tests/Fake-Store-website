@@ -14,7 +14,7 @@ public class CheckoutButtonStepDefs {
     }
 
     @When("The user clicks the 'Przejdź do płatności' button")
-    public void theUserClicksTheButton() throws IllegalAccessException {
+    public void theUserClicksTheButton() {
 
         ShoppingCart shoppingCart = new ShoppingCart(testUtil.getDriver());
         shoppingCart.clickCheckoutButton();

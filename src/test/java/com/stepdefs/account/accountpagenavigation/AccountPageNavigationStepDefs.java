@@ -18,7 +18,7 @@ public class AccountPageNavigationStepDefs {
     }
 
     @When("The user clicks the {string} link")
-    public void userClicksTheLink(String link) throws IllegalAccessException {
+    public void userClicksTheLink(String link) {
 
         account = new Account(testUtil.getDriver());
         account.clickLink(link);
