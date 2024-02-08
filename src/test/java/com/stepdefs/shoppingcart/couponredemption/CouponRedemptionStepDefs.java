@@ -1,6 +1,6 @@
 package com.stepdefs.shoppingcart.couponredemption;
 
-import qa.animation.CouponCodeRefreshLoader;
+import qa.pages.animation.Animation;
 import qa.testutil.TestUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ public class CouponRedemptionStepDefs {
 
     private final TestUtil testUtil;
     private final ShoppingCart shoppingCart;
-    private final CouponCodeRefreshLoader couponCodeRefreshLoader;
+    private final Animation animation;
     private String usedCouponCode;
 
     public CouponRedemptionStepDefs(TestUtil testUtil) {
@@ -21,7 +21,7 @@ public class CouponRedemptionStepDefs {
         this.testUtil = testUtil;
 
         shoppingCart = new ShoppingCart(testUtil.getDriver());
-        couponCodeRefreshLoader = new CouponCodeRefreshLoader(testUtil.getDriver());
+        animation = new Animation(testUtil.getDriver());
     }
 
     @When("An user clicks on the coupon code field")
@@ -41,7 +41,7 @@ public class CouponRedemptionStepDefs {
     @And("Enters the used {string} coupon code")
     public void entersUsedCouponCode(String couponCode) throws IllegalAccessException {
 
-        couponCodeRefreshLoader.waitUntilLoaderIsInvisible();
+
         shoppingCart.getCouponForm().setCouponCode(couponCode);
     }
 
@@ -50,18 +50,16 @@ public class CouponRedemptionStepDefs {
     public void clicksTheButton() throws IllegalAccessException {
 
         shoppingCart.getCouponForm().clickApplyCouponButton();
+        animation.waitUntilIsInvisible();
     }
 
     @Then("The {string} message has been displayed")
     public void theMessageHasBeenDisplayed(String message) {
 
-        try {
-            shoppingCart.waitForMessage();
-        } catch (Exception e) {
-            Assert.fail("The message is not visible");
-        }
-
-        Assert.assertEquals(shoppingCart.getMessageText(), message);
+        Assert.assertTrue(shoppingCart.isMessageListNotEmpty(),
+                "The message is not displayed");
+        Assert.assertEquals(shoppingCart.getMessageText(), message,
+                "Incorrect the message content");
     }
 
     @And("The {string} coupon is displayed on the shopping cart summary")
