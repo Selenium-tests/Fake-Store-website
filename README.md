@@ -28,5 +28,5 @@ Test automation allows tests to be run on three popular web browsers:
 - Mozilla Firefox
 - Microsoft Edge
 
-![Java](https://img.shields.io/badge/Java-%230A1A2F?style=flat&logo=openjdk&logoColor=%236875CD) ![Selenium](https://img.shields.io/badge/Selenium-%230A1A2F?style=flat&logo=Selenium&logoColor=%2300cc00) 
+![Java](https://img.shields.io/badge/Java-%230A1A2F?style=flat&logo=openjdk&logoColor=%236875CD) ![Selenium](https://img.shields.io/badge/Selenium-%230A1A2F?style=flat&logo=Selenium&logoColor=%2300cc00) ![Cucumber](https://img.shields.io/badge/Cucumber-%230A1A2F?style=flat&logo=Cucumber&logoColor=#23D96C)
 ![Intelij Idea](https://img.shields.io/badge/-IntelliJ%20IDEA-0A1A2F?style=flat&logo=intelliJ-idea&logoColor=0a76ef)
